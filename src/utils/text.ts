@@ -1,0 +1,16 @@
+export const pizza: Record<string, [string, number, string?]> = {
+    "Margarita": ["Sos pomidorowy, mozzarella, świeża bazylia", 29, "vege"],
+    "Capricciosa": ["Sos pomidorowy, mozzarella, szynka, pieczarki", 34],
+    "Primavera": ["Sos pomidorowy, mozzarella, salami, pieczarki", 34],
+    "Diabola": ["Sos pomidorowy, mozzarella, spianata, jalapeño, płatki chili", 36, "ostra"],
+    "Vegetariana": ["Sos pomidorowy, mozzarella, cukinia, rukola, suszone pomidory", 36, "vege"],
+    "Hawajska": ["Sos pomidorowy, mozzarella, kurczak, ananas, kukurydza", 38],
+    "Cezar": ["Sos śmietanowy, sałata, kurczak, parmezan, czerwona cebula, czarne oliwki", 38],
+    "Pizza z gruszką": ["Sos pomidorowy, mozzarella, gruszka, ser feta, nasiona, rukola/szpinak", 38, "vege"],
+    "Pollo BBQ": ["Sos BBQ, mozzarella, grillowany kurczak, kukurydza, szczypiorek, prażona cebula", 38],
+    "Myśliwska": ["Sos pomidorowy, mozzarella, frankfurterki, czarne oliwki, płatki chili, sos BBQ", 39, "ostra"],
+    "4 Sery": ["Sos śmietanowy, mozzarella, feta, gorgonzola, Grana Padano", 39, "vege"],
+    "Salama Bianca": ["Sos śmietanowy, mozzarella, pieczarki, spianata, czosnek, gorgonzola", 43],
+    "Parma": ["Sos BBQ, mozzarella, prosciutto, kukurydza, szczypiorek, prażona cebula", 43],
+    "Quattro Carni": ["Sos pomidorowy, salami, szynka, spianata, frankfurterki, szczypiorek", 43],
+}
