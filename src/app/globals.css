@@ -24,3 +24,13 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.gradient-border {
+  background: linear-gradient(to right, #7A0950, #E01094);
+  border-radius: 24px;
+  padding: 2px;
+}
+
+.gradient-border > div {
+  border-radius: 24px;
+}
