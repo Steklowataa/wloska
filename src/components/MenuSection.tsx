@@ -9,7 +9,7 @@ const montserrat = Montserrat({
 type MenuSectionProps = {
     title: string,
     items: Record<string, [string, number, string?, string?]>,
-    type: "pizza" | "burger" | "smashburger" | "extras" | "drinks"
+    type: "pizza" | "burger" | "smashburger" | "extras" | "drinks" | "sos"
 }
 
 export default function MenuSection({ title, items, type }: MenuSectionProps) {

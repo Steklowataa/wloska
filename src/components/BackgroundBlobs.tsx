@@ -28,6 +28,20 @@ export default function BackgroundBlobs() {
     { top: "660vh", left: "60%", opacity: "40%" },
     { top: "680vh", left: "40%", opacity: "20%" },
     //napoje
+    {top: "700vh", left: "40%", opacity: "20%" },
+    {top: "750vh", left: "40%", opacity: "80%" },
+    {top: "770vh", left: "60%", opacity: "40%" },
+    {top: "790vh", left: "10%", opacity: "60%" },
+    {top: "820vh", left: "10%", opacity: "30%" },
+    {top: "850vh", left: "10%", opacity: "40%" },
+    {top: "900vh", left: "60%", opacity: "60%" },
+    {top: "920vh", left: "30%", opacity: "100%" },
+    {top: "940vh", left: "60%", opacity: "70%" },
+    {top: "960vh", left: "20%", opacity: "50%" },
+    {top: "1000vh", left: "30%", opacity: "50%" },
+    {top: "1050vh", left: "10%", opacity: "100%" },
+    // {top: "1150vh", left: "50%", opacity: "80%" },
+    // {top: "1200vh", left: "10%", opacity: "80%" },
 
 
     
@@ -99,11 +113,17 @@ export default function BackgroundBlobs() {
       } else if (topValue > 600 && topValue <= 800) {
         colorFrom = zieliony;
         colorTo = zielionyInny;
-      
-      } else if (topValue > 280) {
-        colorFrom = niebieski;
-        colorTo = fioletowy;
+      } else if (topValue >= 700 && topValue < 850){
+        colorFrom = niebieskiInny;
+        colorTo = niebieski
+      } else if (topValue >= 850 ) {
+        colorFrom = rozowy;
+        colorTo = niebieski
       }
+      // else if (topValue > 280) {
+      //   colorFrom = niebieski;
+      //   colorTo = fioletowy;
+      // }
 
       return (
         <div

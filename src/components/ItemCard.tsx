@@ -26,6 +26,7 @@ const typeLabels: Record<string, string> = {
   burger: "500 g",
   extras: "150 g",
   drinks: "0,33 l",
+  sos: "50 ml"
 }
 
 export default function ItemCard({ name, data, type }: ItemCard) {

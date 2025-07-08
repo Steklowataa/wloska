@@ -4,7 +4,7 @@ export const menu: {
     smashburger: Record<string, [string, number, string, string?]>,
     extras: Record<string, [string, number, string]>,
     drinks: Record<string, [string, number, string]>,
-    sos: {name: string, price: number}[]
+    sos: {name: string, img: string, price: number}[]
     pizzaExtras: {name: string, price: number}[]
     burgerOptions: {name: string, price: number}[]
 } = {
@@ -64,19 +64,19 @@ export const menu: {
         "On Lemon z Ananasem": ["", 9, "/images/margarita.svg"],
     },
     sos: [
-        { name: "Śmietanowy", price: 4 },
-        { name: "Czosnkowy", price: 4 },
-        { name: "BBQ", price: 4 },
-        { name: "Żurawlina", price: 4 },
-        { name: "Drwalski", price: 4 },
-        { name: "Serowy", price: 4 },
-        { name: "Ketchup", price: 4 },
-        { name: "Mayonez", price: 4 },
-        { name: "Miodowo-musztardowy", price: 4 },
-        {name: "Spicy mayo", price: 5},
-        {name: "Pesto mayo", price: 5},
-        {name: "Oliwa z oliwek", price: 5},
-        {name: "Oliwa czosnkowa", price: 5},
+        { name: "Śmietanowy", img: "/images/sos.png", price: 4 },
+        { name: "Czosnkowy", img: "/images/sos.png",price: 4 },
+        { name: "BBQ sos ",img: "/images/sos.png", price: 4 },
+        { name: "Żurawlina",img: "/images/sos.png", price: 4 },
+        { name: "Drwalski", img: "/images/sos.png",price: 4 },
+        { name: "Serowy",img: "/images/sos.png", price: 4 },
+        { name: "Ketchup", img: "/images/sos.png",price: 4 },
+        { name: "Mayonez",img: "/images/sos.png", price: 4 },
+        { name: "Miodowo-musztardowy",img: "/images/sos.png", price: 4 },
+        {name: "Spicy mayo",img: "/images/sos.png", price: 5},
+        {name: "Pesto mayo",img: "/images/sos.png", price: 5},
+        {name: "Oliwa z oliwek",img: "/images/sos.png", price: 5},
+        {name: "Oliwa czosnkowa", img: "/images/sos.png",price: 5},
     ],
     pizzaExtras: [
         { name: "Ananas", price: 4 },
