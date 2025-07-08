@@ -7,6 +7,11 @@ import BackgroundBlobs from "./BackgroundBlobs"
 
 
 export default function Menu() {
+    const sosForDisplay = menu.sos.reduce((acc, item) => {
+        acc[item.name] = ["", item.price, item.img];
+        return acc;
+      }, {} as Record<string, [string, number, string]>)
+      
     return (
         <>
         {/* <Header /> */}
@@ -18,6 +23,7 @@ export default function Menu() {
             <MenuSection title="Smashburgery" items={menu.smashburger} type="smashburger" />
             <MenuSection title="Przystawki" items={menu.extras} type="extras" />
             <MenuSection title="Napoje" items={menu.drinks} type="drinks" />
+            <MenuSection title="Sosy" items={sosForDisplay} type="sos" />
         </main>
         </>
   );
