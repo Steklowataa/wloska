@@ -19,7 +19,7 @@ type Item = {
 type ModalWindowProps = {
   name: string;
   description: string;
-  type: "pizza" | "burger" | "smashburger" | "przystawki" | "drinks";
+  type: "pizza" | "burger" | "smashburger" | "przystawki" | "drinks" | "sos";
   img: string;
   tag?: string;
   price: number;
@@ -121,10 +121,10 @@ export default function ModalWindow({
             {description}
           </p>
 
-          <div className="mb-6">
-            {(type === "pizza" || type === "przystawki" || type === "drinks") && (
+          <div className="">
+            {(type === "pizza" || type === "przystawki" || type === "drinks" || type === "sos") && (
               <ButtonWithQuantity
-                price={totalPriceNormal}
+                price={singlePrice}
                 quantity={productQuantity}
                 setQuantity={setProductQuantity}
               />
@@ -133,13 +133,14 @@ export default function ModalWindow({
             {(type === "burger" || type === "smashburger") && (
               <>
                 <ButtonWithQuantity
-                  price={totalPriceNormal}
+                  price={singlePrice}
                   quantity={productQuantity}
                   setQuantity={setProductQuantity}
+                  allowZero={true}
                 />
                 <SetWithQuantity
                   name={name}
-                  price={totalPriceZestaw}
+                  price={setQuantity > 0 ? totalPriceZestaw : singleSetPrice}
                   quantity={setQuantity}
                   setQuantity={setSetQuantity}
                 />
@@ -150,7 +151,7 @@ export default function ModalWindow({
           <div className="flex-1">
             { type === "pizza" && (
               <>
-              <h3 className={`${inter2.className} text-[20px] mt-6 mb-2`}>Dodatki</h3>
+              <h3 className={`${inter2.className} text-[20px] mt-0 mb-2`}>Dodatki</h3>
                 <h4 className={`${inter.className} text-[12px] text-gray-400 mb-4`}>
                   Prosimy wybrać maksymalnie 2 dodatki
                 </h4>
@@ -167,7 +168,7 @@ export default function ModalWindow({
                 </div>
               </>
             )} 
-            { type !== "drinks" && (
+            { (type !== "drinks" && type !== "sos") && (
               <>
               <h3 className={`${inter2.className} text-[20px] mt-6 mb-2`}>Sosy</h3>
                 <div className="mb-4">

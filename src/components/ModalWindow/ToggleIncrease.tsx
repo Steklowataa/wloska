@@ -13,16 +13,31 @@ const inter2 = Inter({
 
 type ToggleIncreaseProps = {
     quantity: number;
-    setQuantity: React.Dispatch<React.SetStateAction<number>>;
-  };
+    setQuantity: React.Dispatch<React.SetStateAction<number>> | ((value: number) => void);
+    allowZero?: boolean;
+};
   
-  export default function ToggleIncrease({ quantity, setQuantity }: ToggleIncreaseProps) {
+export default function ToggleIncrease({ quantity, setQuantity, allowZero = false }: ToggleIncreaseProps) {
     const increase = () => {
-      setQuantity((prev) => prev + 1);
+        if (typeof setQuantity === 'function') {
+            if (setQuantity.length === 1) {
+                setQuantity(quantity + 1);
+            } else {
+                (setQuantity as React.Dispatch<React.SetStateAction<number>>)((prev) => prev + 1);
+            }
+        }
     };
 
     const decrease = () => {
-        setQuantity(prev => prev > 1 ? prev - 1 : 1)
+        const newValue = allowZero ? Math.max(0, quantity - 1) : Math.max(1, quantity - 1);
+        
+        if (typeof setQuantity === 'function') {
+            if (setQuantity.length === 1) {
+                setQuantity(newValue);
+            } else {
+                (setQuantity as React.Dispatch<React.SetStateAction<number>>)(() => newValue);
+            }
+        }
     }
 
     return (
