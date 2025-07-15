@@ -14,19 +14,20 @@ type Props = {
 
 export default function SetWithQuantity({ name, price, quantity, setQuantity }: Props) {
     const singleSetPrice = quantity > 0 ? price / quantity : price;
+    const zestawPrice = price + 7
     
     return (
         <>
-            <h3 className={`${inter2.className} text-[20px] mb-4`}>Zestaw</h3>
-            <h2 className="text-[14px] mb-2">Zestaw z {name}, frytkami i ketchupem</h2>
-            <div className="flex justify-between items-center mb-6">
+            <h3 className={`${inter2.className} text-[20px] mb-2`}>Zestaw</h3>
+            <h2 className={`${inter.className} text-[14px] mb-2 text-grayI`}>Zestaw {name}, z frytkami i ketchupem</h2>
+            <div className="flex justify-between items-center mt-6">
                 <div>
-                    <p className={`${inter.className} text-gray-400 text-[12px]`}>Czas dostawy</p>
-                    <p className={`${inter2.className} text-white text-[16px]`}>30 min</p>
+                    <p className={`${inter.className} text-grayI text-[12px]`}>Czas dostawy</p>
+                    <p className={`${inter2.className} text-white text-[16px] mt-1`}>30 min</p>
                 </div>
                 <div>
-                    <p className={`${inter.className} text-gray-400 text-[12px]`}>Suma</p>
-                    <p className={`${inter2.className} text-white text-[16px]`}>{singleSetPrice}zł</p>
+                    <p className={`${inter.className} text-grayI text-[12px]`}>Suma</p>
+                    <p className={`${inter2.className} text-white text-[16px] mt-1`}>{zestawPrice}zł</p>
                 </div>
                 <ToggleIncrease quantity={quantity} setQuantity={setQuantity} allowZero={true} />
             </div>

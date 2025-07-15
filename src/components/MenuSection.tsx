@@ -18,13 +18,13 @@ export default function MenuSection({ title, items, type }: MenuSectionProps) {
             <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-x-12 gap-y-10">
                 <div
                     id={title.toLowerCase()}
-                    className={`${montserrat.className} text-[30px] flex justify-center items-center sm:justify-start sm:items-start sm:block col-span-full scroll-mt-[120px] z-999`}
+                    className={`${montserrat.className} text-[30px] flex justify-center items-center sm:justify-start sm:items-start sm:block col-span-full scroll-mt-[120px]`}
                 >
                     {title}
                 </div>
 
                 {Object.entries(items).map(([name, data]) => (
-                    <ItemCard name={name} key={name} data={data} type={type} />
+                    <ItemCard id={type} name={name} key={name} data={data} type={type} />
                 ))}
             </div>
         </div>

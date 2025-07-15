@@ -24,11 +24,11 @@ export default function ButtonWithQuantity({
         <div className="flex justify-between items-center mb-6">
             <div>
                 <p className={`${inter.className} text-gray-400 text-[12px]`}>Czas dostawy</p>
-                <p className={`${inter2.className} text-white text-[16px]`}>30 min</p>
+                <p className={`${inter2.className} text-white text-[16px] mt-1`}>30 min</p>
             </div>
             <div>
                 <p className={`${inter.className} text-gray-400 text-[12px]`}>Suma</p>
-                <p className={`${inter2.className} text-white text-[16px]`}>{singlePrice}zł</p>
+                <p className={`${inter2.className} text-white text-[16px] mt-1`}>{singlePrice}zł</p>
             </div>
             <ToggleIncrease 
                 quantity={quantity} 

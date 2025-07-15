@@ -1,5 +1,5 @@
 "use client";
-
+import { colors } from "../../lib/colors";
 export default function BackgroundBlobs() {
   // Desktop/tablet blobs
   const desktopBlobs = [
@@ -91,34 +91,27 @@ export default function BackgroundBlobs() {
   const renderBlobs = (blobs) => {
     return blobs.map((style, i) => {
       const topValue = parseInt(style.top || style.bottom || "0");
-      let rozowy = "#FF30B3";
-      let rozowyInny = "#7A0950";
-      let niebieski = "#0061FF";
-      let niebieskiInny = "#00D1FF";
-      let fioletowy = "#520951";
-      let zieliony = "#68FF3A";
-      let zielionyInny = "#228604";
       let colorFrom;
       let colorTo;
 
       if (topValue <= 320) {
-        colorFrom = rozowy;
-        colorTo = rozowyInny;
+        colorFrom = colors.rozowy;
+        colorTo = colors.rozowyInny;
       } else if (topValue > 320 && topValue <= 460) {
-        colorFrom = niebieski;
-        colorTo = niebieskiInny;
+        colorFrom = colors.niebieski;
+        colorTo = colors.niebieskiInny;
       } else if (topValue > 460 && topValue <= 600) {
-        colorFrom = rozowy;
-        colorTo = fioletowy;
+        colorFrom = colors.rozowy;
+        colorTo = colors.fioletowy;
       } else if (topValue > 600 && topValue <= 800) {
-        colorFrom = zieliony;
-        colorTo = zielionyInny;
+        colorFrom = colors.zieliony;
+        colorTo = colors.zielionyInny;
       } else if (topValue >= 700 && topValue < 850){
-        colorFrom = niebieskiInny;
-        colorTo = niebieski
+        colorFrom = colors.niebieskiInny;
+        colorTo = colors.niebieski
       } else if (topValue >= 850 ) {
-        colorFrom = rozowy;
-        colorTo = niebieski
+        colorFrom = colors.rozowy;
+        colorTo = colors.niebieski
       }
       // else if (topValue > 280) {
       //   colorFrom = niebieski;

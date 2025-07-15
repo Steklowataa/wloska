@@ -36,6 +36,8 @@ export default function ItemCard({ name, data, type }: ItemCard) {
   const openModal = () => setShowModal(true)
   const closeModal = () => setShowModal(false)
 
+  const newPrice = price
+
   const renderTag = () => {
     if(tag === "vege") {
       return (
@@ -95,7 +97,7 @@ export default function ItemCard({ name, data, type }: ItemCard) {
               <span className='text-sm'>{typeLabels[type]}</span>
             )}
             <div className='flex justify-center items-center text-[14px]'>
-            <span className="font-semibold">{price} zł</span>
+            <span className="font-semibold">{newPrice} zł</span>
             </div>
             <div className="flex items-center gap-1 text-sm">
               <button onClick={openModal} className="w-10 h-6 bg-[#7A0950] rounded-md flex items-center justify-center text-white cursor-pointer">
