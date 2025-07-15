@@ -19,7 +19,7 @@ type Item = {
 type ModalWindowProps = {
   name: string;
   description: string;
-  type: "pizza" | "burger" | "smashburger" | "przystawki" | "drinks";
+  type: "pizza" | "burger" | "smashburger" | "extras" | "drinks" | "sos";
   img: string;
   tag?: string;
   price: number;
@@ -58,7 +58,21 @@ export default function ModalWindow({
     );
   };
 
-  const saucesPrice = selectedSauces.reduce((sum, s) => sum + s.price, 0);
+  // Check if this item includes free sauce
+  const includesFreeSauce = description.toLowerCase().includes("sosem do wyboru") || description.toLocaleLowerCase().includes("sos do wyboru");
+  const freeSauceLimit = includesFreeSauce ? 1 : 0;
+
+  // Calculate prices considering free sauce
+  const calculateSaucesPrice = (sauces: Item[]) => {
+    if (!includesFreeSauce) {
+      return sauces.reduce((sum, s) => sum + s.price, 0);
+    }
+    
+    // First sauce is free, rest are paid
+    return sauces.slice(1).reduce((sum, s) => sum + s.price, 0);
+  };
+
+  const saucesPrice = calculateSaucesPrice(selectedSauces);
   const extrasPrice = selectedExtras.reduce((sum, e) => sum + e.price, 0);
   const singlePrice = price + saucesPrice + extrasPrice;
   const singleSetPrice = singlePrice + 7;
@@ -121,10 +135,10 @@ export default function ModalWindow({
             {description}
           </p>
 
-          <div className="mb-6">
-            {(type === "pizza" || type === "przystawki" || type === "drinks") && (
+          <div className="">
+            {(type === "pizza" || type === "extras" || type === "drinks" || type === "sos") && (
               <ButtonWithQuantity
-                price={totalPriceNormal}
+                price={price}
                 quantity={productQuantity}
                 setQuantity={setProductQuantity}
               />
@@ -133,13 +147,14 @@ export default function ModalWindow({
             {(type === "burger" || type === "smashburger") && (
               <>
                 <ButtonWithQuantity
-                  price={totalPriceNormal}
+                  price={price}
                   quantity={productQuantity}
                   setQuantity={setProductQuantity}
+                  allowZero={true}
                 />
                 <SetWithQuantity
                   name={name}
-                  price={totalPriceZestaw}
+                  price={price}
                   quantity={setQuantity}
                   setQuantity={setSetQuantity}
                 />
@@ -150,7 +165,7 @@ export default function ModalWindow({
           <div className="flex-1">
             { type === "pizza" && (
               <>
-              <h3 className={`${inter2.className} text-[20px] mt-6 mb-2`}>Dodatki</h3>
+              <h3 className={`${inter2.className} text-[20px] mt-0 mb-2`}>Dodatki</h3>
                 <h4 className={`${inter.className} text-[12px] text-gray-400 mb-4`}>
                   Prosimy wybrać maksymalnie 2 dodatki
                 </h4>
@@ -167,19 +182,26 @@ export default function ModalWindow({
                 </div>
               </>
             )} 
-            { type !== "drinks" && (
+            { (type !== "drinks" && type !== "sos") && (
               <>
-              <h3 className={`${inter2.className} text-[20px] mt-6 mb-2`}>Sosy</h3>
+                <h3 className={`${inter2.className} text-[20px] mt-6 mb-2`}>Sosy</h3>
+                {/* {includesFreeSauce && (
+                  <h4 className={`${inter.className} text-[12px] text-green-400 mb-2`}>
+                    Pierwszy sos gratis!
+                  </h4>
+                )} */}
                 <div className="mb-4">
-                <ShowMore
-                  items={menu.sos}
-                  showAll={showAllSauces}
-                  setShowAll={setShowAllSauces}
-                  checkFunction={(item) => isSelected(item, selectedSauces)}
-                  toggleFunction={(item) =>
-                    toggleItem(item, selectedSauces, setSelectedSauces)
-                  }
-                />
+                  <ShowMore
+                    items={menu.sos}
+                    showAll={showAllSauces}
+                    setShowAll={setShowAllSauces}
+                    selectedItems={selectedSauces}
+                    freeLimit={freeSauceLimit}
+                    checkFunction={(item) => isSelected(item, selectedSauces)}
+                    toggleFunction={(item) =>
+                      toggleItem(item, selectedSauces, setSelectedSauces)
+                    }
+                  />
                 </div>
               </>
             )}
