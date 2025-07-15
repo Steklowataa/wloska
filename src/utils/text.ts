@@ -7,6 +7,7 @@ export const menu: {
     sos: {name: string, img: string, price: number}[]
     pizzaExtras: {name: string, price: number}[]
     burgerOptions: {name: string, price: number}[]
+    smashOptions: {name: string, price: number}[]
 } = {
     pizza: {
         "Margarita": ["Sos pomidorowy, mozzarella, świeża bazylia", 29, "/images/marg.svg", "vege",],
@@ -105,5 +106,27 @@ export const menu: {
         { name: "Szynka", price: 6 },
 
     ],
-    burgerOptions: []
+    burgerOptions: [
+        {name: "Czerwona cebula", price: 4},
+        {name: "Jalapeńo", price: 4},
+        {name: "Platki chilli", price: 4},
+        {name: "Pomidor", price: 4},
+        {name: "Pomidory suszone", price: 4},
+        {name: "Prazona cebula", price: 4},
+        {name: "Sałata", price: 4},
+        {name: "Cheddar", price: 5},
+        {name: "Boczek", price: 6}
+    ],
+    smashOptions: [
+        {name: "Podwojne mieso", price: 8},
+        {name: "Czerwona cebula", price: 4},
+        {name: "Jalapeńo", price: 4},
+        {name: "Platki chilli", price: 4},
+        {name: "Pomidor", price: 4},
+        {name: "Pomidory suszone", price: 4},
+        {name: "Prazona cebula", price: 4},
+        {name: "Sałata", price: 4},
+        {name: "Cheddar", price: 5},
+        {name: "Boczek", price: 6}
+    ]
 }

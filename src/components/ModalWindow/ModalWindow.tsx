@@ -181,8 +181,22 @@ export default function ModalWindow({
                   />
                 </div>
               </>
+            )}
+            { type === "burger" && (
+              <>
+              <h2 className={`${inter2.className} text-[20px] mt-3 mb-4`}>Dodatki</h2>
+              <ShowMore items={menu.burgerOptions} showAll={showAllExtras} setShowAll={setShowAllExtras} checkFunction={(item) => isSelected(item, selectedExtras)}
+              toggleFunction={(item) => toggleItem(item, selectedExtras, setSelectedExtras)}/>
+              </>
             )} 
-            { (type !== "drinks" && type !== "sos") && (
+            { type === "smashburger" && (
+              <>
+              <h2 className={`${inter2.className} text-[20px] mt-3 mb-4`}>Dodatki</h2>
+              <ShowMore items={menu.smashOptions} showAll={showAllExtras} setShowAll={setShowAllExtras} checkFunction={(item) => isSelected(item, selectedExtras)}
+              toggleFunction={(item) => toggleItem(item, selectedExtras, setSelectedExtras)}/>
+              </>
+            )} 
+            { (type !== "drinks" && type !== "sos" && type != "smashburger" && type != "burger") && (
               <>
                 <h3 className={`${inter2.className} text-[20px] mt-6 mb-2`}>Sosy</h3>
                 {/* {includesFreeSauce && (
