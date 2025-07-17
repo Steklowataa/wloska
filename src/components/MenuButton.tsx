@@ -62,61 +62,47 @@ export default function MenuButtons() {
   };
 
 
+  
   return (
     <>
-      {/* Mobile view (two rows) */}
-      <div className="flex flex-col space-y-3 md:hidden p-3 ">
-        <div className="flex justify-between space-x-2">
-          {firstRow.map((element, index) => (
-            <button
-              key={index}
-              onClick={() => handleButtonClick(index)}
-              className={`cursor-pointer text-white px-4 py-3 text-base font-semibold rounded-[20px] transition-all ease-in-out duration-300 flex-1 ${
-                index === activeButton ? "bg-[#370424] text-white" : "text-white"
-              }`}
-            >
-              {element}
-            </button>
-          ))}
-        </div>
-        <div className="flex justify-between space-x-2">
-          {secondRow.map((element, index) => {
-            const actualIndex = index + 3;
-            return (
+      {/* Mobile View */}
+      <div className="grid grid-cols-3 gap-2 p-4 md:hidden z-1">
+        {items.map((element, index) => (
+          <button
+            key={index}
+            onClick={() => handleButtonClick(index)}
+            className={`cursor-pointer px-4 py-2 text-sm font-semibold rounded-[20px] transition-colors duration-300 ${
+              index === activeButton
+                ? "bg-[#370424] text-white"
+                : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+            }`}
+          >
+            {element}
+          </button>
+        ))}
+      </div>
+  
+      {/* Desktop View */}
+      <div className="hidden md:grid grid-cols-4 gap-x-8 px-6 relative sticky top-0 z-9">
+        <div className="col-span-5 col-start-2 sticky top-0 z-50">
+          <div className="flex flex-nowrap items-center space-x-4 py-3 px-4 rounded-[50px] w-fit border border-white/20 shadow-sm bg-gray/10 backdrop-blur-md">
+            {items.map((element, index) => (
               <button
-                key={actualIndex}
-                onClick={() => handleButtonClick(actualIndex)}
-                className={`cursor-pointer text-white px-4 py-3 text-base font-semibold rounded-[20px] transition-all ease-in-out duration-700 flex-1 ${
-                  actualIndex === activeButton ? "bg-[#370424] text-white" : "text-white"
+                key={index}
+                onClick={() => handleButtonClick(index)}
+                className={`cursor-pointer px-5 py-2 text-lg md:text-[16px] font-semibold rounded-[20px] transition-colors ease-in-out duration-700 ${
+                  index === activeButton
+                    ? "bg-[#370424] text-white"
+                    : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                 }`}
               >
                 {element}
               </button>
-            );
-          })}
+            ))}
+          </div>
         </div>
       </div>
-
-      {/* Desktop view (one row) */}
-      <div className="grid grid-cols-4 gap-x-8 px-6 relative sticky top-0 z-9">
-  {/* Pasek przycisków w kolumnie 2–5 */}
-  <div className="col-span-5 col-start-2 sticky top-0 z-50">
-    <div className="flex flex-nowrap items-center space-x-4 py-3 px-4 rounded-[50px] w-fit border border-white/20 shadow-sm bg-gray/10 backdrop-blur-md">
-      {items.map((element, index) => (
-        <button
-          key={index}
-          onClick={() => handleButtonClick(index)}
-          className={`cursor-pointer px-5 py-2 text-lg md:text-[16px] font-semibold rounded-[20px] transition-colors ease-in-out duration-700 ${
-            index === activeButton ? "bg-[#370424] text-white" : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-          }`}
-        >
-          {element}
-        </button>
-      ))}
-    </div>
-  </div>
-  </div>
-
     </>
   );
+  
 }
