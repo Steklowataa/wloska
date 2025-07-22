@@ -130,8 +130,8 @@ export default function ModalWindow({
               className="rounded-full"
             />
           </div>
-          <h2 className={`${inter2.className} text-[24px] mb-2`}>{name}</h2>
-          <p className={`${inter.className} text-gray-300 mb-6 text-[14px]`}>
+          <h2 className={`${inter2.className} md:text-[24px] text-[20px] mb-2`}>{name}</h2>
+          <p className={`${inter.className} text-gray-300 mb-6 md:text-[14px] text-[12px]`}>
             {description}
           </p>
 

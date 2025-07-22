@@ -22,6 +22,16 @@ export default function ButtonWithQuantity({
   const singlePrice = price;
 
   return (
+    <div className="relative flex justify-between items-center md:px-4 md:py-6 md:mb-[2px] mb-6 overflow-hidden">
+      <div className="absolute w-[50px] h-[50px] rounded-full blur-lg opacity-80 left-5 top-5 z-0 bg-[#68FF3A] hidden md:block"></div>
+      <div className="absolute w-[50px] h-[50px] rounded-full blur-lg opacity-70 left-30 top-5 z-0 bg-[#68FF3A] hidden md:block"></div>
+      <div className="z-10">
+        <p className={`${inter.className} text-white md:text-[12px] text-[10px]`}>Czas dostawy</p>
+        <p className={`${inter2.className} text-white md:text-[16px] text-[12px] mt-1`}>30 min</p>
+      </div>
+      <div className="z-10">
+        <p className={`${inter.className} text-white md:text-[12px] text-[10px]`}>Suma</p>
+        <p className={`${inter2.className} text-white md:text-[16px] text-[12px] mt-1`}>
     <div className="relative flex justify-between items-center mb-6 px-4 py-6 overflow-hidden">
       <div
         className="absolute w-[50px] h-[50px] rounded-full blur-lg opacity-80 left-4 top-4 z-0"
@@ -49,4 +59,8 @@ export default function ButtonWithQuantity({
       </div>
     </div>
   );
+
 }
+
+}
+
