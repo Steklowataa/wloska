@@ -87,7 +87,7 @@ export default function MenuButtons() {
               <button
                 key={index}
                 onClick={() => handleButtonClick(index)}
-                className={`cursor-pointer px-5 py-2 text-lg md:text-[16px] font-semibold rounded-[20px] transition-colors ease-in-out duration-700 ${
+                className={`transition-transform duration-300 easy-in-out hover:scale-105 cursor-pointer px-5 py-2 text-lg md:text-[16px] font-semibold rounded-[20px] transition-colors ease-in-out duration-700 ${
                   index === activeButton
                     ? "bg-[#370424] text-white"
                     : "bg-gray-200 text-gray-700 hover:bg-gray-300"

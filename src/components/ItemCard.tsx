@@ -72,7 +72,8 @@ export default function ItemCard({ name, data, type }: ItemCard) {
 
     return (
       <>
-        <div className={`relative w-[240px] h-[330px] rounded-[40px] bg-[rgba(189,184,184,0.2)] text-white p-4 flex flex-col`}>
+        <div className={`transition-transform duration-300 easy-in-out hover:scale-105
+        relative w-[240px] h-[330px] rounded-[40px] bg-[rgba(158,156,156,0.2)] text-white backdrop-blur-md p-4 flex flex-col`}>
           {tag && (
             <div className="absolute top-2 left-2 text-xl p-1">
               { renderTag() }
