@@ -14,7 +14,7 @@ export default function Menu() {
       
     return (
         <>
-        {/* <Header /> */}
+        <Header />
         <MenuButtons />
         <main className="pt-[70px] md:pt-0 px-8 pb-8 min-h-screen space-y-16 text-9xl">
             <BackgroundBlobs />
