@@ -10,6 +10,7 @@
 }
 
 @theme inline {
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
@@ -21,6 +22,14 @@
     --background: #0a0a0a;
     --foreground: #ededed;
   }
+}
+
+/* Add this temporarily to your global CSS */
+.test-sticky {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 9999 !important;
+  background: red !important;
 }
 
 body {

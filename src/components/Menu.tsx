@@ -16,7 +16,7 @@ export default function Menu() {
         <>
         {/* <Header /> */}
         <MenuButtons />
-        <main className="p-8 min-h-screen space-y-16 text-9xl">
+        <main className="pt-[70px] md:pt-0 px-8 pb-8 min-h-screen space-y-16 text-9xl">
             <BackgroundBlobs />
             <MenuSection title="Pizza" items={menu.pizza} type="pizza" />
             <MenuSection title="Burgery" items={menu.burger} type="burger" />

@@ -1,8 +1,11 @@
 "use client"
 import Image from 'next/image'
+import dynamic from 'next/dynamic'
 import { Inter } from 'next/font/google'
 import ModalWindow from './ModalWindow/ModalWindow'
 import { useState } from 'react'
+import { ClipLoader } from 'react-spinners'
+import ScrollButton from "./ScrollButton"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -29,9 +32,11 @@ const typeLabels: Record<string, string> = {
   sos: "50 ml"
 }
 
+
 export default function ItemCard({ name, data, type }: ItemCard) {
   const [showModal, setShowModal] = useState<boolean>(false)
   const [description, price, img, tag] = data ?? [];
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const openModal = () => setShowModal(true)
   const closeModal = () => setShowModal(false)
@@ -74,13 +79,20 @@ export default function ItemCard({ name, data, type }: ItemCard) {
             </div>
           )}
 
-          <div className="flex justify-center items-center h-[160px]">
+          <div className="flex justify-center items-center h-[160px] relative">
+            {!isLoaded && (
+              <div className="absolute z-10 flex items-center justify-center w-[180px] h-[180px]">
+              <ClipLoader color="#ffffff" size={40} />
+            </div>
+            )}
             <Image
                 src={img}
                 alt="Logo"
                 width={180}
                 height={180}
-                className='mb-12'
+                className={`mb-12 transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+                onLoad={() => setIsLoaded(true)}
+                loading="lazy"
             />
           </div>
 
@@ -106,6 +118,7 @@ export default function ItemCard({ name, data, type }: ItemCard) {
             </div>
           </div>
         </div>
+        <ScrollButton />
         {showModal && (
           <ModalWindow name={name} description={description} img={img} tag={tag} type={type} price={price} onClose={closeModal}/>
         )}
