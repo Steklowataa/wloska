@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import { useCart } from "../../app/context/CartContext";
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import ButtonWithQuantity from "./ButtonWithQuantity";
@@ -8,6 +7,7 @@ import SetWithQuantity from "./SetWithQuantity";
 import ShowMore from "./ShowMore";
 import { menu } from "@/utils/text";
 import { ClipLoader } from 'react-spinners'
+import { useCart } from "@/app/context/CartContext";
 
 const inter = Inter({ subsets: ["latin"], weight: "400" });
 const inter2 = Inter({ subsets: ["latin"], weight: "600" });
