@@ -1,12 +1,13 @@
 "use client";
-import { useState } from 'react';
-import { useEffect, useRef } from 'react';
-
+import { useState, useEffect, useRef } from 'react';
 
 export default function MenuButtons() {
   const items: string[] = ["Pizza", "Burgery", "SmashBurgery", "Przystawki", "Napoje", "Sosy"];
-  const sectionref = useRef<(HTMLElement | null)[]>([])
-  const isClicked = useRef(false)
+  const sectionref = useRef<(HTMLElement | null)[]>([]);
+  const isScrolling = useRef(false);
+  const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
+
+  const [activeButton, setActiveButton] = useState<number>(0);
 
   useEffect(() => {
     const observers: IntersectionObserver[] = [];
@@ -20,15 +21,15 @@ export default function MenuButtons() {
         const observer = new IntersectionObserver(
           (entries) => {
             entries.forEach((entry) => {
-              if (entry.isIntersecting) {
+              if (entry.isIntersecting && !isScrolling.current) {
                 setActiveButton(index);
               }
             });
           },
           {
             root: null,
-            rootMargin: "-30% 0px -60% 0px",
-            threshold: 1, 
+            rootMargin: "-20% 0px -50% 0px",
+            threshold: 0.3,
           }
         );
   
@@ -41,51 +42,47 @@ export default function MenuButtons() {
       observers.forEach((observer) => observer.disconnect());
     };
   }, []);
-  
-
-  const firstRow = items.slice(0, 3);
-  const secondRow = items.slice(3);
-
-  const [activeButton, setActiveButton] = useState<number>(0);
 
   const handleButtonClick = (index: number): void => {
+    isScrolling.current = true;
     setActiveButton(index);
 
+    if (scrollTimeout.current) {
+      clearTimeout(scrollTimeout.current);
+    }
+
     const sectionId = items[index].toLowerCase();
-    const element = document.getElementById(sectionId)
-    if(element) {
+    const element = document.getElementById(sectionId);
+    
+    if (element) {
       element.scrollIntoView({
         behavior: 'smooth',
         block: 'start',
       });
     }
+    scrollTimeout.current = setTimeout(() => {
+      isScrolling.current = false;
+    }, 1000);
   };
 
+  useEffect(() => {
+    return () => {
+      if (scrollTimeout.current) {
+        clearTimeout(scrollTimeout.current);
+      }
+    };
+  }, []);
 
-  
   return (
     <>
-      {/* Mobile View */}
-      <div className="grid grid-cols-3 gap-2 p-4 md:hidden z-1">
-        {items.map((element, index) => (
-          <button
-            key={index}
-            onClick={() => handleButtonClick(index)}
-            className={`cursor-pointer px-4 py-2 text-sm font-semibold rounded-[20px] transition-colors duration-300 ${
-              index === activeButton
-                ? "bg-[#370424] text-white"
-                : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-            }`}
-          >
-            {element}
-          </button>
-        ))}
+      {/* Mobile View - Alternative Structure */}
+      <div className="block md:hidden">
+      
       </div>
   
       {/* Desktop View */}
-      <div className="hidden md:grid grid-cols-4 gap-x-8 px-6 relative sticky top-0 z-9">
-        <div className="col-span-5 col-start-2 sticky top-0 z-50">
-          <div className="flex flex-nowrap items-center space-x-4 py-3 px-4 rounded-[50px] w-fit border border-white/20 shadow-sm bg-gray/10 backdrop-blur-md">
+      <div className="hidden md:flex justify-center sticky top-6 z-50 px-6">
+      <div className="flex flex-nowrap items-center space-x-4 py-3 px-4 rounded-[50px] w-fit border border-white/20 shadow-sm bg-gray/10 backdrop-blur-md">
             {items.map((element, index) => (
               <button
                 key={index}
@@ -101,8 +98,6 @@ export default function MenuButtons() {
             ))}
           </div>
         </div>
-      </div>
     </>
   );
-  
 }
