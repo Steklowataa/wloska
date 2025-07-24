@@ -7,7 +7,6 @@ import { useState } from "react";
 
 export default function Header() {
     const { totalQuantity, items } = useCart();
-    console.log(items)
     const [showSummeryCart, setShowSummeryCart] = useState(false);
 
     return (
@@ -34,7 +33,20 @@ export default function Header() {
                 </span>
             )}
             {showSummeryCart &&  (
-                <SummeryCart items={items} />
+                <SummeryCart items={items.map((item) => ({
+                    name: item.name,
+                    image: item.image,
+                    price: item.basePrice,
+                    quantity: item.quantity,
+                    totalPrice: item.totalPrice,
+                    sauces: item.sauces,
+                    extras: item.extras,
+                    additions: [
+                        ...(item.sauces?.map((s) => s.name) || []),
+                        ...(item.extras?.map((s) => s.name) || []),
+                    ],
+                    setQuantity: () => {}
+                }))} />
             )}
             </div>
         </div>
