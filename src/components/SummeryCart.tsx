@@ -3,6 +3,8 @@ import Image from "next/image";
 import { useState } from "react";
 import ButtonWithQuantity from "./ModalWindow/ButtonWithQuantity";
 import { useRouter } from "next/navigation";
+import { Divide } from "lucide-react";
+import groupCartItems from "@/utils/GroupCartItem";
 
 type CartItem = {
   name: string;
@@ -10,41 +12,59 @@ type CartItem = {
   price: number;
   quantity: number;
   totalPrice: number;
-  additions?: string[];
+  sauces?: any[];
+  extras?: any[];
   setQuantity: (val: number) => void;
 };
 
 export default function SummeryCart({ items }: { items: CartItem[] }) {
-    // console.log("cart in preview, ", items)
-  const [expanded, setExpanded] = useState(false);
+  // const [expanded, setExpanded] = useState(false); // ← niepotrzebne po modyfikacji
   const router = useRouter();
 
   const totalPrice = (items || []).reduce((sum, item) => sum + item.totalPrice, 0);
-
-  const handleToggleExpand = () => setExpanded(!expanded);
+  // const handleToggleExpand = () => setExpanded(!expanded); // ← niepotrzebne po modyfikacji
   const handleGoToBasket = () => router.push("/basket");
 
-  const displayedItems =
-    expanded
-      ? items || []
-      : items?.[0]
-        ? [items[0]]
-        : [];
+  const groupedItems = groupCartItems(items);
+
+  // Debug: Let's see what we're working with
+  console.log("Original items:", items);
+  console.log("Grouped items:", groupedItems);
+  
+  // More detailed debugging for each item
+  items.forEach((item, index) => {
+    console.log(`Item ${index}:`, {
+      name: item.name,
+      sauces: item.sauces,
+      extras: item.extras,
+      saucesType: typeof item.sauces,
+      extrasType: typeof item.extras,
+      saucesLength: item.sauces?.length,
+      extrasLength: item.extras?.length
+    });
+  });
+
+  // ↓ zawsze pokazujemy całą listę pozycji
+  const displayedItems = groupedItems;
 
   return (
-    <div className="absolute right-4 top-[70px] z-999 bg-[#1c1c1c] text-white rounded-xl p-4 w-[90vw] sm:w-[380px] shadow-xl border border-[#7A0950]">
+    <div className="absolute left-10 top-10 z-999 bg-white backdrop-blur-2xl text-black rounded-xl p-4 w-[90vw] sm:w-[380px] shadow-xl]">
       <div className="flex flex-col gap-4">
         {displayedItems.length > 0 ? (
           <>
             {displayedItems.map((item, i) => (
-              <div key={i} className="flex items-center gap-4 border-b border-gray-600 pb-4">
-                <Image
-                  src={item.image}
-                  alt={item.name}
-                  width={60}
-                  height={60}
-                  className="rounded-xl"
-                />
+              <div key={i} className="flex items-center gap-4 border-b border-grey pb-4">
+                {item.image ? (
+                  <Image
+                    src={item.image || "4-sery.png"}
+                    alt={item.name}
+                    width={60}
+                    height={60}
+                    className="rounded-xl"
+                  />
+                ) : (
+                  <div className="rounded-full w-[60px] h-[60px] z-50 bg-grey"></div>
+                )}
                 <div className="flex-1">
                   <div className="flex justify-between items-center">
                     <p className="font-bold">
@@ -53,42 +73,60 @@ export default function SummeryCart({ items }: { items: CartItem[] }) {
                     </p>
                     <p className="font-semibold">{item.totalPrice}zł</p>
                   </div>
-                  {item.additions?.length > 0 && (
+                  {/* Fixed: Better handling of sauces and extras display */}
+                  {/* Debug the condition */}
+                  {(() => {
+                    const hasSauces = item.sauces && item.sauces.length > 0;
+                    const hasExtras = item.extras && item.extras.length > 0;
+                    console.log(`Item ${item.name} - hasSauces:`, hasSauces, 'hasExtras:', hasExtras);
+                    console.log(`Item ${item.name} - sauces:`, item.sauces, 'extras:', item.extras);
+                    return (hasSauces || hasExtras);
+                  })() && (
                     <p className="text-xs text-gray-300">
-                      {item.additions.join(", ")}
+                      {/* Safely extract names from sauces and extras */}
+                      {(() => {
+                        const sauceNames = (item.sauces || []).map((sauce) => {
+                          console.log('Processing sauce:', sauce, 'type:', typeof sauce);
+                          return typeof sauce === 'string' ? sauce : sauce?.name || 'Unknown sauce';
+                        });
+                        const extraNames = (item.extras || []).map((extra) => {
+                          console.log('Processing extra:', extra, 'type:', typeof extra);
+                          return typeof extra === 'string' ? extra : extra?.name || 'Unknown extra';
+                        });
+                        const allNames = [...sauceNames, ...extraNames];
+                        console.log('Final names array:', allNames);
+                        return allNames.join(", ");
+                      })()}
                     </p>
                   )}
-                  <div className="mt-2">
-                    <ButtonWithQuantity
-                      price={item.price}
-                      quantity={item.quantity}
-                      setQuantity={(val) => item.setQuantity(val)}
-                    />
-                  </div>
                 </div>
               </div>
             ))}
-            {items.length > 1 && (
+
+            {/* 
+            // ← zakomentowane, bo nie potrzebujemy już rozwoju listy
+            {items.length > 2 && (
               <button
                 className="text-sm text-pink-400 mt-2 hover:underline"
                 onClick={handleToggleExpand}
               >
                 {expanded ? "Zwiń" : `Pokaż wszystkie (${items.length})`}
               </button>
-            )}
-            <div className="flex justify-between items-center mt-4">
-              <p className="text-lg font-bold">Razem:</p>
-              <p className="text-lg font-bold">{totalPrice}zł</p>
+            )} 
+            */}
+
+            <div className="flex gap-x-30 items-center mt-4">
+              <p className="text-lg font-bold">Razem: {totalPrice}zł</p>
+              <button
+                className="bg-[#7A0950] text-white rounded-full py-2 mt-2 font-semibold hover:opacity-90 w-[120px]"
+                onClick={handleGoToBasket}
+              >
+                Potwierdź
+              </button>
             </div>
-            <button
-              className="bg-[#7A0950] text-white rounded-full py-2 mt-2 font-semibold hover:opacity-90"
-              onClick={handleGoToBasket}
-            >
-              Potwierdź
-            </button>
           </>
         ) : (
-          <p className="text-center text-gray-400">Twój koszyk jest pusty</p>
+          <p className="text-center text-white">Twój koszyk jest pusty</p>
         )}
       </div>
     </div>
