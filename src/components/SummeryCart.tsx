@@ -5,6 +5,7 @@ import ButtonWithQuantity from "./ModalWindow/ButtonWithQuantity";
 import { useRouter } from "next/navigation";
 import { Divide } from "lucide-react";
 import groupCartItems from "@/utils/GroupCartItem";
+import { useCart } from "@/app/context/CartContext";
 
 type CartItem = {
   name: string;
@@ -20,6 +21,7 @@ type CartItem = {
 export default function SummeryCart({ items }: { items: CartItem[] }) {
   // const [expanded, setExpanded] = useState(false); // ← niepotrzebne po modyfikacji
   const router = useRouter();
+  const { removeFromCart } = useCart();
 
   const totalPrice = (items || []).reduce((sum, item) => sum + item.totalPrice, 0);
   // const handleToggleExpand = () => setExpanded(!expanded); // ← niepotrzebne po modyfikacji
@@ -47,6 +49,21 @@ export default function SummeryCart({ items }: { items: CartItem[] }) {
   // ↓ zawsze pokazujemy całą listę pozycji
   const displayedItems = groupedItems;
 
+  const handleDeleteItem = (item: any) => {
+    // Remove all instances of this specific item (with same name, sauces, and extras)
+    const itemsToRemove = items.filter(cartItem => {
+      const sameBaseName = cartItem.name === item.name;
+      const sameSauces = JSON.stringify(cartItem.sauces || []) === JSON.stringify(item.sauces || []);
+      const sameExtras = JSON.stringify(cartItem.extras || []) === JSON.stringify(item.extras || []);
+      return sameBaseName && sameSauces && sameExtras;
+    });
+
+    // Remove each instance
+    itemsToRemove.forEach(() => {
+        removeFromCart(item.name, item.sauces || [], item.extras || []);
+    });
+  };
+
   return (
     <div className="absolute left-10 top-10 z-999 bg-white backdrop-blur-2xl text-black rounded-xl p-4 w-[90vw] sm:w-[380px] shadow-xl]">
       <div className="flex flex-col gap-4">
@@ -71,7 +88,16 @@ export default function SummeryCart({ items }: { items: CartItem[] }) {
                       {item.name}
                       {item.quantity > 1 && ` ×${item.quantity}`}
                     </p>
-                    <p className="font-semibold">{item.totalPrice}zł</p>
+                    <div className="flex flex-col items-end">
+                      <p className="font-semibold">{item.totalPrice}zł</p>
+                      <button 
+                        onClick={() => handleDeleteItem(item)}
+                        className="text-red-500 hover:text-red-700 text-sm mt-1 transition-colors"
+                        title="Usuń z koszyka"
+                      >
+                        🗑️
+                      </button>
+                    </div>
                   </div>
                   {/* Fixed: Better handling of sauces and extras display */}
                   {/* Debug the condition */}
