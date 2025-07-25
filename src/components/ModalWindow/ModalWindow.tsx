@@ -114,7 +114,7 @@ export default function ModalWindow({
   };
 
   return (
-    <div className="fixed inset-0 bg-[rgba(0,0,0,0.8)] flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-[rgba(0,0,0,0.8)] flex items-center justify-center z-200">
       <div className="bg-black rounded-[30px] text-white w-[380px] sm:w-[440px] max-h-[90vh] p-4 border border-gray-600 relative overflow-hidden">
         <button
           onClick={onClose}
