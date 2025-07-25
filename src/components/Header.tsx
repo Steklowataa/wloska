@@ -46,7 +46,7 @@ export default function Header() {
               />
             </Link>
             {totalQuantity > 0 && (
-              <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs z-50 font-bold w-5 h-5 flex items-center justify-center rounded-full">
+              <span className="absolute -top-2 -right-2 bg-[#EE0498] text-white text-xs z-50 font-bold w-5 h-5 flex items-center justify-center rounded-full">
                 {totalQuantity}
               </span>
             )}
