@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { Divide } from "lucide-react";
 import groupCartItems from "@/utils/GroupCartItem";
 import { useCart } from "@/app/context/CartContext";
+import { Inter } from "next/font/google";
 
 type CartItem = {
   name: string;
@@ -18,13 +19,27 @@ type CartItem = {
   setQuantity: (val: number) => void;
 };
 
+const inter = Inter({
+    subsets: ["latin"],
+    weight: "400"
+  })
+  
+const interBold = Inter({
+    subsets: ["latin"],
+    weight: "600"
+})
+
+const interBold2 = Inter({
+    subsets: ["latin"],
+    weight: "800"
+})
+
 export default function SummeryCart({ items }: { items: CartItem[] }) {
-  // const [expanded, setExpanded] = useState(false); // ← niepotrzebne po modyfikacji
   const router = useRouter();
   const { removeFromCart } = useCart();
+  const [expanded, setExpanded] = useState(false);
 
   const totalPrice = (items || []).reduce((sum, item) => sum + item.totalPrice, 0);
-  // const handleToggleExpand = () => setExpanded(!expanded); // ← niepotrzebne po modyfikacji
   const handleGoToBasket = () => router.push("/basket");
 
   const groupedItems = groupCartItems(items);
@@ -46,11 +61,14 @@ export default function SummeryCart({ items }: { items: CartItem[] }) {
     });
   });
 
-  // ↓ zawsze pokazujemy całą listę pozycji
-  const displayedItems = groupedItems;
+  // Show only first 2 items unless expanded
+  const displayedItems = expanded ? groupedItems : groupedItems.slice(0, 2);
+  
+  const handleToggleExpand = () => {
+    setExpanded(!expanded);
+  };
 
   const handleDeleteItem = (item: any) => {
-    // Remove all instances of this specific item (with same name, sauces, and extras)
     const itemsToRemove = items.filter(cartItem => {
       const sameBaseName = cartItem.name === item.name;
       const sameSauces = JSON.stringify(cartItem.sauces || []) === JSON.stringify(item.sauces || []);
@@ -58,101 +76,93 @@ export default function SummeryCart({ items }: { items: CartItem[] }) {
       return sameBaseName && sameSauces && sameExtras;
     });
 
-    // Remove each instance
     itemsToRemove.forEach(() => {
         removeFromCart(item.name, item.sauces || [], item.extras || []);
     });
   };
 
   return (
-    <div className="absolute left-10 top-10 z-999 bg-white backdrop-blur-2xl text-black rounded-xl p-4 w-[90vw] sm:w-[380px] shadow-xl]">
-      <div className="flex flex-col gap-4">
+    <div className="absolute left-10 top-10 z-999 bg-white backdrop-blur-2xl text-black rounded-xl p-4 w-[85vw] sm:w-[320px] shadow-xl">
+      <div className="flex flex-col gap-3">
         {displayedItems.length > 0 ? (
           <>
             {displayedItems.map((item, i) => (
-              <div key={i} className="flex items-center gap-4 border-b border-grey pb-4">
-                {item.image ? (
-                  <Image
-                    src={item.image || "4-sery.png"}
-                    alt={item.name}
-                    width={60}
-                    height={60}
-                    className="rounded-xl"
-                  />
-                ) : (
-                  <div className="rounded-full w-[60px] h-[60px] z-50 bg-grey"></div>
-                )}
-                <div className="flex-1">
-                  <div className="flex justify-between items-center">
-                    <p className="font-bold">
+              <div key={i} className="border-b border-gray-200 pb-3 last:border-b-0">
+                {/* First line: Pizza name, quantity, price and trash button */}
+                <div className="flex justify-between items-center mb-1">
+                  <div className="flex-1">
+                    <span className={`${interBold2.className} text-[17px]`}>
                       {item.name}
                       {item.quantity > 1 && ` ×${item.quantity}`}
-                    </p>
-                    <div className="flex flex-col items-end">
-                      <p className="font-semibold">{item.totalPrice}zł</p>
-                      <button 
-                        onClick={() => handleDeleteItem(item)}
-                        className="text-red-500 hover:text-red-700 text-sm mt-1 transition-colors"
-                        title="Usuń z koszyka"
-                      >
-                        🗑️
-                      </button>
-                    </div>
+                    </span>
                   </div>
-                  {/* Fixed: Better handling of sauces and extras display */}
-                  {/* Debug the condition */}
-                  {(() => {
-                    const hasSauces = item.sauces && item.sauces.length > 0;
-                    const hasExtras = item.extras && item.extras.length > 0;
-                    console.log(`Item ${item.name} - hasSauces:`, hasSauces, 'hasExtras:', hasExtras);
-                    console.log(`Item ${item.name} - sauces:`, item.sauces, 'extras:', item.extras);
-                    return (hasSauces || hasExtras);
-                  })() && (
-                    <p className="text-xs text-gray-300">
-                      {/* Safely extract names from sauces and extras */}
-                      {(() => {
-                        const sauceNames = (item.sauces || []).map((sauce) => {
-                          console.log('Processing sauce:', sauce, 'type:', typeof sauce);
-                          return typeof sauce === 'string' ? sauce : sauce?.name || 'Unknown sauce';
-                        });
-                        const extraNames = (item.extras || []).map((extra) => {
-                          console.log('Processing extra:', extra, 'type:', typeof extra);
-                          return typeof extra === 'string' ? extra : extra?.name || 'Unknown extra';
-                        });
-                        const allNames = [...sauceNames, ...extraNames];
-                        console.log('Final names array:', allNames);
-                        return allNames.join(", ");
-                      })()}
-                    </p>
-                  )}
+                  <div className="flex items-center gap-2">
+                    <span className={`${interBold2.className} text-[15px]`}>{item.totalPrice}zł</span>
+                    <button 
+                      onClick={() => handleDeleteItem(item)}
+                      className="text-red-500 hover:text-[#EE0498] text-lg transition-colors cursor-pointer p-1 hover:bg-red-50 rounded"
+                      title="Usuń z koszyka"
+                      type="button"
+                    >
+                      🗑️
+                    </button>
+                  </div>
                 </div>
+                
+                {/* Second line: Additions (sauces and extras) */}
+                {(() => {
+                  const hasSauces = item.sauces && item.sauces.length > 0;
+                  const hasExtras = item.extras && item.extras.length > 0;
+                  console.log(`Item ${item.name} - hasSauces:`, hasSauces, 'hasExtras:', hasExtras);
+                  console.log(`Item ${item.name} - sauces:`, item.sauces, 'extras:', item.extras);
+                  return (hasSauces || hasExtras);
+                })() && (
+                  <div className={`${inter.className} text-[12px]`}>
+                    {/* Safely extract names from sauces and extras */}
+                    {(() => {
+                      const sauceNames = (item.sauces || []).map((sauce) => {
+                        console.log('Processing sauce:', sauce, 'type:', typeof sauce);
+                        return typeof sauce === 'string' ? sauce : sauce?.name || 'Unknown sauce';
+                      });
+                      const extraNames = (item.extras || []).map((extra) => {
+                        console.log('Processing extra:', extra, 'type:', typeof extra);
+                        return typeof extra === 'string' ? extra : extra?.name || 'Unknown extra';
+                      });
+                      const allNames = [...sauceNames, ...extraNames];
+                      console.log('Final names array:', allNames);
+                      return allNames.join(", ");
+                    })()}
+                  </div>
+                )}
               </div>
             ))}
 
-            {/* 
-            // ← zakomentowane, bo nie potrzebujemy już rozwoju listy
-            {items.length > 2 && (
+            {/* Show expand/collapse button only when there are more than 2 items */}
+            {groupedItems.length > 2 && (
               <button
-                className="text-sm text-pink-400 mt-2 hover:underline"
+                className={`${inter.className} text-sm text-[#FF01A2] mt-2 hover:underline cursor-pointer`}
                 onClick={handleToggleExpand}
+                type="button"
               >
-                {expanded ? "Zwiń" : `Pokaż wszystkie (${items.length})`}
+                {expanded ? "" : `Pokaż wszystkie (${groupedItems.length})`}
               </button>
-            )} 
-            */}
+            )}
 
-            <div className="flex gap-x-30 items-center mt-4">
-              <p className="text-lg font-bold">Razem: {totalPrice}zł</p>
+            <div className="flex justify-between items-center mt-1 pt-2">
+              <p className={`${interBold2.className} text-[17px]`}>Razem: {totalPrice}zł</p>
               <button
-                className="bg-[#7A0950] text-white rounded-full py-2 mt-2 font-semibold hover:opacity-90 w-[120px]"
+                className={`${interBold.className} text-[15px] bg-[#7A0950] text-white rounded-full 
+                px-4 py-2 font-semibold hover:opacity-90 
+                cursor-pointer transition-opacity`}
                 onClick={handleGoToBasket}
+                type="button"
               >
                 Potwierdź
               </button>
             </div>
           </>
         ) : (
-          <p className="text-center text-white">Twój koszyk jest pusty</p>
+          <p className="text-center text-black py-4">Twój koszyk jest pusty</p>
         )}
       </div>
     </div>
