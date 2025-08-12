@@ -60,17 +60,16 @@ export default function ModalWindow({
     );
   };
 
-  // Check if this item includes free sauce
+
   const includesFreeSauce = description.toLowerCase().includes("sosem do wyboru") || description.toLocaleLowerCase().includes("sos do wyboru");
   const freeSauceLimit = includesFreeSauce ? 1 : 0;
 
-  // Calculate prices considering free sauce
   const calculateSaucesPrice = (sauces: Item[]) => {
     if (!includesFreeSauce) {
       return sauces.reduce((sum, s) => sum + s.price, 0);
     }
     
-    // First sauce is free, rest are paid
+
     return sauces.slice(1).reduce((sum, s) => sum + s.price, 0);
   };
 
@@ -90,6 +89,7 @@ export default function ModalWindow({
       addToCart({
         name,
         description,
+        img,
         type,
         basePrice: price,
         sauces: selectedSauces,
@@ -102,6 +102,7 @@ export default function ModalWindow({
       addToCart({
         name: name + " Zestaw",
         description,
+        img,
         type,
         basePrice: price,
         sauces: selectedSauces,
