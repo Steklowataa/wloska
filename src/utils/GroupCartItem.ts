@@ -1,74 +1,63 @@
+// src/utils/GroupCartItem.ts
+
 type CartItem = {
     name: string;
-    image: string;
-    quantity: number;
-    description: string;
+    image?: string;
+    quantity?: number;
+    description?: string;
     type?: string;
-    basePrice: number;
-    sauces?: any[];
-    extras?: any[];
+    basePrice?: number;
+    sauces?: Array<string | { name?: string }>;
+    extras?: Array<string | { name?: string }>;
+    totalPrice?: number;
+  };
+  
+  type GroupedCartItem = CartItem & {
+    additionals: string[]; // tutaj trzymamy sauces + extras jako stringi
+    quantity: number;
     totalPrice: number;
   };
   
-  function groupCartItems(items: CartItem[]) {
-    console.log("=== GROUPING DEBUG START ===");
-    console.log("Input items:", items);
-    
-    const grouped: { [key: string]: CartItem & { additions: string[] } } = {};
-    
+  function normalizeAdditionName(x: string | { name?: string } | undefined): string {
+    if (!x) return "Dodatek";
+    return typeof x === "string" ? x : x.name ?? "Dodatek";
+  }
+  
+  function groupCartItems(items: CartItem[] = []): GroupedCartItem[] {
+    if (!Array.isArray(items)) return [];
+  
+    const grouped: Record<string, GroupedCartItem> = {};
+  
     for (const item of items) {
-      console.log(`\n--- Processing item: ${item.name} ---`);
-      console.log("Raw sauces:", item.sauces);
-      console.log("Raw extras:", item.extras);
-      
-      // Better handling of sauces and extras - handle both string and object formats
-      const sauces = item.sauces?.map((s) => {
-        console.log("Processing sauce:", s, "type:", typeof s);
-        return typeof s === 'string' ? s : s?.name || 'Unknown sauce';
-      }) || [];
-      
-      const extras = item.extras?.map((e) => {
-        console.log("Processing extra:", e, "type:", typeof e);
-        return typeof e === 'string' ? e : e?.name || 'Unknown extra';
-      }) || [];
-      
-      console.log("Processed sauces:", sauces);
-      console.log("Processed extras:", extras);
-      
-      // Sort the additions to ensure consistent grouping
-      const sortedSauces = [...sauces].sort();
-      const sortedExtras = [...extras].sort();
-      
-      // Create a more reliable key that includes the base name and sorted additions
-      const key = `${item.name}::sauces[${sortedSauces.join(";")}]::extras[${sortedExtras.join(";")}]`;
-      
-      console.log(`Generated key: ${key}`);
-      
+      // defensywnie ustawiamy wartości domyślne
+      const qty = item.quantity ?? 1;
+      const basePrice = item.basePrice ?? 0;
+      const itemTotal = item.totalPrice ?? basePrice * qty;
+  
+      // Normalizacja dodatków do tablicy stringów
+      const sauces = (item.sauces || []).map(s => normalizeAdditionName(s));
+      const extras = (item.extras || []).map(e => normalizeAdditionName(e));
+      const additionals = [...sauces, ...extras];
+  
+      // Klucz grupujący: nazwa + posortowane additionals + (opcjonalnie) basePrice
+      // sort by value to ensure same sets in different order group together
+      const key = `${item.name}::additionals[${[...additionals].sort().join("|")}]::price[${basePrice}]`;
+  
       if (!grouped[key]) {
-        console.log("Creating new group for key:", key);
         grouped[key] = {
           ...item,
-          additions: [...sauces, ...extras], // Keep original order for display
-          sauces: item.sauces || [],
-          extras: item.extras || [],
-          quantity: item.quantity || 1,
-          totalPrice: item.totalPrice,
+          additionals,
+          quantity: qty,
+          totalPrice: itemTotal,
         };
       } else {
-        console.log("Adding to existing group for key:", key);
-        // Item with same name and same additions - increment quantity and price
-        grouped[key].quantity += item.quantity || 1;
-        grouped[key].totalPrice += item.totalPrice;
+        grouped[key].quantity += qty;
+        grouped[key].totalPrice += itemTotal;
       }
-      
-      console.log("Current grouped state:", grouped[key]);
     }
-    
-    const result = Object.values(grouped);
-    console.log("=== FINAL GROUPING RESULT ===");
-    console.log("Final grouped items:", result);
-    console.log("=== GROUPING DEBUG END ===");
-    return result;
+  
+    return Object.values(grouped);
   }
   
   export default groupCartItems;
+  
