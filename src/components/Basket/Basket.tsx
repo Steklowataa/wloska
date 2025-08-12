@@ -8,7 +8,7 @@ export default function BasketPage() {
 
   return (
     <div className="p-4">
-      <StepButtons onStepChange={setCurrentStep} />
+      <StepButtons onStepChange={setCurrentStep} currentStep={currentStep} />
       <ListOfProducts currentStep={currentStep} />
       {currentStep === 2 && <div>Formularz danych kontaktowych</div>}
       {currentStep === 3 && <div>Wybór metody płatności</div>}
