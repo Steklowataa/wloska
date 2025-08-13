@@ -15,7 +15,7 @@ export default function StepButtons() {
   const steps = [
     { label: "Koszyk", path: "/basket/products" },
     { label: "Dane osobowe", path: "/basket/details" },
-    { label: "Podsumowanie", path: "/basket/summery" },
+    { label: "Podsumowanie", path: "/basket/summary" },
   ];
 
   return (
