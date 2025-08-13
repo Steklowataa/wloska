@@ -2,13 +2,14 @@
 import { Inter } from "next/font/google";
 import { useCart } from "@/app/context/CartContext";
 import Image from "next/image";
+import NextButton from "../NextButton";
 
 const inter = Inter({ subsets: ["latin"], weight: "400" });
 const interBold = Inter({ subsets: ["latin"], weight: "600" });
 const interBold2 = Inter({ subsets: ["latin"], weight: "800" });
 
 export default function ListOfProducts() {  
-  const { items, removeFromCart, isLoaded } = useCart();
+  const { items, removeFromCart } = useCart();
 
   if (items.length === 0) {
     return (
@@ -87,6 +88,7 @@ export default function ListOfProducts() {
 
         <div className="flex justify-between items-center mt-6 pt-4 ">
           <p className={`${interBold2.className} text-xl`}>Razem: {totalPrice} zł</p>
+          <NextButton />
         </div>
       </div>
     </div>
