@@ -7,26 +7,21 @@ const inter = Inter({ subsets: ["latin"], weight: "400" });
 const interBold = Inter({ subsets: ["latin"], weight: "600" });
 const interBold2 = Inter({ subsets: ["latin"], weight: "800" });
 
-export default function ListOfProducts({ currentStep }: { currentStep: number }) {
-  const { items, removeFromCart } = useCart();
-  if (currentStep !== 1) return null;
+export default function ListOfProducts() {  
+  const { items, removeFromCart, isLoaded } = useCart();
 
-  if (!items || items.length === 0) {
+  if (items.length === 0) {
     return (
       <div className="max-w-3xl mx-auto mt-10 p-6 bg-[#28091D]/40 rounded-xl shadow-lg">
         <div className="flex items-center justify-center flex-col">
-        <h1 className={`${interBold2.className} text-2xl mb-3`}>Twoje zamówienie</h1>
-        <p className={`${inter.className} text-gray-300 text-center`}>Twój koszyk jest pusty</p>
+          <h1 className={`${interBold2.className} text-2xl mb-3`}>Twoje zamówienie</h1>
+          <p className={`${inter.className} text-gray-300 text-center`}>Twój koszyk jest pusty</p>
         </div>
       </div>
     );
   }
 
   const totalPrice = items.reduce((sum, item) => sum + item.totalPrice, 0);
-
-  const handleDeleteItem = (item: any) => {
-    removeFromCart(item.name, item.sauces || [], item.extras || []);
-  };
 
   const getAdditionalsText = (item: any) => {
     const additions = [];
@@ -92,12 +87,6 @@ export default function ListOfProducts({ currentStep }: { currentStep: number })
 
         <div className="flex justify-between items-center mt-6 pt-4 ">
           <p className={`${interBold2.className} text-xl`}>Razem: {totalPrice} zł</p>
-          <button
-            className={`${interBold.className} bg-[#7A0950] button-shadow-style text-white px-10 py-3 rounded-full hover:opacity-90 transition-opacity`}
-            type="button"
-          >
-            Dalej →
-          </button>
         </div>
       </div>
     </div>

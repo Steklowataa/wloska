@@ -40,7 +40,7 @@ export default function SummeryCart({ items }: { items: CartItem[] }) {
   const [expanded, setExpanded] = useState(false);
 
   const totalPrice = (items || []).reduce((sum, item) => sum + item.totalPrice, 0);
-  const handleGoToBasket = () => router.push("/basket");
+  const handleGoToBasket = () => router.push("/basket/products");
 
   const groupedItems = groupCartItems(items);
 
