@@ -33,7 +33,7 @@ export default function AdressDataForm() {
   ]
 
   return (
-    <div className="p-6 rounded-[20px] w-[800px] bg-[#28091D]/40 border border-white">
+    <div className="pl-3 pr-7 rounded-[20px] w-[800px] h-[380px] bg-[#28091D]/40 border border-white">
       <h2
         className={`${inter.className} text-4xl font-extrabold text-center mb-8`}
         style={{
