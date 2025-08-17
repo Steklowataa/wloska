@@ -2,6 +2,7 @@
 import SwitchButton from "./SwitchButton"
 import PersonalDataForm from "./PersonalDataForm"
 import AdressDataForm from "./AdressDataForm"
+import ExtraDataForm from "./ExtraDataForm"
 
 export default function OrderDetails () {
     return (
@@ -9,7 +10,8 @@ export default function OrderDetails () {
         <div>
             <SwitchButton />
             <PersonalDataForm />
-             <AdressDataForm />
+            <AdressDataForm />
+            <ExtraDataForm />
         </div>
         </>
     )
