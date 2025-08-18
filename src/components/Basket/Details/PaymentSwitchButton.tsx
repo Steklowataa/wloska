@@ -1,6 +1,17 @@
 "use client"
 import { useState } from "react"
 import Changes from "./Changes"
+import { Inter } from "next/font/google"
+
+const inter = Inter({
+    subsets: ["latin"],
+    weight: "600"
+})
+
+const inter2 = Inter({
+    subsets: ["latin"],
+    weight: "400"
+})
 
 export default function PaymentSwitchButton() {
     const [choice, setChoice] = useState<string>("Gotówka")
@@ -37,7 +48,7 @@ export default function PaymentSwitchButton() {
                         className="appearance-none w-5 h-5 rounded-full border-2 border-gray-400 
                                    checked:border-green-500 checked:bg-green-500 cursor-pointer"
                     />
-                    <span className={`${choice === "Karta" ? "font-semibold" : "text-gray-400"}`}>
+                    <span className={`${choice === "Karta" ? `font-semibold ${inter.className}` : "text-gray-400"}`}>
                         Karta
                     </span>
                 </label>
@@ -48,7 +59,7 @@ export default function PaymentSwitchButton() {
                     <div>
                         <Changes />
                     </div>}
-                {choice === "Karta" && <h2 className="text-green-600 font-semibold">Karta</h2>}
+                {choice === "Karta" && <h2 className={`${inter.className} pl-6 mt-6`}>Płatność kartą odbywa się wyłącznie przy odbiorze u kuriera (terminal).</h2>}
             </div>
         </>
     )
