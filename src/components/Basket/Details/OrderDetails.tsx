@@ -3,6 +3,7 @@ import SwitchButton from "./SwitchButton"
 import PersonalDataForm from "./PersonalDataForm"
 import AdressDataForm from "./AdressDataForm"
 import ExtraDataForm from "./ExtraDataForm"
+import PaymentForm from "./PaymentForm"
 
 export default function OrderDetails() {
   return (
@@ -18,6 +19,7 @@ export default function OrderDetails() {
       {/* dolny rząd - reduced gap */}
       <div className="flex gap-8 items-start -mt-15">
         <ExtraDataForm />
+        <PaymentForm />
       </div>
        
       {/* przycisk dalej */}
