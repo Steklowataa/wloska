@@ -34,7 +34,8 @@ export default function NextButton() {
 
     return (
         <button
-            className={`${interBold.className} bg-[#7A0950] button-shadow-style text-white px-10 py-3 rounded-full hover:opacity-90 transition-opacity`}
+            className={`${interBold.className} bg-[#7A0950] cursor-pointer button-shadow-style text-white
+             px-10 py-3 rounded-full hover:opacity-90 transition-opacity`}
             type="button"
             onClick={handleNext}>
                 {getButtonText()}
