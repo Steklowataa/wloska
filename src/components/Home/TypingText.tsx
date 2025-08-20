@@ -30,7 +30,6 @@ const TypingText = ({ text, speed, delay = 0, trigger }: {text: string, speed?: 
     return (
         <span>
             {displayedText}
-            {isTyping && <span className="animate-pulse">|</span>}
         </span>
     );
 };

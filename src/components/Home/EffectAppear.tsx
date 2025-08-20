@@ -1,24 +1,51 @@
+"use client"
 import { useState, useEffect } from "react";
 
-const EffectAppear = ({ text, trigger }: {text: string, trigger: string}) => {
-    const [isVisible, setIsVisible] = useState(false);
+const EffectAppear = ({
+  text,
+  trigger,
+  duration = 1000,   // czas trwania fade (ms)
+  visibleTime = 3000  // czas, ile tekst jest widoczny
+}: {
+  text: string;
+  trigger: string | number;
+  duration?: number;
+  visibleTime?: number;
+}) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [displayedText, setDisplayedText] = useState(text);
 
-    useEffect(() => {
+  useEffect(() => {
+    // 1. Fade-out starego tekstu
+    setIsVisible(false);
+
+    // 2. Po zakończeniu fade-outa podmień tekst i fade-in
+    const changeTimer = setTimeout(() => {
+      setDisplayedText(text);
+      setIsVisible(true);
+
+      // 3. Po czasie wyświetlania zaczynamy fade-out
+      const hideTimer = setTimeout(() => {
         setIsVisible(false);
-        const timeout = setTimeout(() => {
-            setIsVisible(true);
-        }, 2200); // Appear after typing animation
+      }, visibleTime);
 
-        return () => clearTimeout(timeout);
-    }, [text, trigger]);
+      return () => clearTimeout(hideTimer);
+    }, duration);
 
-    return (
-        <div className={`mt-6 text-lg text-gray-700 max-w-2xl transition-all duration-1000 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-        }`}>
-            {text}
-        </div>
-    );
+    return () => clearTimeout(changeTimer);
+  }, [text, trigger, duration, visibleTime]);
+
+  return (
+    <div
+      className="mt-6 text-lg text-white max-w-2xl transition-opacity"
+      style={{
+        transition: `opacity ${duration}ms ease-in-out`,
+        opacity: isVisible ? 1 : 0
+      }}
+    >
+      {displayedText}
+    </div>
+  );
 };
 
 export default EffectAppear;

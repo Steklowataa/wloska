@@ -5,13 +5,13 @@ const SpinningEllipse = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
     
     // 4 colors: green, red, yellow, blue
-    const colors = ['#22c55e', '#ef4444', '#eab308', '#3b82f6'];
+    const colors = ['#E01094', '#940C62', '#43A9F7', '#0F7BCE'];
         
     useEffect(() => {
         const interval = setInterval(() => {
             setRotation(prev => prev + 90);
             setCurrentIndex(prev => (prev + 1) % 4); // Cycle through 0, 1, 2, 3
-        }, 6500); // szybkosc otwarzania 
+        }, 5500); // szybkosc otwarzania 
 
         return () => clearInterval(interval);
     }, []);
