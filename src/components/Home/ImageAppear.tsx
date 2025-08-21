@@ -32,7 +32,7 @@ const ImageAppear = ({
                 alt={src} 
                 width={500} 
                 height={500} 
-                className="absolute right-0 top-1/4 object-cover transition-opacity"
+                className="absolute right-30 top-1/5 object-cover transition-opacity"
                 style={{
                     opacity: isVisible ? 1 : 0,
                     transition: `opacity ${duration}ms ease-in-out`

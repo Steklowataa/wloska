@@ -4,6 +4,7 @@ import TypingText from "@/components/Home/TypingText";
 import SpinningEllipse from "@/components/Home/SpinEllipse";
 import EffectAppear from "@/components/Home/EffectAppear";
 import ImageAppear from "@/components/Home/ImageAppear";
+import Header from "@/components/Header";
 
 
 export default function Home() {
@@ -49,6 +50,7 @@ export default function Home() {
 
     return (
         <>
+            <Header />
             <SpinningEllipse />
             <div>
               <ImageAppear src={images[currentIndex]} trigger={currentIndex} duration={1000}/>
