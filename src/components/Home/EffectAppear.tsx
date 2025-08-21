@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 const EffectAppear = ({
   text,
   trigger,
-  duration = 1000,   // czas trwania fade (ms)
-  visibleTime = 3000  // czas, ile tekst jest widoczny
+  duration = 1000,
+  visibleTime = 3000
 }: {
   text: string;
   trigger: string | number;
@@ -16,15 +16,12 @@ const EffectAppear = ({
   const [displayedText, setDisplayedText] = useState(text);
 
   useEffect(() => {
-    // 1. Fade-out starego tekstu
     setIsVisible(false);
 
-    // 2. Po zakończeniu fade-outa podmień tekst i fade-in
     const changeTimer = setTimeout(() => {
       setDisplayedText(text);
       setIsVisible(true);
 
-      // 3. Po czasie wyświetlania zaczynamy fade-out
       const hideTimer = setTimeout(() => {
         setIsVisible(false);
       }, visibleTime);
@@ -37,7 +34,7 @@ const EffectAppear = ({
 
   return (
     <div
-      className="mt-6 text-lg text-white max-w-2xl transition-opacity"
+      className="mt-6 text-lg text-white max-w-2xl transition-opacity min-h-[48px]" // Added min-h-[48px] to maintain consistent height
       style={{
         transition: `opacity ${duration}ms ease-in-out`,
         opacity: isVisible ? 1 : 0
