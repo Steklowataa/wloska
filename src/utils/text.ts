@@ -130,3 +130,28 @@ export const menu: {
         {name: "Boczek", price: 6}
     ]
 }
+
+export const text : {
+    images: {img: string}[],
+    header: {name: string, subtitle: string, description: string, color: string}[],
+    secondHeader: {text: string}[],
+} = {
+    images : [
+        { img: "/images/bianca.svg"},
+        { img: "/images/z-gruszka.svg"},
+        { img: "/images/4-sery.png" },
+        {img: "/images/4-miesa.svg"}
+    ],
+    header : [
+        { name: "Salami", subtitle: "Bianca", description: "...", color: '#E01094' },
+        { name: "Pizza z", subtitle: "Gruszką", description: "...", color: '#940C62' },
+        { name: "Pizza", subtitle: "Cezar", description: "...", color: '#43A9F7' },
+        { name: "Quatro", subtitle: "Carni", description: "...", color: '#0F7BCE' }
+    ],
+    secondHeader: [
+        {text: "Salami Bianca to idealna propozycja dla fanów intensywnych smaków i kremowej bazy. Na delikatnym sosie śmietanowym układamy aromatyczne pieczarki"},
+        {text: "Pizza z Gruszką to wyjątkowe połączenie delikatności i charakteru. Na kremowym sosie układamy soczyste plastry gruszki, rukolę i gorgonzolę, całość"},
+        {text: "Pizza Cezar to wariacja na temat klasycznej sałatki. Na sosie śmietanowym znajdziesz kawałki soczystego kurczaka, czarne oliwki i czerwoną cebulkę, "},
+        {text: "Quatro Carni to propozycja dla miłośników mięsnych smaków. Na bazie aromatycznego sosu znajdziesz szynkę, pikantną spianatę, chrupiące frankfurterki"}
+    ]
+}
