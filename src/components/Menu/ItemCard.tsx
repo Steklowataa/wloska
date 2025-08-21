@@ -2,7 +2,7 @@
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import { Inter } from 'next/font/google'
-import ModalWindow from './ModalWindow/ModalWindow'
+import ModalWindow from '../ModalWindow/ModalWindow'
 import { useState } from 'react'
 import { ClipLoader } from 'react-spinners'
 import ScrollButton from "./ScrollButton"
@@ -72,8 +72,8 @@ export default function ItemCard({ name, data, type }: ItemCard) {
 
     return (
       <>
-        <div className={`transition-transform duration-300 easy-in-out hover:scale-105
-        relative w-[240px] h-[330px] rounded-[40px] bg-[rgba(158,156,156,0.2)] text-white backdrop-blur-md p-4 flex flex-col`}>
+        <div className={`transition-transform duration-300 ease-in-out hover:scale-105 relative w-[240px] h-[330px] rounded-[40px] 
+          bg-gradient-to-br from-white/10 via-white/10 to-transparent text-white backdrop-blur-lg shadow-xl p-4 flex flex-col`}>
           {tag && (
             <div className="absolute top-2 left-2 text-xl p-1">
               { renderTag() }

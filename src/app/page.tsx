@@ -1,11 +1,21 @@
+"use client"
 import { useState, useEffect } from "react";
 import TypingText from "@/components/Home/TypingText";
 import SpinningEllipse from "@/components/Home/SpinEllipse";
 import EffectAppear from "@/components/Home/EffectAppear";
+import ImageAppear from "@/components/Home/ImageAppear";
+import Header from "@/components/Header";
 
 
 export default function Home() {
     const [currentIndex, setCurrentIndex] = useState(0);
+
+    const images = [
+      "/images/bianca.svg",
+      "/images/z-gruszka.svg",
+      "/images/4-sery.png",
+      "/images/4-miesa.svg"
+    ]
 
     const pizzaData = [
         { name: "Salami", subtitle: "Bianca", description: "...", color: '#E01094' },
@@ -40,7 +50,11 @@ export default function Home() {
 
     return (
         <>
+            <Header />
             <SpinningEllipse />
+            <div>
+              <ImageAppear src={images[currentIndex]} trigger={currentIndex} duration={1000}/>
+            </div>
             <div className="mt-[200px] ml-[100px] relative z-10">
                 <div className="text-[80px] font-bold leading-tight min-h-[160px]">
                     <div>

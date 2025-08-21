@@ -82,7 +82,7 @@ export default function SummeryCart({ items }: { items: CartItem[] }) {
   };
 
   return (
-    <div className="absolute left-10 top-10 z-999 bg-white backdrop-blur-2xl text-black rounded-xl p-4 w-[85vw] sm:w-[320px] shadow-xl">
+    <div className="absolute right-0 top-12 z-999 bg-white backdrop-blur-2xl text-black rounded-xl p-4 w-[85vw] sm:w-[320px] shadow-xl">
       <div className="flex flex-col gap-3">
         {displayedItems.length > 0 ? (
           <>

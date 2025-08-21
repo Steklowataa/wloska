@@ -2,7 +2,7 @@
 import MenuButtons from "./MenuButton"
 import { menu } from "@/utils/text"
 import MenuSection from "./MenuSection"
-import Header from "./Header"
+import Header from "../Header"
 import BackgroundBlobs from "./BackgroundBlobs"
 
 

@@ -1,5 +1,5 @@
 "use client";
-import { colors } from "../../lib/colors";
+import { colors } from "../../../lib/colors";
 import { useState, useEffect } from "react";
 
 export default function BackgroundBlobs() {
