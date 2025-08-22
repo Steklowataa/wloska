@@ -7,6 +7,18 @@ import ImageAppear from "@/components/Home/ImageAppear";
 import Header from "@/components/Header";
 import { text } from "../utils/text"
 import ButtonToMenu from "@/components/Home/ButtonToMenu";
+import { Playfair_Display, Inter } from "next/font/google";
+
+
+const playfair = Playfair_Display({
+    subsets: ["latin"],
+    weight: "800"
+})
+
+const inter = Inter({
+    subsets: ["latin"],
+    weight: "600"
+})
 
 export default function Home() {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -36,14 +48,14 @@ export default function Home() {
             </div>
             <div className="mt-[100px] ml-[100px] relative z-10">
                 <div className="text-[80px] font-bold leading-[80px] ">
-                    <div className="h-[80px] flex items-center">
+                    <div className={`${playfair.className} h-[80px] flex items-center`}>
                         <TypingText 
                              speed={80}
                              text={text.header[currentIndex].name}
                              trigger={currentIndex}
                         />
                     </div>
-                    <div className="ml-10 h-[80px] flex items-center" style={{ color: text.header[currentIndex].color }}>
+                    <div className={`${playfair.className} ml-10 h-[80px] flex items-center`} style={{ color: text.header[currentIndex].color }}>
                         <TypingText 
                              speed={80}
                              text={text.header[currentIndex].subtitle}
@@ -51,7 +63,7 @@ export default function Home() {
                              trigger={currentIndex}
                         />
                     </div>
-                    <div className="w-[500px] text-[16px] h-[60px] flex items-center mt-10">
+                    <div className={`${inter.className} w-[450px] text-[16px] h-[60px] flex items-center mt-20`}>
                       <EffectAppear text={text.secondHeader[currentIndex].text} trigger={currentIndex}/>
                     </div>
                 </div>
