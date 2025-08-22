@@ -1,12 +1,18 @@
 "use client"
+import { Inter } from "next/font/google"
+import Link from "next/link"
+
+const inter = Inter({
+    subsets: ["latin"],
+    weight: "600"
+})
 
 const ButtonToMenu = () => {
     return (
-        <div className="flex flex-row gap-10 items-center ml-[100px]">
+        <div className={`${inter.className} flex flex-row gap-10 items-center ml-[100px]`}>
             <div className="text-white text-[16px] relative">
                 <p>Potrzebujesz więcej opcji?</p>
-                {/* Arrow pointing to the button */}
-                <div className="absolute top-full left-0 mt-2">
+                <div className="absolute top-full left-10 ">
                     <svg width="100" height="20" viewBox="0 0 100 20" fill="none">
                         <path 
                             d="M5 10 L85 10 M80 5 L85 10 L80 15" 
@@ -19,7 +25,11 @@ const ButtonToMenu = () => {
                 </div>
             </div>
             <div>
-                <button className="bg-[#E01094] w-[190px] h-[65px] rounded-[20px] text-white shadow-inner transition-transform duration-300 hover:scale-110">Menu</button>
+                <Link href={"/menu"}>
+                    <button className="bg-[#E01094] w-[140px] h-[50px] rounded-[20px] text-white shadow-inner transition-transform duration-300 hover:scale-110 cursor-pointer">
+                        Menu
+                    </button>
+                </Link>
             </div>
         </div>
     )

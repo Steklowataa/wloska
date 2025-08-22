@@ -1,5 +1,5 @@
 "use client"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import Image from "next/image"
 
 const ImageAppear = ({
@@ -11,32 +11,53 @@ const ImageAppear = ({
     trigger: string | number,
     duration?: number
 }) => {
-    const [isVisible, setIsVisible] = useState(false)
     const [currentSrc, setCurrentSrc] = useState(src)
+    const [isVisible, setIsVisible] = useState(true)
+    const timeoutRef = useRef<NodeJS.Timeout | null>(null)
 
     useEffect(() => {
-        setIsVisible(false)
+        if (timeoutRef.current) {
+            clearTimeout(timeoutRef.current)
+        }
 
-        const timer = setTimeout(() => {
-            setCurrentSrc(src)
+        if (src === currentSrc) {
             setIsVisible(true)
-        }, duration)
+            return
+        }
 
-        return () => clearTimeout(timer)
-    }, [src, trigger, duration])
+        setCurrentSrc(src)
+        setIsVisible(false)
+        
+        timeoutRef.current = setTimeout(() => {
+            setIsVisible(true)
+        }, 50)
+
+        return () => {
+            if (timeoutRef.current) {
+                clearTimeout(timeoutRef.current)
+            }
+        }
+    }, [src, trigger])
+
+
+    useEffect(() => {
+        setCurrentSrc(src)
+        setIsVisible(true)
+    }, [])
 
     return (
         <div>
             <Image
-                src={src}
-                alt={src} 
-                width={500} 
-                height={500} 
-                className="absolute right-30 top-1/5 object-cover transition-opacity"
+                src={currentSrc}
+                alt={currentSrc}
+                width={500}
+                height={500}
+                className="absolute right-30 top-1/5 object-cover"
                 style={{
                     opacity: isVisible ? 1 : 0,
-                    transition: `opacity ${duration}ms ease-in-out`
-                }}/>
+                    transition: `opacity ${duration}ms cubic-bezier(0.25, 0.8, 0.25, 1)`
+                }}
+            />
         </div>
     )
 }
