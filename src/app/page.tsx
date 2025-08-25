@@ -4,7 +4,7 @@ import TypingText from "@/components/Home/TypingText";
 import SpinningEllipse from "@/components/Home/SpinEllipse";
 import EffectAppear from "@/components/Home/EffectAppear";
 import ImageAppear from "@/components/Home/ImageAppear";
-import Header from "@/components/Header";
+import Header from "@/components/Header/Header";
 import { text } from "../utils/text"
 import ButtonToMenu from "@/components/Home/ButtonToMenu";
 import { Playfair_Display, Inter } from "next/font/google";
