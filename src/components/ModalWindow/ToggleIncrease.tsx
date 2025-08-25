@@ -44,8 +44,7 @@ export default function ToggleIncrease({ quantity, setQuantity, allowZero = fals
         <div className="flex items-center bg-gray-600 rounded-full px-4 py-2">
             <button 
                 onClick={decrease}
-                className="text-white text-[18px] w-8 h-8 flex items-center justify-center hover:bg-gray-500 rounded-full transition-colors"
-            >
+                className="text-white text-[18px] w-8 h-8 flex items-center justify-center hover:bg-gray-500 rounded-full transition-colors">
                 −
             </button>
             
@@ -55,8 +54,7 @@ export default function ToggleIncrease({ quantity, setQuantity, allowZero = fals
             
             <button 
                 onClick={increase}
-                className="text-white text-[18px] w-8 h-8 flex items-center justify-center hover:bg-gray-500 rounded-full transition-colors"
-            >
+                className="text-white text-[18px] w-8 h-8 flex items-center justify-center hover:bg-gray-500 rounded-full transition-colors">
                 +
             </button>
         </div>

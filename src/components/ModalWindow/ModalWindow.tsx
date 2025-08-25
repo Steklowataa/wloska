@@ -1,86 +1,42 @@
 "use client";
-import { useState } from "react";
-import Image from "next/image";
-import { Inter } from "next/font/google";
-import ButtonWithQuantity from "./ButtonWithQuantity";
-import SetWithQuantity from "./SetWithQuantity";
-import ShowMore from "./ShowMore";
-import { menu } from "@/utils/text";
-import { ClipLoader } from 'react-spinners'
+import { useState, useRef, useEffect } from "react";
 import { useCart } from "@/app/context/CartContext";
+import { menu } from "@/utils/text";
+import { Item, ModalWindowProps } from "./types";
+import { isSelected, toggleItem, calculateSaucesPrice } from "./utils";
+import ModalHeader from "./ModalHeader";
+import ModalQuantity from "./ModalQuantity";
+import ModalExtras from "./ModalExtras"
+import ModalSauces from "./ModalSauces";
 
-const inter = Inter({ subsets: ["latin"], weight: "400" });
-const inter2 = Inter({ subsets: ["latin"], weight: "600" });
-
-type Item = {
-  name: string;
-  price: number;
-};
-
-type ModalWindowProps = {
-  name: string;
-  description: string;
-  type: "pizza" | "burger" | "smashburger" | "extras" | "drinks" | "sos";
-  img: string;
-  tag?: string;
-  price: number;
-  onClose: () => void;
-};
-
-export default function ModalWindow({
-  name,
-  description,
-  type,
-  img,
-  price,
-  onClose,
-}: ModalWindowProps) {
+export default function ModalWindow(props: ModalWindowProps) {
+  const { name, description, type, img, price, onClose } = props;
   const { addToCart } = useCart();
 
   const [selectedSauces, setSelectedSauces] = useState<Item[]>([]);
   const [selectedExtras, setSelectedExtras] = useState<Item[]>([]);
-  const [productQuantity, setProductQuantity] = useState<number>(1); // solo
-  const [setQuantity, setSetQuantity] = useState<number>(0); // zestaw
+  const [productQuantity, setProductQuantity] = useState(1);
+  const [setQuantity, setSetQuantity] = useState(0);
   const [showAllSauces, setShowAllSauces] = useState(false);
   const [showAllExtras, setShowAllExtras] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false)
+  const scrollRef = useRef<HTMLDivElement>(null);
 
-  const isSelected = (item: Item, list: Item[]) =>
-    list.some((i) => i.name === item.name);
+  useEffect(() => {
+    if (scrollRef.current) scrollRef.current.scrollTop = 200;
+  }, []);
 
-  const toggleItem = (
-    item: Item,
-    list: Item[],
-    setList: (items: Item[]) => void
-  ) => {
-    setList(
-      isSelected(item, list)
-        ? list.filter((i) => i.name !== item.name)
-        : [...list, item]
-    );
-  };
-
-
-  const includesFreeSauce = description.toLowerCase().includes("sosem do wyboru") || description.toLocaleLowerCase().includes("sos do wyboru");
+  const includesFreeSauce =
+    description.toLowerCase().includes("sosem do wyboru") ||
+    description.toLowerCase().includes("sos do wyboru");
   const freeSauceLimit = includesFreeSauce ? 1 : 0;
 
-  const calculateSaucesPrice = (sauces: Item[]) => {
-    if (!includesFreeSauce) {
-      return sauces.reduce((sum, s) => sum + s.price, 0);
-    }
-    
-
-    return sauces.slice(1).reduce((sum, s) => sum + s.price, 0);
-  };
-
-  const saucesPrice = calculateSaucesPrice(selectedSauces);
+  const saucesPrice = calculateSaucesPrice(selectedSauces, includesFreeSauce);
   const extrasPrice = selectedExtras.reduce((sum, e) => sum + e.price, 0);
   const singlePrice = price + saucesPrice + extrasPrice;
   const singleSetPrice = singlePrice + 7;
 
   const totalPriceNormal = singlePrice * productQuantity;
   const totalPriceZestaw = singleSetPrice * setQuantity;
-
   const totalCombinedQuantity = productQuantity + setQuantity;
   const totalCombinedPrice = totalPriceNormal + totalPriceZestaw;
 
@@ -97,7 +53,6 @@ export default function ModalWindow({
         totalPrice: singlePrice,
       });
     }
-
     for (let i = 0; i < setQuantity; i++) {
       addToCart({
         name: name + " Zestaw",
@@ -110,7 +65,6 @@ export default function ModalWindow({
         totalPrice: singleSetPrice,
       });
     }
-
     onClose();
   };
 
@@ -123,113 +77,36 @@ export default function ModalWindow({
         >
           ×
         </button>
-        <div className="overflow-y-auto max-h-[90vh] p-6 flex flex-col">
-        <div className="flex items-center justify-center mb-6 relative w-[200px] h-[200px] mx-auto">
-          {!isLoaded && (
-            <div className="absolute z-10 flex items-center justify-center w-full h-full bg-black bg-opacity-60 rounded-full">
-              <ClipLoader color="#ffffff" size={40} />
-            </div>
-          )}
-          <Image
-            src={img}
-            width={200}
-            height={200}
-            alt={name}
-            className="rounded-full"
-            onLoad={() => setIsLoaded(true)}
+        <div ref={scrollRef} className="overflow-y-auto max-h-[90vh] p-6 flex flex-col">
+          <ModalHeader img={img} name={name} description={description} />
+          <ModalQuantity
+            type={type}
+            name={name}
+            price={price}
+            productQuantity={productQuantity}
+            setProductQuantity={setProductQuantity}
+            setQuantity={setQuantity}
+            setSetQuantity={setSetQuantity}
           />
-        </div>
-          <h2 className={`${inter2.className} md:text-[24px] text-[20px] mb-2`}>{name}</h2>
-          <p className={`${inter.className} text-gray-300 mb-6 md:text-[14px] text-[12px]`}>
-            {description}
-          </p>
-
-          <div className="">
-            {(type === "pizza" || type === "extras" || type === "drinks" || type === "sos") && (
-              <ButtonWithQuantity
-                price={price}
-                quantity={productQuantity}
-                setQuantity={setProductQuantity}
-              />
-            )}
-
-            {(type === "burger" || type === "smashburger") && (
-              <>
-                <ButtonWithQuantity
-                  price={price}
-                  quantity={productQuantity}
-                  setQuantity={setProductQuantity}
-                  allowZero={true}
-                />
-                <SetWithQuantity
-                  name={name}
-                  price={price}
-                  quantity={setQuantity}
-                  setQuantity={setSetQuantity}
-                />
-              </>
-            )}
-          </div>
-          
-          <div className="flex-1">
-            { type === "pizza" && (
-              <>
-              <h3 className={`${inter2.className} text-[20px] mt-0 mb-2`}>Dodatki</h3>
-                <h4 className={`${inter.className} text-[12px] text-gray-400 mb-4`}>
-                  Prosimy wybrać maksymalnie 2 dodatki
-                </h4>
-                <div className="mb-4">
-                  <ShowMore
-                    items={menu.pizzaExtras}
-                    showAll={showAllExtras}
-                    setShowAll={setShowAllExtras}
-                    checkFunction={(item) => isSelected(item, selectedExtras)}
-                    toggleFunction={(item) =>
-                      toggleItem(item, selectedExtras, setSelectedExtras)
-                    }
-                  />
-                </div>
-              </>
-            )}
-            { type === "burger" && (
-              <>
-              <h2 className={`${inter2.className} text-[20px] mt-3 mb-4`}>Dodatki</h2>
-              <ShowMore items={menu.burgerOptions} showAll={showAllExtras} setShowAll={setShowAllExtras} checkFunction={(item) => isSelected(item, selectedExtras)}
-              toggleFunction={(item) => toggleItem(item, selectedExtras, setSelectedExtras)}/>
-              </>
-            )} 
-            { type === "smashburger" && (
-              <>
-              <h2 className={`${inter2.className} text-[20px] mt-3 mb-4`}>Dodatki</h2>
-              <ShowMore items={menu.smashOptions} showAll={showAllExtras} setShowAll={setShowAllExtras} checkFunction={(item) => isSelected(item, selectedExtras)}
-              toggleFunction={(item) => toggleItem(item, selectedExtras, setSelectedExtras)}/>
-              </>
-            )} 
-            { (type !== "drinks" && type !== "sos" && type != "smashburger" && type != "burger") && (
-              <>
-                <h3 className={`${inter2.className} text-[20px] mt-6 mb-2`}>Sosy</h3>
-                {/* {includesFreeSauce && (
-                  <h4 className={`${inter.className} text-[12px] text-green-400 mb-2`}>
-                    Pierwszy sos gratis!
-                  </h4>
-                )} */}
-                <div className="mb-4">
-                  <ShowMore
-                    items={menu.sos}
-                    showAll={showAllSauces}
-                    setShowAll={setShowAllSauces}
-                    selectedItems={selectedSauces}
-                    freeLimit={freeSauceLimit}
-                    checkFunction={(item) => isSelected(item, selectedSauces)}
-                    toggleFunction={(item) =>
-                      toggleItem(item, selectedSauces, setSelectedSauces)
-                    }
-                  />
-                </div>
-              </>
-            )}
-          </div>
-          
+          <ModalExtras
+            type={type}
+            selectedExtras={selectedExtras}
+            setSelectedExtras={setSelectedExtras}
+            showAllExtras={showAllExtras}
+            setShowAllExtras={setShowAllExtras}
+            isSelected={isSelected}
+            toggleItem={toggleItem}
+          />
+          <ModalSauces
+            type={type}
+            selectedSauces={selectedSauces}
+            setSelectedSauces={setSelectedSauces}
+            showAllSauces={showAllSauces}
+            setShowAllSauces={setShowAllSauces}
+            freeSauceLimit={freeSauceLimit}
+            isSelected={isSelected}
+            toggleItem={toggleItem}
+          />
           <button
             onClick={handleAdd}
             className="w-full bg-green-600 hover:bg-green-700 text-white py-3 px-6 rounded-full transition-colors text-[16px] font-semibold mt-4"

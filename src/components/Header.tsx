@@ -28,7 +28,7 @@ export default function Header() {
   };
 
   return (
-    <div className="relative z-100">
+    <div className="relative z-100 sticky top-0">
       <div
         className={`${inter.className} rounded-3xl flex items-center 
         ml-[150px] mr-[150px] mt-[10px] h-[56px] px-6 bg-gradient-to-r from-[#FF30B3]/10 to-[#7A0950]/10 bg-clip-padding backdrop-blur-md backdrop-saturate-100 backdrop-contrast-100 border border-white/50`}
