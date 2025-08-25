@@ -1,10 +1,15 @@
 "use client"
-import { Inter } from "next/font/google"
+import { Inter, Playfair_Display } from "next/font/google"
 import Link from "next/link"
 
 const inter = Inter({
     subsets: ["latin"],
     weight: "600"
+})
+
+const playfair = Playfair_Display({
+    subsets: ["latin"],
+    weight: "800"
 })
 
 const ButtonToMenu = () => {
@@ -26,7 +31,7 @@ const ButtonToMenu = () => {
             </div>
             <div>
                 <Link href={"/menu"}>
-                    <button className="bg-[#E01094] w-[140px] h-[50px] rounded-[20px] text-white shadow-inner transition-transform duration-300 hover:scale-110 cursor-pointer">
+                    <button className={`${playfair.className} bg-[#E01094] w-[140px] h-[50px] rounded-[20px] text-white shadow-inner transition-transform duration-300 hover:scale-110 cursor-pointer`}>
                         Menu
                     </button>
                 </Link>

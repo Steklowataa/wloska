@@ -72,7 +72,8 @@ export default function ItemCard({ name, data, type }: ItemCard) {
 
     return (
       <>
-        <div className={`transition-transform duration-300 ease-in-out hover:scale-105 relative w-[240px] h-[330px] rounded-[40px] 
+      <button onClick={openModal} className='cursor-pointer'>
+      <div className={`transition-transform duration-300 ease-in-out hover:scale-105 relative w-[240px] h-[330px] rounded-[40px] 
           bg-gradient-to-br from-white/10 via-white/10 to-transparent text-white backdrop-blur-lg shadow-xl p-4 flex flex-col`}>
           {tag && (
             <div className="absolute top-2 left-2 text-xl p-1">
@@ -109,16 +110,17 @@ export default function ItemCard({ name, data, type }: ItemCard) {
             { typeLabels[type] && (
               <span className='text-sm'>{typeLabels[type]}</span>
             )}
-            <div className='flex justify-center items-center text-[14px]'>
+            <div className='flex justify-end items-center text-[16px]'>
             <span className="font-semibold">{newPrice} zł</span>
             </div>
-            <div className="flex items-center gap-1 text-sm">
-              <button onClick={openModal} className="w-10 h-6 bg-[#7A0950] rounded-md flex items-center justify-center text-white cursor-pointer">
+            {/* <div className="flex items-center gap-1 text-sm"> */}
+              {/* <button onClick={openModal} className="w-10 h-6 bg-[#7A0950] rounded-md flex items-center justify-center text-white cursor-pointer">
                 +
-              </button>
-            </div>
+              </button> */}
+            {/* </div> */}
           </div>
         </div>
+      </button>
         <ScrollButton />
         {showModal && (
           <ModalWindow name={name} description={description} img={img} tag={tag} type={type} price={price} onClose={closeModal}/>

@@ -81,7 +81,7 @@ export default function MenuButtons() {
       </div>
   
       {/* Desktop View */}
-      <div className="hidden md:flex justify-center sticky top-30 z-50 px-6">
+      <div className="hidden md:flex justify-center sticky top-20 z-50 px-6">
       <div className="flex flex-nowrap items-center space-x-4 py-3 px-4 rounded-[50px] w-fit shadow-sm bg-gray/10 backdrop-blur-md">
             {items.map((element, index) => (
               <button
