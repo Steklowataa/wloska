@@ -1,6 +1,8 @@
 "use client";
 import StepButtons from "@/components/Basket/StepButtons";
 import OrderDetails from "@/components/Basket/Details/OrderDetails";
+import BackgroundBlobs from "@/components/Menu/BackgroundBlobs";
+
 
 export default function Page() {
   console.log("Page component rendering");
@@ -9,6 +11,7 @@ export default function Page() {
     <>
       <StepButtons />
       <OrderDetails />
+      {/* <BackgroundBlobs/> */}
     </>
   );
 }

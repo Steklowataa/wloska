@@ -1,6 +1,7 @@
 "use client"
 import Input from "./Input"
 import { Inter } from "next/font/google"
+import { useOrder, type Customer } from "@/app/context/OrderContext"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -10,26 +11,43 @@ const inter = Inter({
 type AdressFieldProps = {
   label: string
   placeholder: string
+  fieldKey: keyof Customer
 }
 
-function AdressForm({ label, placeholder }: AdressFieldProps) {
+function AdressForm({ label, placeholder, fieldKey }: AdressFieldProps) {
+  const { customer, setCustomer } = useOrder()
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const numericFields: (keyof Customer)[] = [
+      "streetNumber",
+      "flatNumber",
+      "floorNumber",
+      "staircase"
+    ]
+
+    const value = numericFields.includes(fieldKey) ? Number(e.target.value) : e.target.value
+    setCustomer({ [fieldKey]: value })
+  }
+
   return (
     <div className="flex flex-col">
-      <label className={`${inter.className} text-white mb-2`}>
-        {label}
-      </label>
-      <Input value={placeholder} />
+      <label className={`${inter.className} text-white mb-2`}>{label}</label>
+      <Input
+        value={customer[fieldKey] ?? ""}
+        onChange={handleChange}
+        placeholder={placeholder}
+      />
     </div>
   )
 }
 
 export default function AdressDataForm() {
-  const adress = [
-    { label: "Nazwa ulicy", placeholder: "3go Maja" },
-    { label: "Numer ulicy", placeholder: "11" },
-    { label: "Numer mieszkania", placeholder: "11" },
-    { label: "Piętro (opcjonalnie)", placeholder: "1" },
-    { label: "Klatka (opcjonalnie)", placeholder: "2" }
+  const adress: AdressFieldProps[] = [
+    { label: "Nazwa ulicy", placeholder: "3go Maja", fieldKey: "streetName" },
+    { label: "Numer ulicy", placeholder: "11", fieldKey: "streetNumber" },
+    { label: "Numer mieszkania", placeholder: "11", fieldKey: "flatNumber" },
+    { label: "Piętro (opcjonalnie)", placeholder: "1", fieldKey: "floorNumber" },
+    { label: "Klatka (opcjonalnie)", placeholder: "2", fieldKey: "staircase" }
   ]
 
   return (
@@ -39,7 +57,8 @@ export default function AdressDataForm() {
         style={{
           WebkitTextStroke: "2px white",
           color: "transparent"
-        }}>
+        }}
+      >
         Adres
       </h2>
 
@@ -47,7 +66,6 @@ export default function AdressDataForm() {
         {adress.slice(0, 3).map((field, index) => (
           <AdressForm key={index} {...field} />
         ))}
-
         <div className="col-span-1">
           <AdressForm {...adress[3]} />
         </div>

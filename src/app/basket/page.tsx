@@ -1,7 +1,11 @@
 import Basket from "@/components/Basket/Basket";
+import BackgroundBlobs from "@/components/Menu/BackgroundBlobs";
 
 export default function Page() {
     return (
-        <Basket />
+        <div>
+            <Basket />
+            <BackgroundBlobs/>
+        </div>
     )
 }
