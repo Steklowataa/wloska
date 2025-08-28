@@ -1,6 +1,7 @@
 "use client"
 import Input from "./Input"
 import { Inter } from "next/font/google"
+import { useOrder } from "@/app/context/OrderContext"
 
 const inter = Inter({
     subsets: ["latin"],
@@ -9,23 +10,29 @@ const inter = Inter({
 
 type FormFieldProps = {
     label: string,
-    placeholder: string
+    placeholder: string,
+    fieldKey: keyof ReturnType<typeof useOrder>["customer"]
 }
 
 
-function FormField({label, placeholder} : FormFieldProps) {
+function FormField({label, placeholder, fieldKey} : FormFieldProps) {
+    const { customer, setCustomer } = useOrder()
+
     return (
         <div className="mb-6 ">
             <div className={`${inter.className} mb-6`}>{label}</div>
-            <Input value={placeholder} />
+            <Input 
+                value={customer[fieldKey] ?? ""} 
+                onChange={(e) => setCustomer({ [fieldKey]: e.target.value })}
+                placeholder={placeholder}/>
         </div>
     )
 }
 export default function PersonalDataForm() {
     const fields = [
-        { label: "Imię i nazwisko", placeholder: "Imię i nazwisko" },
-        { label: "Numer telefonu", placeholder: "Numer telefonu" },
-        { label: "Email", placeholder: "Email" }
+        { label: "Imię i nazwisko", placeholder: "Imię i nazwisko", fieldKey: "name" },
+        { label: "Numer telefonu", placeholder: "Numer telefonu", fieldKey: "phone" },
+        { label: "Email", placeholder: "Email", fieldKey: "email" }
       ]
 
     return (
