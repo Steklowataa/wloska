@@ -1,52 +1,65 @@
-"use client"
-import Input from "./Input"
-import { Inter } from "next/font/google"
-import { useOrder } from "@/app/context/OrderContext"
+"use client";
 
-const inter = Inter({
-    subsets: ["latin"],
-    weight: "600"
-})
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { personSchema } from "@/utils/zosSchema";
+import { Form, FormItem, FormLabel, FormControl, FormField, FormDescription, FormMessage } from "@/components/ui/form";
+import Input from "./Input";
 
-type FormFieldProps = {
-    label: string,
-    placeholder: string,
-    fieldKey: keyof ReturnType<typeof useOrder>["customer"]
-}
+type FormValues = z.infer<typeof personSchema>;
 
-
-function FormField({label, placeholder, fieldKey} : FormFieldProps) {
-    const { customer, setCustomer } = useOrder()
-
-    return (
-        <div className="mb-6 ">
-            <div className={`${inter.className} mb-6`}>{label}</div>
-            <Input 
-                value={customer[fieldKey] ?? ""} 
-                onChange={(e) => setCustomer({ [fieldKey]: e.target.value })}
-                placeholder={placeholder}/>
-        </div>
-    )
-}
 export default function PersonalDataForm() {
-    const fields = [
-        { label: "Imię i nazwisko", placeholder: "Imię i nazwisko", fieldKey: "name" },
-        { label: "Numer telefonu", placeholder: "Numer telefonu", fieldKey: "phone" },
-        { label: "Email", placeholder: "Email", fieldKey: "email" }
-      ]
+  const form = useForm<FormValues>({
+    resolver: zodResolver(personSchema),
+    defaultValues: {
+      name: "",
+      phone: "",
+      email: "",
+    },
+  });
 
-    return (
-        <div className="grid grid-col-1 bg-[#28091D]/40 border border-white w-[336px] h-[435px] rounded-[20px] items-center justify-center">
+  function onSubmit(values:z.infer<typeof personSchema>) {
+    console.log(values)
+  }
 
-            <h2 className={`${inter.className} text-[30px] text-center mb-4`} style={{
-          WebkitTextStroke: "2px white",
-          color: "transparent"
-        }}>
-                Dane Osobowe
-            </h2>
-        {fields.map((field, index) => (
-          <FormField key={index} {...field} />
-        ))}
-      </div>
-    )
+  return (
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)}
+      className="grid gap-4">
+       <FormField control={form.control} name="name" render={({field}) => (
+        <FormItem>
+            <FormLabel>Imie i nazwisko</FormLabel>
+            <FormControl>
+                <Input placeholder="Imie i nazwisko"{...field}/>
+            </FormControl>
+            <FormDescription>Prosze wpisz imie i nazwisko</FormDescription>
+            <FormMessage/>
+        </FormItem>
+       )}></FormField>
+
+        <FormField control={form.control} name="phone" render={({field}) => (
+        <FormItem>
+            <FormLabel>Numer telefonu</FormLabel>
+            <FormControl>
+                <Input placeholder="Numer telefonu"{...field}/>
+            </FormControl>
+            <FormDescription>Prosze wpisz swój numer telefonu</FormDescription>
+            <FormMessage/>
+        </FormItem>
+       )}></FormField>
+        <FormField control={form.control} name="email" render={({field}) => (
+        <FormItem>
+            <FormLabel>Email</FormLabel>
+            <FormControl>
+                <Input placeholder="Numer telefonu"{...field}/>
+            </FormControl>
+            <FormDescription>Prosze wpisz swój email</FormDescription>
+            <FormMessage/>
+        </FormItem>
+       )}></FormField>
+       <button >Submit</button>
+      </form>
+    </Form>
+  );
 }
