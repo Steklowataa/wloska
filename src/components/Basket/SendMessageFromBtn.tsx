@@ -2,7 +2,7 @@
 import { useCart } from "@/app/context/CartContext";
 import { useState } from "react";
 import { useOrder } from "@/app/context/OrderContext";
-import { useRouter } from "next/navigation"; // ← Fixed import (not next/router)
+import { useRouter } from "next/navigation";
 
 const SendMessageToButton = () => {
   const { customer } = useOrder();
@@ -14,9 +14,11 @@ const SendMessageToButton = () => {
     setLoading(true);
     
     try {
+      const totalPrice = items.reduce((sum, i) => sum + i.totalPrice, 0);
+
       const orderData = {
         items,
-        totalPrice: items.reduce((sum, i) => sum + i.totalPrice, 0),
+        totalPrice: totalPrice,
         customer: {
           name: customer.name,
           phone: customer.phone,
@@ -39,22 +41,24 @@ const SendMessageToButton = () => {
         body: JSON.stringify(orderData),
       });
 
+
       if (!response.ok) {
         console.error("Response not ok:", response.status, response.statusText);
+        const errorText = await response.text();
+        console.error("Error response:", errorText);
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
       }
 
       const result = await response.json();
 
       if (result.success) {
-        console.log("✅ Order successful!");
-        // alert("✅ Zamówienie zostało wysłane do kuchni!");
-        router.push(`/basket/summary?orderNumber=${result.orderNumber}`);
+        const summaryUrl = `/basket/summary?orderNumber=${encodeURIComponent(result.orderNumber)}`;
+        router.push(summaryUrl);
       } else {
-        console.error("❌ Order failed:", result);
+        //TODO
         alert(`❌ Wystąpił błąd: ${result.error || "Nieznany błąd"}`);
       }
     } catch (error) {
-      console.error("💥 Network/parsing error:", error);
       alert(`❌ Błąd połączenia: ${error.message}`);
     } finally {
       setLoading(false);

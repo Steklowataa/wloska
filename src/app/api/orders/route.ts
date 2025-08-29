@@ -4,7 +4,7 @@ export async function POST(req) {
   try {
     const data = await req.json();
     
-    const orderNumber = `#${Date.now()}-${Math.floor(Math.random() * 1000)}`;
+    const orderNumber = `${Date.now()}-${Math.floor(Math.random() * 100)}`;
     
     const botToken = process.env.TELEGRAM_BOT_TOKEN;
     const chatId = process.env.TELEGRAM_CHAT_ID;
@@ -13,6 +13,7 @@ export async function POST(req) {
       console.error("Missing Telegram credentials");
       return NextResponse.json({ 
         success: false, 
+        orderNumber,
         error: "Missing Telegram configuration"
       }, { status: 500 });
     }
@@ -84,6 +85,7 @@ export async function POST(req) {
       console.error("Telegram API Error:", telegramResult);
       return NextResponse.json({ 
         success: false, 
+        orderNumber,
         error: "Failed to send Telegram message",
         telegramError: telegramResult 
       }, { status: 500 });
