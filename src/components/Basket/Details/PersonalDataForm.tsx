@@ -1,11 +1,14 @@
 "use client";
 
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { personSchema } from "@/utils/zosSchema";
-import { Form, FormItem, FormLabel, FormControl, FormField, FormDescription, FormMessage } from "@/components/ui/form";
+import { Form, FormItem, FormLabel, FormControl, FormField, FormMessage } from "@/components/ui/form";
 import Input from "./Input";
+import { Inter } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"], weight: "600" });
 
 type FormValues = z.infer<typeof personSchema>;
 
@@ -19,47 +22,65 @@ export default function PersonalDataForm() {
     },
   });
 
-  function onSubmit(values:z.infer<typeof personSchema>) {
-    console.log(values)
+  function onSubmit(values: FormValues) {
+    console.log(values);
   }
 
-  return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}
-      className="grid gap-4">
-       <FormField control={form.control} name="name" render={({field}) => (
-        <FormItem>
-            <FormLabel>Imie i nazwisko</FormLabel>
-            <FormControl>
-                <Input placeholder="Imie i nazwisko"{...field}/>
-            </FormControl>
-            <FormDescription>Prosze wpisz imie i nazwisko</FormDescription>
-            <FormMessage/>
-        </FormItem>
-       )}></FormField>
+  const fields = [
+    { name: "name", label: "Imię i nazwisko", placeholder: "Imię i nazwisko" },
+    { name: "phone", label: "Numer telefonu", placeholder: "Numer telefonu" },
+    { name: "email", label: "Email", placeholder: "Email" },
+  ];
 
-        <FormField control={form.control} name="phone" render={({field}) => (
-        <FormItem>
-            <FormLabel>Numer telefonu</FormLabel>
-            <FormControl>
-                <Input placeholder="Numer telefonu"{...field}/>
-            </FormControl>
-            <FormDescription>Prosze wpisz swój numer telefonu</FormDescription>
-            <FormMessage/>
-        </FormItem>
-       )}></FormField>
-        <FormField control={form.control} name="email" render={({field}) => (
-        <FormItem>
-            <FormLabel>Email</FormLabel>
-            <FormControl>
-                <Input placeholder="Numer telefonu"{...field}/>
-            </FormControl>
-            <FormDescription>Prosze wpisz swój email</FormDescription>
-            <FormMessage/>
-        </FormItem>
-       )}></FormField>
-       <button >Submit</button>
-      </form>
-    </Form>
+  return (
+    <div
+      className="grid grid-cols-1 bg-[#28091D]/40 border border-white w-[336px] h-[465px] rounded-[20px] items-center justify-center p-6 gap-4"
+    >
+      <h2
+        className={`${inter.className} text-[30px] text-center mb-4`}
+        style={{
+          WebkitTextStroke: "2px white",
+          color: "transparent",
+        }}
+      >
+        Dane Osobowe
+      </h2>
+
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="grid gap-4"
+        >
+          {fields.map((field) => (
+            <FormField
+              key={field.name}
+              control={form.control}
+              name={field.name as keyof FormValues}
+              render={({ field: controllerField }) => (
+                <FormItem className={`${inter.className}`}>
+                  <FormLabel className={`${inter.className} text-[16px]`}>
+                    {field.label}
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      {...controllerField}
+                      placeholder={field.placeholder}
+                    />
+                  </FormControl>
+                  <FormMessage className="text-red-600 text-sm" />
+                </FormItem>
+              )}
+            />
+          ))}
+
+          <button
+            type="submit"
+            className="mt-2 w-full bg-white text-black rounded-[12px] py-2 font-semibold hover:bg-gray-200 transition"
+          >
+            Submit
+          </button>
+        </form>
+      </Form>
+    </div>
   );
 }

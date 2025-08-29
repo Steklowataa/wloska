@@ -4,7 +4,7 @@ import React from "react";
 
 const inter = Inter({
   subsets: ["latin"],
-  weight: "400",
+  weight: "300",
 });
 
 type InputProps = {
@@ -18,7 +18,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ value, onChange, onBlur, placeholder }, ref) => {
     return (
       <input
-        className="w-[252px] h-[48px] rounded-[12px] bg-black border border-white p-4"
+        className="w-[252px] h-[48px] rounded-[12px] bg-black border border-white p-4 placeholder:text-[14px]"
         value={value}
         onChange={onChange}
         onBlur={onBlur}
