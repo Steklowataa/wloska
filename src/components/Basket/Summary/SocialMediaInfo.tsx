@@ -21,7 +21,7 @@ export default function SocialMediaInfo() {
           </a>
         </div>
         <div className="w-10 h-10 rounded-lg flex items-center justify-center">
-          <a href="https://www.instagram.com/wloska_krk/" target="_blank" rel="noopener norefferer">
+          <a href="https://www.facebook.com/p/W%C5%82oska-PizzaBurger-100093044946129/" target="_blank" rel="noopener norefferer">
             <Image src={"/images/facebook.png"} alt={"facebook-icon"} width={50} height={50}/>
           </a>
         </div>

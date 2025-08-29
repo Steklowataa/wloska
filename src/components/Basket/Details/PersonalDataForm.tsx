@@ -1,52 +1,74 @@
-"use client"
-import Input from "./Input"
-import { Inter } from "next/font/google"
-import { useOrder } from "@/app/context/OrderContext"
+"use client";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { personSchema } from "@/utils/zosSchema";
+import { Form, FormItem, FormLabel, FormControl, FormField, FormMessage } from "@/components/ui/form";
+import Input from "./Input";
+import { Inter } from "next/font/google";
 
-const inter = Inter({
-    subsets: ["latin"],
-    weight: "600"
-})
+const inter = Inter({ subsets: ["latin"], weight: "600" });
 
-type FormFieldProps = {
-    label: string,
-    placeholder: string,
-    fieldKey: keyof ReturnType<typeof useOrder>["customer"]
-}
+type FormValues = z.infer<typeof personSchema>;
 
-
-function FormField({label, placeholder, fieldKey} : FormFieldProps) {
-    const { customer, setCustomer } = useOrder()
-
-    return (
-        <div className="mb-6 ">
-            <div className={`${inter.className} mb-6`}>{label}</div>
-            <Input 
-                value={customer[fieldKey] ?? ""} 
-                onChange={(e) => setCustomer({ [fieldKey]: e.target.value })}
-                placeholder={placeholder}/>
-        </div>
-    )
-}
 export default function PersonalDataForm() {
-    const fields = [
-        { label: "Imię i nazwisko", placeholder: "Imię i nazwisko", fieldKey: "name" },
-        { label: "Numer telefonu", placeholder: "Numer telefonu", fieldKey: "phone" },
-        { label: "Email", placeholder: "Email", fieldKey: "email" }
-      ]
+  const form = useForm<FormValues>({
+    resolver: zodResolver(personSchema),
+    defaultValues: {
+      name: "",
+      phone: "",
+      email: "",
+    },
+  });
 
-    return (
-        <div className="grid grid-col-1 bg-[#28091D]/40 border border-white w-[336px] h-[435px] rounded-[20px] items-center justify-center">
+  function onSubmit(values: FormValues) {
+    console.log(values);
+  }
 
-            <h2 className={`${inter.className} text-[30px] text-center mb-4`} style={{
+  const fields = [
+    { name: "name", label: "Imię i nazwisko", placeholder: "Imię i nazwisko" },
+    { name: "phone", label: "Numer telefonu", placeholder: "Numer telefonu" },
+    { name: "email", label: "Email", placeholder: "Email" },
+  ];
+
+  return (
+    <div className="grid grid-cols-1 bg-[#28091D]/40 border border-white w-[336px] h-[465px] rounded-[20px] 
+    items-center justify-center p-6 gap-4">
+      <h2 className={`${inter.className} text-[30px] text-center mb-4`}
+        style={{
           WebkitTextStroke: "2px white",
-          color: "transparent"
+          color: "transparent",
         }}>
-                Dane Osobowe
-            </h2>
-        {fields.map((field, index) => (
-          <FormField key={index} {...field} />
-        ))}
-      </div>
-    )
+        Dane Osobowe
+      </h2>
+
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="grid gap-4">
+          {fields.map((field) => (
+            <FormField
+              key={field.name}
+              control={form.control}
+              name={field.name as keyof FormValues}
+              render={({ field: controllerField }) => (
+                <FormItem className={`${inter.className}`}>
+                  <FormLabel className={`${inter.className} text-[16px]`}>
+                    {field.label}
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      {...controllerField}
+                      placeholder={field.placeholder}
+                    />
+                  </FormControl>
+                  <FormMessage className="text-red-600 text-sm" />
+                </FormItem>
+              )}
+            />
+          ))}
+        </form>
+      </Form>
+    </div>
+  );
 }
