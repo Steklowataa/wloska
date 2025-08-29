@@ -26,7 +26,7 @@ export default function OrderDetails() {
             </div>
             <div className="flex gap-8 justify-center -mt-15">
               <ExtraDataForm />
-              {/* <PaymentForm /> */}
+              <PaymentForm />
             </div>
             {/* <div className="flex justify-end mt-[-270px] z-999">
               <NextButton />

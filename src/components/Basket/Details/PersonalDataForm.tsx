@@ -2,7 +2,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { personSchema } from "@/utils/zosSchema";
+import { personSchema } from "@/utils/zodSchema";
 import { Form, FormItem, FormLabel, FormControl, FormField, FormMessage } from "@/components/ui/form";
 import Input from "./Input";
 import { Inter } from "next/font/google";

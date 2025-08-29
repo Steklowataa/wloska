@@ -3,7 +3,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { adresSchema } from "@/utils/zosSchema";
+import { adresSchema } from "@/utils/zodSchema";
 import {
   Form,
   FormItem,

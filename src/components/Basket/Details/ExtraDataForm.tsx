@@ -4,7 +4,7 @@ import { Inter } from "next/font/google";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { extraDataSchema, type ExtraDataValues } from "@/utils/zosSchema";
+import { extraDataSchema, type ExtraDataValues } from "@/utils/zodSchema";
 import {Form, FormItem, FormLabel, FormControl, FormField, FormMessage,} from "@/components/ui/form";
 
 const inter = Inter({ subsets: ["latin"], weight: "600" });

@@ -80,3 +80,22 @@ export const extraDataSchema = z.object({
 });
   
 export type ExtraDataValues = z.infer<typeof extraDataSchema>;
+
+//formularz do wyboru typu platnosci
+export const paymentSchema = z.object({
+  payment: z.enum(["Gotówka", "Karta"], {
+    required_error: "Musisz wybrać metodę płatności 🥺",
+  }),
+
+  change: z
+    .union([
+      z.literal("50"),
+      z.literal("100"),
+      z.literal("200"),
+      z.literal("other"),
+      z.literal("none"),
+    ])
+    .optional(),
+});
+
+export type PaymentValues = z.infer<typeof paymentSchema>;
