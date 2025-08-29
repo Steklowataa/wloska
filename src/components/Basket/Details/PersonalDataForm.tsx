@@ -1,5 +1,4 @@
 "use client";
-
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -33,24 +32,20 @@ export default function PersonalDataForm() {
   ];
 
   return (
-    <div
-      className="grid grid-cols-1 bg-[#28091D]/40 border border-white w-[336px] h-[465px] rounded-[20px] items-center justify-center p-6 gap-4"
-    >
-      <h2
-        className={`${inter.className} text-[30px] text-center mb-4`}
+    <div className="grid grid-cols-1 bg-[#28091D]/40 border border-white w-[336px] h-[465px] rounded-[20px] 
+    items-center justify-center p-6 gap-4">
+      <h2 className={`${inter.className} text-[30px] text-center mb-4`}
         style={{
           WebkitTextStroke: "2px white",
           color: "transparent",
-        }}
-      >
+        }}>
         Dane Osobowe
       </h2>
 
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="grid gap-4"
-        >
+          className="grid gap-4">
           {fields.map((field) => (
             <FormField
               key={field.name}
@@ -72,13 +67,6 @@ export default function PersonalDataForm() {
               )}
             />
           ))}
-
-          <button
-            type="submit"
-            className="mt-2 w-full bg-white text-black rounded-[12px] py-2 font-semibold hover:bg-gray-200 transition"
-          >
-            Submit
-          </button>
         </form>
       </Form>
     </div>

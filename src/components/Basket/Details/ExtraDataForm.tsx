@@ -1,55 +1,65 @@
-"use client"
-import Input from "./Input"
-import { Inter } from "next/font/google"
-import Image from "next/image"
-import { useOrder, type Customer } from "@/app/context/OrderContext"
+"use client";
+import Input from "./Input";
+import { Inter } from "next/font/google";
+import Image from "next/image";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { extraDataSchema, type ExtraDataValues } from "@/utils/zosSchema";
+import {Form, FormItem, FormLabel, FormControl, FormField, FormMessage,} from "@/components/ui/form";
 
-const inter = Inter({
-  subsets: ["latin"],
-  weight: "600"
-})
-
-type ExtraDataProps = {
-  label: string
-  placeholder: string
-  fieldKey: keyof Customer
-}
-
-function ExtraData({ label, placeholder, fieldKey }: ExtraDataProps) {
-  const { customer, setCustomer } = useOrder()
-
-  return (
-    <div className="flex flex-col">
-      <label className={`${inter.className} mb-2 text-white`}>{label}</label>
-      <Input
-        value={customer[fieldKey] ?? ""}
-        onChange={(e) => setCustomer({ [fieldKey]: e.target.value })}
-        placeholder={placeholder}
-      />
-    </div>
-  )
-}
+const inter = Inter({ subsets: ["latin"], weight: "600" });
 
 export default function ExtraDataForm() {
-  const fields: ExtraDataProps[] = [
-    { label: "PROMOKOD", placeholder: "np. YXC34RX", fieldKey: "promoCode" },
-    { label: "Komentarz (opcjonalnie)", placeholder: "Proszę nie używać dzwonka", fieldKey: "message" }
-  ]
+  const form = useForm<ExtraDataValues>({
+    resolver: zodResolver(extraDataSchema),
+    defaultValues: {
+      promoCode: "",
+      message: "",
+    },
+  });
 
-  return (
-    <div className="relative w-[550px] h-[400px]">
-      <Image
-        alt="background"
-        src="/images/rectangle.png"
-        width={600}
-        height={400}
-        className="absolute mt-0"
-      />
-      <div className="absolute inset-0 grid grid-cols-2 gap-x-3 pl-4 pr-6 mt-18">
-        {fields.map((field, index) => (
-          <ExtraData key={index} {...field} />
-        ))}
+function onSubmit(values: ExtraDataValues) {
+  console.log("Extra data submitted:", values);
+}
+
+const fields = [
+  { name: "promoCode", label: "PROMOKOD", placeholder: "np. YXC34RX" },
+  { name: "message", label: "Komentarz (opcjonalnie)", placeholder: "Proszę nie używać dzwonka" },
+];
+
+return (
+  <div className="relative w-[550px] h-[400px]">
+    <Image
+      alt="background"
+      src="/images/rectangle.png"
+      width={600}
+      height={400}
+      className="absolute mt-0"/>
+
+      <div className="absolute inset-0 pl-4 pr-6 pt-10">
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="grid grid-cols-2 gap-x-3 gap-y-4">
+            {fields.map((field) => (
+              <FormField
+                key={field.name}
+                control={form.control}
+                name={field.name as keyof ExtraDataValues}
+                render={({ field: controllerField }) => (
+                  <FormItem className={`${inter.className}`}>
+                    <FormLabel className={`${inter.className} text-white mt-6 text-[16px]`}>{field.label}</FormLabel>
+                    <FormControl>
+                      <Input {...controllerField} placeholder={field.placeholder} />
+                    </FormControl>
+                    <FormMessage className="text-red-500 text-[14px]" />
+                  </FormItem>
+                )}
+              />
+            ))}
+          </form>
+        </Form>
       </div>
     </div>
-  )
+  );
 }
