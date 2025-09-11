@@ -1,13 +1,13 @@
 "use client";
-import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import groupCartItems from "@/utils/GroupCartItem";
 import { useCart } from "@/app/context/CartContext";
 import { Inter } from "next/font/google";
+import { AiOutlineDelete } from "react-icons/ai";
 
 type CartItem = {
-  id: string; // 👈 teraz po id
+  id: string;
   name: string;
   image: string;
   price: number;
@@ -42,7 +42,6 @@ export default function SummeryCart({ items }: { items: CartItem[] }) {
 
   const groupedItems = groupCartItems(items);
 
-  // Show only first 2 items unless expanded
   const displayedItems = expanded ? groupedItems : groupedItems.slice(0, 2);
 
   const handleToggleExpand = () => {
@@ -50,7 +49,7 @@ export default function SummeryCart({ items }: { items: CartItem[] }) {
   };
 
   const handleDeleteItem = (item: CartItem) => {
-    removeFromCart(item.id); // 👈 teraz po ID
+    removeFromCart(item.id); 
   };
 
   return (
@@ -60,7 +59,7 @@ export default function SummeryCart({ items }: { items: CartItem[] }) {
           <>
             {displayedItems.map((item, i) => (
               <div key={item.id} className="border-b border-gray-200 pb-3 last:border-b-0">
-                {/* First line: name, quantity, price and trash button */}
+                {/* nazwa, dodatki, przycisk usun*/}
                 <div className="flex justify-between items-center mb-1">
                   <div className="flex-1">
                     <span className={`${interBold2.className} text-[17px]`}>
@@ -76,12 +75,12 @@ export default function SummeryCart({ items }: { items: CartItem[] }) {
                       title="Usuń z koszyka"
                       type="button"
                     >
-                      🗑️
+                      <AiOutlineDelete width={20}/>
                     </button>
                   </div>
                 </div>
 
-                {/* Additions */}
+                {/* dodatki */}
                 {(item.sauces?.length || item.extras?.length) ? (
                   <div className={`${inter.className} text-[12px]`}>
                     {[...(item.sauces || []), ...(item.extras || [])]
@@ -92,7 +91,6 @@ export default function SummeryCart({ items }: { items: CartItem[] }) {
               </div>
             ))}
 
-            {/* Expand button */}
             {groupedItems.length > 2 && (
               <button
                 className={`${inter.className} text-sm text-[#FF01A2] mt-2 hover:underline cursor-pointer`}
@@ -103,7 +101,7 @@ export default function SummeryCart({ items }: { items: CartItem[] }) {
               </button>
             )}
 
-            {/* Footer */}
+            {/* footer */}
             <div className="flex justify-between items-center mt-1 pt-2">
               <p className={`${interBold2.className} text-[17px]`}>Razem: {totalPrice}zł</p>
               <button

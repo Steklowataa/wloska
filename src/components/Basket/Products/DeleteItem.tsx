@@ -14,10 +14,10 @@ type DeleteItemProps = {
 const DeleteItem = ({ onDelete }: DeleteItemProps) => {
   return (
     <button
-      onClick={onDelete} // 👈 tutaj uruchamiasz funkcję przekazaną z ListOfProducts
-      className={`${inter.className} flex items-center justify-center gap-2 px-4 py-2 bg-pink-600 hover:bg-pink-700 rounded-full text-white shadow-md transition`}
+      onClick={onDelete}
+      className={`${inter.className} flex items-center justify-center gap-2 w-[120px] h-[45px] px-4 py-2 bg-[#E01094] hover:bg-[#C4037E] rounded-full text-white shadow-md transition`}
     >
-      <AiOutlineDelete size={18} />
+      <AiOutlineDelete size={23} />
       Usuń
     </button>
   );

@@ -53,7 +53,7 @@ export default function ListOfProducts() {
   return (
     <>
     <BackgroundBlobsCart />
-      <div className="max-w-3xl mx-auto mt-10 p-6 bg-[#28091D]/40 rounded-xl shadow-lg">
+      <div className="max-w-2xl mx-auto mt-10 p-6 bg-[#28091D]/40 rounded-xl shadow-lg">
       <div className="flex items-center justify-center">
         <h1 className={`${interBold2.className} text-2xl mb-6`}>Twoje zamówienie</h1>
       </div>
@@ -81,16 +81,20 @@ export default function ListOfProducts() {
                     <span className={`${interBold2.className} text-[16px]`}>
                       {item.totalPrice} zł
                     </span>
+                  </div>
+                  <div className="flex justify-between items-center mt-1">
+                    <div>
+                      {additionalsText && (
+                        <p className={`${inter.className} text-sm text-white`}>
+                          <strong>Dodatki:</strong> {additionalsText}
+                        </p>
+                      )}
+                    </div>
                     <DeleteItem onDelete={() => removeFromCart(item.id)}/>
                   </div>
-                  {additionalsText && (
-                    <p className={`${inter.className} text-sm text-white mt-1`}>
-                      <strong>Dodatki:</strong> {additionalsText}
-                    </p>
-                  )}
                 </div>
               </div>
-              <div className="border-b-4 border-[#960B63] w-3/4 mx-auto mt-6"></div>
+              <div className="border-b-4 border-[#960B63] w-2/3 mx-auto mt-6"></div>
             </div>
           );
         })}
