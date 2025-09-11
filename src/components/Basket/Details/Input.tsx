@@ -19,7 +19,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     return (
       <input
         className="w-[252px] h-[48px] rounded-[12px] bg-black border border-white p-4 placeholder:text-[14px]"
-        value={value}
+        value={value || ""}
         onChange={onChange}
         onBlur={onBlur}
         ref={ref}

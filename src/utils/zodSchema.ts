@@ -30,10 +30,10 @@ export const adresSchema = z.object({
     streetNumber: z
       .string()
       .trim()
-      .min(1, "Numer ulicy nie moze być 0 🥺")
-      .regex(/^\d+$/, "Numer nie może składać się z literek — tylko cyfry 🥺🥺🥺")
+      // .min(1, "Numer ulicy nie moze być 0 🥺")
+      .regex(STREET_ALLOWED, "Nazwa ulicy może zawierać tylko litery, cyfry i spacje🥺🥺🥺")
       .transform((v) => Number(v))
-      .refine((n) => Number.isInteger(n), "Numer ulicy musi być liczbą całkowitą")
+      // .refine((n) => Number.isInteger(n), "Numer ulicy musi być liczbą całkowitą")
       .refine((n) => n > 0, "Podaj numer ulicy większy od 0")
       .refine((n) => n <= 999, "Za długi numer 🥺"),
   
@@ -99,3 +99,6 @@ export const paymentSchema = z.object({
 });
 
 export type PaymentValues = z.infer<typeof paymentSchema>;
+
+export const orderSchema = personSchema.merge(adresSchema).merge(paymentSchema).merge(extraDataSchema)
+export type OrderValues = z.infer<typeof orderSchema>;
