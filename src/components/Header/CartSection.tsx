@@ -64,6 +64,7 @@ export default function CartSection({ isScrolled, isHovered }: CartProps) {
           <div className="absolute right-0 top-0 z-40">
             <SummeryCart
               items={items.map((item) => ({
+                id: item.id,
                 name: item.name,
                 image: item.image,
                 price: item.basePrice,
@@ -71,11 +72,11 @@ export default function CartSection({ isScrolled, isHovered }: CartProps) {
                 totalPrice: item.totalPrice,
                 sauces: item.sauces,
                 extras: item.extras,
-                additions: [
-                  ...(item.sauces?.map((s) => s.name) || []),
-                  ...(item.extras?.map((s) => s.name) || []),
-                ],
-                setQuantity: () => {},
+                // additions: [
+                //   ...(item.sauces?.map((s) => s.name) || []),
+                //   ...(item.extras?.map((s) => s.name) || []),
+                // ],
+                // setQuantity: () => {},
               }))}
             />
           </div>

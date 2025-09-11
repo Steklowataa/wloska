@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import { useCart } from "@/app/context/CartContext";
 import Image from "next/image";
 import NextButton from "../NextButton";
+import BackgroundBlobsCart from "../BackgroundBlobsCart"
+import DeleteItem from "./DeleteItem";
 
 const inter = Inter({ subsets: ["latin"], weight: "400" });
 const interBold = Inter({ subsets: ["latin"], weight: "600" });
@@ -13,12 +15,16 @@ export default function ListOfProducts() {
 
   if (items.length === 0) {
     return (
-      <div className="max-w-3xl mx-auto mt-10 p-6 bg-[#28091D]/40 rounded-xl shadow-lg">
+      <>
+      <BackgroundBlobsCart />
+      <div className="max-w-3xl mx-auto mt-10 p-6 bg-[#28091D]/40 rounded-xl shadow-lg z-999">
         <div className="flex items-center justify-center flex-col">
           <h1 className={`${interBold2.className} text-2xl mb-3`}>Twoje zamówienie</h1>
           <p className={`${inter.className} text-gray-300 text-center`}>Twój koszyk jest pusty</p>
         </div>
       </div>
+      </>
+      
     );
   }
 
@@ -45,7 +51,9 @@ export default function ListOfProducts() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto mt-10 p-6 bg-[#28091D]/40 rounded-xl shadow-lg">
+    <>
+    <BackgroundBlobsCart />
+      <div className="max-w-3xl mx-auto mt-10 p-6 bg-[#28091D]/40 rounded-xl shadow-lg">
       <div className="flex items-center justify-center">
         <h1 className={`${interBold2.className} text-2xl mb-6`}>Twoje zamówienie</h1>
       </div>
@@ -73,6 +81,7 @@ export default function ListOfProducts() {
                     <span className={`${interBold2.className} text-[16px]`}>
                       {item.totalPrice} zł
                     </span>
+                    <DeleteItem onDelete={() => removeFromCart(item.id)}/>
                   </div>
                   {additionalsText && (
                     <p className={`${inter.className} text-sm text-white mt-1`}>
@@ -92,5 +101,7 @@ export default function ListOfProducts() {
         </div>
       </div>
     </div>
+    </>
+  
   );
 }
