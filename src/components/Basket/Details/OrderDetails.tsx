@@ -5,35 +5,22 @@ import AdressDataForm from "./AdressDataForm";
 import ExtraDataForm from "./ExtraDataForm";
 import PaymentForm from "./PaymentForm";
 import NextButton from "../NextButton";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { orderSchema, OrderValues } from "@/utils/zodSchema";
 import { Form } from "@/components/ui/form";
+import { UseFormReturn } from "react-hook-form";
+import { OrderValues } from "@/utils/zodSchema";
+import { useState } from "react";
+import BackgroundBlobsCart from "../BackgroundBlobsCart";
 
-export default function OrderDetails() {
+type Props = {
+  form: UseFormReturn<OrderValues>;
+};
+
+export default function OrderDetails({ form }: Props) {
   const [isDelivery, setIsDelivery] = useState<boolean>(false);
 
-  const form = useForm<OrderValues>({
-    resolver: zodResolver(orderSchema),
-    defaultValues: {
-      name: "",
-      phone: "",
-      email: "",
-      streetName: "",
-      streetNumber: undefined,
-      flatNumber: undefined,
-      floorNumber: undefined,
-      staircase: undefined,
-      promoCode: "",
-      message: "",
-      payment: "Gotówka",
-      change: "50",
-    },
-    mode: "onChange",
-  });
-
   return (
+    <>
+    <BackgroundBlobsCart />
     <Form {...form}>
       <form className="flex justify-center items-start min-h-screen">
         <div className="flex flex-col gap-10">
@@ -64,5 +51,6 @@ export default function OrderDetails() {
         </div>
       </form>
     </Form>
+    </>
   );
 }

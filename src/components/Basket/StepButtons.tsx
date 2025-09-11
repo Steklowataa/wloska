@@ -1,22 +1,31 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Inter } from "next/font/google";
 
-const inter = Inter({
-  subsets: ["latin"],
-  weight: "600",
-});
+const inter = Inter({ subsets: ["latin"], weight: "600" });
 
-export default function StepButtons() {
+type Props = {
+  goToSummary: () => Promise<void>;
+};
+
+export default function StepButtons({ goToSummary }: Props) {
   const pathname = usePathname();
+  const router = useRouter();
 
   const steps = [
     { label: "Koszyk", path: "/basket/products" },
     { label: "Dane osobowe", path: "/basket/details" },
     { label: "Podsumowanie", path: "/basket/summary" },
   ];
+
+  const handleStepClick = (stepPath: string) => {
+    if (stepPath === "/basket/summary") {
+      goToSummary(); // walidacja + przejście
+    } else {
+      router.push(stepPath);
+    }
+  };
 
   return (
     <div className="flex items-center justify-center gap-x-6 mt-6">
@@ -25,9 +34,9 @@ export default function StepButtons() {
         const isActive = pathname === step.path;
 
         return (
-          <Link
+          <button
             key={step.label}
-            href={step.path}
+            onClick={() => handleStepClick(step.path)}
             className={`${inter.className} flex items-center gap-2 px-4 py-3 border rounded-3xl transition-all duration-200 ${
               isActive
                 ? "bg-white/40 text-white border-white"
@@ -35,7 +44,7 @@ export default function StepButtons() {
             }`}
           >
             <div
-              className={`${inter.className} flex items-center justify-center rounded-full w-[24px] h-[24px] text-sm font-medium ${
+              className={`flex items-center justify-center rounded-full w-[24px] h-[24px] text-sm font-medium ${
                 isActive
                   ? "bg-[#C2007B] text-white"
                   : "bg-[#7A0950] text-white"
@@ -44,7 +53,7 @@ export default function StepButtons() {
               {stepNumber}
             </div>
             {step.label}
-          </Link>
+          </button>
         );
       })}
     </div>

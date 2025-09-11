@@ -30,23 +30,18 @@ export const adresSchema = z.object({
     streetNumber: z
       .string()
       .trim()
-      // .min(1, "Numer ulicy nie moze być 0 🥺")
-      .regex(STREET_ALLOWED, "Nazwa ulicy może zawierać tylko litery, cyfry i spacje🥺🥺🥺")
-      .transform((v) => Number(v))
-      // .refine((n) => Number.isInteger(n), "Numer ulicy musi być liczbą całkowitą")
-      .refine((n) => n > 0, "Podaj numer ulicy większy od 0")
-      .refine((n) => n <= 999, "Za długi numer 🥺"),
-  
+      .nonempty("Podaj numer ulicy") 
+      .regex(/^[0-9A-Za-z]+$/, "Numer ulicy może zawierać tylko cyfry i litery, np. 65E"),
+    
     flatNumber: z
       .string()
       .trim()
-      .min(1, "Podaj numer mieszkania")
-      .regex(/^\d+$/, "Numer mieszkania nie może składać się z literek — tylko cyfry")
+      .nonempty("Podaj numer mieszkania")
+      .regex(/^\d+$/, "Numer mieszkania nie może składać się z liter — tylko cyfry")
       .transform((v) => Number(v))
-      .refine((n) => Number.isInteger(n), "Numer mieszkania musi być liczbą całkowitą")
-      .refine((n) => n > 0, "Podaj numer mieszkania większy od 0")
-      .refine((n) => n <= 999, "Za duża liczba jak na numer mieszkania 🥺"),
-  
+      .refine((n) => Number.isInteger(n) && n > 0 && n <= 999, "Podaj numer mieszkania w zakresie 1-999"),
+    
+    
     floorNumber: z
       .string()
       .trim()

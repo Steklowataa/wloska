@@ -41,7 +41,7 @@ export default function PersonalDataForm() {
               <FormControl>
                 <Input {...controllerField} placeholder={field.placeholder} />
               </FormControl>
-              <FormMessage className="text-red-600 text-sm" />
+              <FormMessage className="text-red-500 text-[14px]" />
             </FormItem>
           )}
         />
