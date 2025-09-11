@@ -1,7 +1,7 @@
 "use client";
 import StepButtons from "@/components/Basket/StepButtons";
 import OrderDetails from "@/components/Basket/Details/OrderDetails";
-import BackgroundBlobs from "@/components/Menu/BackgroundBlobs";
+import Header from "@/components/Header/Header";
 
 
 export default function Page() {
@@ -9,9 +9,9 @@ export default function Page() {
   
   return (
     <>
+      <Header />
       <StepButtons />
       <OrderDetails />
-      {/* <BackgroundBlobs/> */}
     </>
   );
 }

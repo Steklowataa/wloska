@@ -19,7 +19,7 @@ export default function StepButtons() {
   ];
 
   return (
-    <div className="flex items-center justify-center gap-x-6">
+    <div className="flex items-center justify-center gap-x-6 mt-6">
       {steps.map((step, index) => {
         const stepNumber = index + 1;
         const isActive = pathname === step.path;
