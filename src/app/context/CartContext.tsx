@@ -2,6 +2,7 @@
 import { createContext, useContext, useState } from "react";
 
 type CartItem = {
+  id: string,
   name: string;
   image: string;
   quantity: number;
@@ -26,18 +27,12 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
 
   const addToCart = (item: CartItem) => {
-    setItems((prev) => [...prev, item]);
+    const newItem = {...item, id:crypto.randomUUID()}
+    setItems((prev) => [...prev, newItem]);
   };
 
-  const removeFromCart = (name: string, sauces: any[] = [], extras: any[] = []) => {
-    setItems((prevItems) =>
-      prevItems.filter(
-        (item) =>
-          item.name !== name ||
-          JSON.stringify(item.sauces || []) !== JSON.stringify(sauces) ||
-          JSON.stringify(item.extras || []) !== JSON.stringify(extras)
-      )
-    );
+  const removeFromCart = (id: string) => {
+    setItems((prevItems) => prevItems.filter((item) => item.id !== id));
   };
 
   const totalQuantity = items.length;
