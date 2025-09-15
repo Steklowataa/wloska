@@ -1,8 +1,9 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+## 🖋️ Opis
+Włoska Pizza&Burger - to nowoczesna platforma kulinarna, która łączy atrakcyjną wizualnie prezentację dań z prostym i intuicyjnym systemem zamówień. Użytkownicy mogą przeglądać menu, wybierać produkty, konfigurować dodatki i łatwo dodawać je do koszyka. Elegancka animacja i responsywny design sprawiają, że korzystanie ze strony jest przyjemne zarówno na komputerze, jak i na urządzeniach mobilnych.
 
-First, run the development server:
+## Getting Started
 
 ```bash
 npm run dev
@@ -14,9 +15,6 @@ pnpm dev
 # or
 bun dev
 ```
-## 🖋️ Opis
-Włoska Pizza&Burger - to nowoczesna platforma kulinarna, która łączy atrakcyjną wizualnie prezentację dań z prostym i intuicyjnym systemem zamówień. Użytkownicy mogą przeglądać menu, wybierać produkty, konfigurować dodatki i łatwo dodawać je do koszyka. Elegancka animacja i responsywny design sprawiają, że korzystanie ze strony jest przyjemne zarówno na komputerze, jak i na urządzeniach mobilnych.
-
 
 ## 🍽️ Funkcjonalności
 
