@@ -6,6 +6,7 @@ First, run the development server:
 
 ```bash
 npm run dev
+npm install
 # or
 yarn dev
 # or
@@ -15,6 +16,25 @@ bun dev
 ```
 ## 🖋️ Opis
 Włoska Pizza&Burger - to nowoczesna platforma kulinarna, która łączy atrakcyjną wizualnie prezentację dań z prostym i intuicyjnym systemem zamówień. Użytkownicy mogą przeglądać menu, wybierać produkty, konfigurować dodatki i łatwo dodawać je do koszyka. Elegancka animacja i responsywny design sprawiają, że korzystanie ze strony jest przyjemne zarówno na komputerze, jak i na urządzeniach mobilnych.
+
+## Struktura projektu
+.
+├── public/               # assets: zdjęcia, screenshoty
+│   └── screenshots/      # screenshoty do README
+├── src/
+│   ├── app/              # strony Next.js
+│   │   ├── page.tsx      # Home page
+│   │   ├── menu/         # Strona menu
+│   │   ├── basket/       # Koszyk i checkout
+│   │   └── api/          # API routes (np. obsługa Telegram bota)
+│   ├── components/       # komponenty wielokrotnego użytku
+│   ├── context/          # CartContext, OrderContext
+│   └── utils/            # helpery, walidacje
+├── .env.local.example    # przykładowy plik z kluczami
+├── package.json
+├── README.md
+└── tsconfig.json
+
 
 ## 🍽️ Funkcjonalności
 
