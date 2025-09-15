@@ -9,7 +9,8 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        rozowy: '#FF30B3',
+        "pink" : "#E01094",
+        "rozowy": '#FF30B3',
         rozowyInny: '#7A0950',
         niebieski: '#0061FF',
         niebieskiInny: '#00D1FF',
