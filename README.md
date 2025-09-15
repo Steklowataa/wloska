@@ -36,7 +36,7 @@ Włoska Pizza&Burger - to nowoczesna platforma kulinarna, która łączy atrakcy
 - **Integracja z Telegram botem**
   - zamówienie wysyłane w czasie rzeczywistym do kucharza
   ![Zrzut ekranu – zamówienie w Telegramie](./public/screenshot/telegram.png)
-@wloskaZamowienia_bot
+https://t.me/wloskaZamowienia_bot
 
 
 ## 📦 Dependencies
