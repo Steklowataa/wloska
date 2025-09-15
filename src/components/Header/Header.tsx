@@ -10,7 +10,11 @@ const inter = Inter({
   weight: "600"
 });
 
-export default function Header() {
+type HeaderProp = {
+  showCart?: boolean;
+}
+
+export default function Header({showCart = true} : HeaderProp) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -33,7 +37,7 @@ export default function Header() {
             onMouseLeave={() => setIsHovered(false)}>
         <Logo isScrolled={isScrolled} isHovered={isHovered} />
         <Navigation isScrolled={isScrolled} isHovered={isHovered} />
-        <CartSection isScrolled={isScrolled} isHovered={isHovered} />
+        {showCart &&  <CartSection isScrolled={isScrolled} isHovered={isHovered} />}
       </div>
     </div>
   );

@@ -38,7 +38,7 @@ export default function Page() {
 
   return (
     <>
-      <Header />
+      <Header showCart={false}/>
       <StepButtons goToSummary={goToSummary} />
       <OrderDetails form={form} />
     </>
