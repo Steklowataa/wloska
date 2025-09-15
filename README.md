@@ -29,6 +29,7 @@ Włoska Pizza&Burger - to nowoczesna platforma kulinarna, która łączy atrakcy
   - wybór dostawa/odbiór
   - dla dostawy: dane osobowe, adres, forma płatności
   - przycisk potwierdzenia
+  - walidacja danych zrobiona za pomocą Zod i shadcn ui
 - **Podsumowanie i potwierdzenie zamówienia**
 - **Integracja z Telegram botem**
   - zamówienie wysyłane w czasie rzeczywistym do kucharza
