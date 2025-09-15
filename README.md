@@ -14,7 +14,24 @@ pnpm dev
 bun dev
 ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+
+## 🍽️ Funkcjonalności
+
+- **Home page**
+  - animacja (4 różne tła z tytułem, opisem i zdjęciem)
+  - przycisk przenoszący do menu
+- **Strona z menu i side menu**
+  - wybór produktu
+  - możliwość nawigacji po sekcjach poprzez nagłówek
+  - animacja nagłówka (zmniejsza się przy scrollu w dół)
+- **Formularz zamówienia**
+  - wybór dostawa/odbiór
+  - dla dostawy: dane osobowe, adres, forma płatności
+  - przycisk potwierdzenia
+- **Podsumowanie i potwierdzenie zamówienia**
+- **Integracja z Telegram botem**
+  - zamówienie wysyłane w czasie rzeczywistym do kucharza
+
 
 ## 📦 Dependencies
 
