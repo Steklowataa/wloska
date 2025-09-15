@@ -31,6 +31,7 @@ bun dev
 - **Podsumowanie i potwierdzenie zamówienia**
 - **Integracja z Telegram botem**
   - zamówienie wysyłane w czasie rzeczywistym do kucharza
+  ![Zrzut ekranu – zamówienie w Telegramie](./public/screenshot/telegram.png)
 
 
 ## 📦 Dependencies
