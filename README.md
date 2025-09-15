@@ -13,7 +13,8 @@ pnpm dev
 # or
 bun dev
 ```
-
+## Opis
+Włoska Pizza&Burger - to nowoczesna platforma kulinarna, która łączy atrakcyjną wizualnie prezentację dań z prostym i intuicyjnym systemem zamówień. Użytkownicy mogą przeglądać menu, wybierać produkty, konfigurować dodatki i łatwo dodawać je do koszyka. Elegancka animacja i responsywny design sprawiają, że korzystanie ze strony jest przyjemne zarówno na komputerze, jak i na urządzeniach mobilnych.
 
 ## 🍽️ Funkcjonalności
 
@@ -55,4 +56,12 @@ bun dev
 - [@radix-ui/react-label](https://www.radix-ui.com/primitives/docs/components/label) – komponent Label z Radix UI
 - [@radix-ui/react-slot](https://www.radix-ui.com/primitives/docs/utilities/slot) – util do komponowania komponentów w Radix UI
 - [@next/font](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) – optymalizacja fontów w Next.js
+
+  ## TODO
+  - Rozszerzyć Home page (więcej informacji o samej restauracji)
+  - Zrobić pod strone Kontakt
+  - Dodać zmiane języków
+  - Dorobić podstrone zamówienia odbiór osobisty ( na razie jest zaimplementowane zamówienie poprzez dostawę)
+  - Zrobić stronę responsywną
+  - Zamienić zdjęcia
 
