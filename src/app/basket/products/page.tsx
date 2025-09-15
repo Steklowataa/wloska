@@ -7,7 +7,7 @@ import Header from "@/components/Header/Header"
 export default function Page() {
     return (
         <>
-            <Header />
+            <Header showCart={false}/>
             <StepButtons />
             <ListOfProducts />
         </>
