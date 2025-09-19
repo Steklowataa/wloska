@@ -1,7 +1,7 @@
 "use client";
 import { Inter } from "next/font/google";
 import ShowMore from "./ShowMore";
-import { menu } from "@/utils/text";
+import { useMenuByLangName } from "@/utils/useMenuByLangName";
 
 const inter = Inter({ subsets: ["latin"], weight: "400" });
 const inter2 = Inter({ subsets: ["latin"], weight: "600" });
@@ -25,15 +25,8 @@ type ModalExtrasProps = {
   ) => void;
 };
 
-export default function ModalExtras({
-  type,
-  selectedExtras,
-  setSelectedExtras,
-  showAllExtras,
-  setShowAllExtras,
-  isSelected,
-  toggleItem,
-}: ModalExtrasProps) {
+export default function ModalExtras({ type, selectedExtras, setSelectedExtras, showAllExtras, setShowAllExtras, isSelected, toggleItem,}: ModalExtrasProps) {
+  const { menu } = useMenuByLangName()
   if (type === "pizza") {
     return (
       <>

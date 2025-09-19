@@ -3,34 +3,13 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import groupCartItems from "@/utils/GroupCartItem";
 import { useCart } from "@/app/context/CartContext";
+import type { CartItem } from "@/app/context/CartContext";
 import { Inter } from "next/font/google";
 import { AiOutlineDelete } from "react-icons/ai";
 
-type CartItem = {
-  id: string;
-  name: string;
-  image: string;
-  price: number;
-  quantity: number;
-  totalPrice: number;
-  sauces?: any[];
-  extras?: any[];
-};
-
-const inter = Inter({
-  subsets: ["latin"],
-  weight: "400",
-});
-
-const interBold = Inter({
-  subsets: ["latin"],
-  weight: "600",
-});
-
-const interBold2 = Inter({
-  subsets: ["latin"],
-  weight: "800",
-});
+const inter = Inter({ subsets: ["latin"], weight: "400" });
+const interBold = Inter({ subsets: ["latin"], weight: "600" });
+const interBold2 = Inter({ subsets: ["latin"], weight: "800" });
 
 export default function SummeryCart({ items }: { items: CartItem[] }) {
   const router = useRouter();
@@ -41,15 +20,12 @@ export default function SummeryCart({ items }: { items: CartItem[] }) {
   const handleGoToBasket = () => router.push("/basket/products");
 
   const groupedItems = groupCartItems(items);
-
   const displayedItems = expanded ? groupedItems : groupedItems.slice(0, 2);
 
-  const handleToggleExpand = () => {
-    setExpanded(!expanded);
-  };
+  const handleToggleExpand = () => setExpanded(!expanded);
 
-  const handleDeleteItem = (item: CartItem) => {
-    removeFromCart(item.id); 
+  const handleDeleteItem = (id: string) => {
+    removeFromCart(id); // ✅ teraz podajemy tylko id
   };
 
   return (
@@ -57,9 +33,9 @@ export default function SummeryCart({ items }: { items: CartItem[] }) {
       <div className="flex flex-col gap-3">
         {displayedItems.length > 0 ? (
           <>
-            {displayedItems.map((item, i) => (
+            {displayedItems.map((item) => (
               <div key={item.id} className="border-b border-gray-200 pb-3 last:border-b-0">
-                {/* nazwa, dodatki, przycisk usun*/}
+                {/* nazwa, dodatki, przycisk usuń */}
                 <div className="flex justify-between items-center mb-1">
                   <div className="flex-1">
                     <span className={`${interBold2.className} text-[17px]`}>
@@ -68,14 +44,16 @@ export default function SummeryCart({ items }: { items: CartItem[] }) {
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className={`${interBold2.className} text-[15px]`}>{item.totalPrice}zł</span>
+                    <span className={`${interBold2.className} text-[15px]`}>
+                      {item.totalPrice}zł
+                    </span>
                     <button
-                      onClick={() => handleDeleteItem(item)}
+                      onClick={() => handleDeleteItem(item.id)} // ✅ przekazujemy tylko id
                       className="text-red-500 hover:text-[#EE0498] text-lg transition-colors cursor-pointer p-1 hover:bg-red-50 rounded"
                       title="Usuń z koszyka"
                       type="button"
                     >
-                      <AiOutlineDelete width={20}/>
+                      <AiOutlineDelete width={20} />
                     </button>
                   </div>
                 </div>
@@ -84,7 +62,9 @@ export default function SummeryCart({ items }: { items: CartItem[] }) {
                 {(item.sauces?.length || item.extras?.length) ? (
                   <div className={`${inter.className} text-[12px]`}>
                     {[...(item.sauces || []), ...(item.extras || [])]
-                      .map((extra) => (typeof extra === "string" ? extra : extra?.name || "Unknown"))
+                      .map((extra) =>
+                        typeof extra === "string" ? extra : extra?.name || "Unknown"
+                      )
                       .join(", ")}
                   </div>
                 ) : null}

@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react"
-import { menu } from "@/utils/text"
+import { menu } from "@/utils/translation/pl"
 
 export default function ToggleExtras({ renderItemsWithShowMore, selectedExtras, showAllExtras, setShowAllExtras, setSelectedExtras}) {
     const toggleExtra = (extra: string) => {

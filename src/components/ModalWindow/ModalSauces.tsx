@@ -1,7 +1,7 @@
 "use client";
 import { Inter } from "next/font/google";
 import ShowMore from "./ShowMore";
-import { menu } from "@/utils/text";
+import { useMenuByLangName } from "@/utils/useMenuByLangName";
 
 const inter2 = Inter({ subsets: ["latin"], weight: "600" });
 
@@ -35,6 +35,7 @@ export default function ModalSauces({
   toggleItem,
   freeSauceLimit,
 }: ModalSaucesProps) {
+  const {menu} = useMenuByLangName()
   if (type === "drinks" || type === "sos" || type === "smashburger" || type === "burger") {
     return null;
   }

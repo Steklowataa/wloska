@@ -1,4 +1,5 @@
-export const menu: {
+export const menuPL: {
+    title: {id: string; pizza?: string; burger?: string; smashburger?: string; extras?: string; drinks?: string; saus?: string;}[];
     pizza: Record<string, [string, number, string, string?]>,
     burger: Record<string, [string, number, string, string?]>,
     smashburger: Record<string, [string, number, string, string?]>,
@@ -9,6 +10,14 @@ export const menu: {
     burgerOptions: {name: string, price: number}[]
     smashOptions: {name: string, price: number}[]
 } = {
+    title: [
+        {id: "Pizza", pizza: "Pizza"},
+        {id: "Burgery", burger: "Burgery"},
+        {id: "Smashburgery", smashburger: "Smashburgery"},
+        {id: "Przystawki", extras: "Przystawki"},
+        {id: "Napoje", drinks: "Napoje"},
+        {id: "Sosy", saus: "Sosy"}
+    ],
     pizza: {
         "Margarita": ["Sos pomidorowy, mozzarella, świeża bazylia", 29, "/images/marg.svg", "vege",],
         "Capricciosa": ["Sos pomidorowy, mozzarella, szynka, pieczarki", 34, "/images/capr.svg", ""],
@@ -131,10 +140,12 @@ export const menu: {
     ]
 }
 
-export const text : {
+export const textPL : {
     images: {img: string}[],
     header: {name: string, subtitle: string, description: string, color: string}[],
     secondHeader: {text: string}[],
+    stableTextHeader: {text: string, buttonText: string}[],
+    homePageHeader: {home: string, menu: string, contacts: string}[],
 } = {
     images : [
         { img: "/images/bianca.svg"},
@@ -149,9 +160,15 @@ export const text : {
         { name: "Quatro", subtitle: "Carni", description: "...", color: '#0F7BCE' }
     ],
     secondHeader: [
-        {text: "Salami Bianca to idealna propozycja dla fanów intensywnych smaków i kremowej bazy. Na delikatnym sosie śmietanowym układamy aromatyczne pieczarki"},
-        {text: "Pizza z Gruszką to wyjątkowe połączenie delikatności i charakteru. Na kremowym sosie układamy soczyste plastry gruszki, rukolę i gorgonzolę, całość"},
-        {text: "Pizza Cezar to wariacja na temat klasycznej sałatki. Na sosie śmietanowym znajdziesz kawałki soczystego kurczaka, czarne oliwki i czerwoną cebulkę, "},
-        {text: "Quatro Carni to propozycja dla miłośników mięsnych smaków. Na bazie aromatycznego sosu znajdziesz szynkę, pikantną spianatę, chrupiące frankfurterki"}
+        {text: "Salami Bianca to idealna propozycja dla fanów intensywnych smaków i kremowej bazy. Śmietanowy sos, gorgonzola, piecxarki i pikanta spianata."},
+        {text: "Pizza z Gruszką to wyjątkowe połączenie delikatności i charakteru. Na kremowym sosie układamy soczyste plastry gruszki, rukolę i gorgonzolę"},
+        {text: "Pizza Cezar to wariacja na temat klasycznej sałatki. Na sosie śmietanowym znajdziesz kawałki soczystego kurczaka, czarne oliwki i czerwoną cebulkę "},
+        {text: "Quatro Carni to propozycja dla miłośników mięsnych smaków. Znajdziesz szynkę, pikantną spianatę, chrupiące frankfurterki i soczysty boczek"}
+    ],
+    stableTextHeader: [
+        {text: "Potrzebujesz więcej opcji?", buttonText: "Menu"}
+    ],
+    homePageHeader: [
+        {home: "Strona główna", menu: "Menu", contacts: "Kontakt"}
     ]
 }

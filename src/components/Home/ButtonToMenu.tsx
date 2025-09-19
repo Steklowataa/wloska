@@ -1,6 +1,7 @@
 "use client"
 import { Inter, Playfair_Display } from "next/font/google"
 import Link from "next/link"
+import { useMenuByLangName } from "@/utils/useMenuByLangName"
 
 const inter = Inter({
     subsets: ["latin"],
@@ -13,10 +14,12 @@ const playfair = Playfair_Display({
 })
 
 const ButtonToMenu = () => {
+    const { text: translation } = useMenuByLangName();
+    const { text: headerText, buttonText } = translation.stableTextHeader[0];
     return (
         <div className={`${inter.className} flex flex-row gap-10 items-center ml-[100px]`}>
             <div className="text-white text-[16px] relative">
-                <p>Potrzebujesz więcej opcji?</p>
+                <p>{ headerText }</p>
                 <div className="absolute top-full left-10 ">
                     <svg width="100" height="20" viewBox="0 0 100 20" fill="none">
                         <path 
@@ -32,7 +35,7 @@ const ButtonToMenu = () => {
             <div>
                 <Link href={"/menu"}>
                     <button className={`${playfair.className} bg-[#E01094] w-[140px] h-[50px] rounded-[20px] text-white shadow-inner transition-transform duration-300 hover:scale-110 cursor-pointer`}>
-                        Menu
+                        { buttonText }
                     </button>
                 </Link>
             </div>
