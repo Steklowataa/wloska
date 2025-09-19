@@ -1,8 +1,28 @@
 "use client";
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from "react";
+import { useMenuByLangName } from "@/utils/useMenuByLangName";
 
 export default function MenuButtons() {
-  const items: string[] = ["Pizza", "Burgery", "SmashBurgery", "Przystawki", "Napoje", "Sosy"];
+  const { menu } = useMenuByLangName();
+
+  // Funkcja pomocnicza do pobierania tłumaczeń z menu.title
+  const getLabel = (id: string) => {
+    const found = menu.title.find((t: any) => t.id === id);
+    if (!found) return id;
+    const [_, value] = Object.entries(found).find(([key]) => key !== "id") || [];
+    return value || id;
+  };
+
+  // Memoize items array to prevent unnecessary re-renders
+  const items = useMemo(() => [
+    { key: "pizza", id: "Pizza", label: getLabel("Pizza") },
+    { key: "burger", id: "Burgery", label: getLabel("Burgery") },
+    { key: "smashburger", id: "SmashBurgery", label: getLabel("SmashBurgery") },
+    { key: "extras", id: "Przystawki", label: getLabel("Przystawki") },
+    { key: "drinks", id: "Napoje", label: getLabel("Napoje") },
+    { key: "sos", id: "Sosy", label: getLabel("Sosy") },
+  ], [menu.title]); // Only recreate when menu.title changes
+
   const sectionref = useRef<(HTMLElement | null)[]>([]);
   const isScrolling = useRef(false);
   const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
@@ -11,12 +31,11 @@ export default function MenuButtons() {
 
   useEffect(() => {
     const observers: IntersectionObserver[] = [];
-  
+
     items.forEach((item, index) => {
-      const sectionId = item.toLowerCase();
-      const section = document.getElementById(sectionId);
+      const section = document.getElementById(item.id);
       sectionref.current[index] = section;
-  
+
       if (section) {
         const observer = new IntersectionObserver(
           (entries) => {
@@ -32,16 +51,16 @@ export default function MenuButtons() {
             threshold: 0.3,
           }
         );
-  
-        observer.observe(section); 
+
+        observer.observe(section);
         observers.push(observer);
       }
     });
-  
+
     return () => {
       observers.forEach((observer) => observer.disconnect());
     };
-  }, []);
+  }, [items]); // Now items is properly memoized
 
   const handleButtonClick = (index: number): void => {
     isScrolling.current = true;
@@ -51,15 +70,14 @@ export default function MenuButtons() {
       clearTimeout(scrollTimeout.current);
     }
 
-    const sectionId = items[index].toLowerCase();
-    const element = document.getElementById(sectionId);
-    
+    const element = document.getElementById(items[index].id);
     if (element) {
       element.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
+        behavior: "smooth",
+        block: "start",
       });
     }
+
     scrollTimeout.current = setTimeout(() => {
       isScrolling.current = false;
     }, 1000);
@@ -75,29 +93,29 @@ export default function MenuButtons() {
 
   return (
     <>
-      {/* Mobile View - Alternative Structure */}
+      {/* Mobile View */}
       <div className="block md:hidden">
-      
+        {/* Możesz tu zrobić np. dropdown albo slider */}
       </div>
-  
+
       {/* Desktop View */}
       <div className="hidden md:flex justify-center sticky top-20 z-50 px-6">
-      <div className="flex flex-nowrap items-center space-x-4 py-3 px-4 rounded-[50px] w-fit shadow-sm bg-gray/10 backdrop-blur-md">
-            {items.map((element, index) => (
-              <button
-                key={index}
-                onClick={() => handleButtonClick(index)}
-                className={`transition-transform duration-300 easy-in-out hover:scale-105 cursor-pointer px-5 py-2 text-lg md:text-[16px] font-semibold rounded-[20px] transition-colors ease-in-out duration-700 ${
-                  index === activeButton
-                    ? "bg-[#370424] text-white"
-                    : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-                }`}
-              >
-                {element}
-              </button>
-            ))}
-          </div>
+        <div className="flex flex-nowrap items-center space-x-4 py-3 px-4 rounded-[50px] w-fit shadow-sm bg-gray/10 backdrop-blur-md">
+          {items.map((element, index) => (
+            <button
+              key={element.key}
+              onClick={() => handleButtonClick(index)}
+              className={`transition-transform easy-in-out hover:scale-105 cursor-pointer px-5 py-2 text-lg md:text-[16px] font-semibold rounded-[20px] ease-in-out duration-700 ${
+                index === activeButton
+                  ? "bg-[#370424] text-white"
+                  : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+              }`}
+            >
+              {element.label}
+            </button>
+          ))}
         </div>
+      </div>
     </>
   );
 }

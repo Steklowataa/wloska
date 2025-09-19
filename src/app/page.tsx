@@ -5,9 +5,9 @@ import SpinningEllipse from "@/components/Home/SpinEllipse";
 import EffectAppear from "@/components/Home/EffectAppear";
 import ImageAppear from "@/components/Home/ImageAppear";
 import Header from "@/components/Header/Header";
-import { text } from "../utils/text"
 import ButtonToMenu from "@/components/Home/ButtonToMenu";
 import { Playfair_Display, Inter } from "next/font/google";
+import { useMenuByLangName } from "@/utils/useMenuByLangName";
 
 
 const playfair = Playfair_Display({
@@ -22,7 +22,7 @@ const inter = Inter({
 
 export default function Home() {
     const [currentIndex, setCurrentIndex] = useState(0);
-    const currentSecondHeader = text.secondHeader[currentIndex]
+    const { text }= useMenuByLangName()
     
     const currentPizza = text.header[currentIndex];
     

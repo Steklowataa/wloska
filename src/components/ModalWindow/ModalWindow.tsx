@@ -1,7 +1,6 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 import { useCart } from "@/app/context/CartContext";
-import { menu } from "@/utils/text";
 import { Item, ModalWindowProps } from "./types";
 import { isSelected, toggleItem, calculateSaucesPrice } from "./utils";
 import ModalHeader from "./ModalHeader";
@@ -20,6 +19,13 @@ export default function ModalWindow(props: ModalWindowProps) {
   const [showAllSauces, setShowAllSauces] = useState(false);
   const [showAllExtras, setShowAllExtras] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
 
   useEffect(() => {
     if (scrollRef.current) scrollRef.current.scrollTop = 200;
@@ -47,6 +53,7 @@ export default function ModalWindow(props: ModalWindowProps) {
         description,
         img,
         type,
+        quantity: setQuantity,
         basePrice: price,
         sauces: selectedSauces,
         extras: selectedExtras,
@@ -63,6 +70,7 @@ export default function ModalWindow(props: ModalWindowProps) {
         sauces: selectedSauces,
         extras: selectedExtras,
         totalPrice: singleSetPrice,
+        quantity: setQuantity
       });
     }
     onClose();
@@ -89,7 +97,7 @@ export default function ModalWindow(props: ModalWindowProps) {
             setSetQuantity={setSetQuantity}
           />
           <ModalExtras
-            type={type}
+            type = {type}
             selectedExtras={selectedExtras}
             setSelectedExtras={setSelectedExtras}
             showAllExtras={showAllExtras}

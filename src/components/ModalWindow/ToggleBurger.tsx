@@ -1,5 +1,5 @@
 "use client"
-import { menu } from "@/utils/text";
+import { menu } from "@/utils/translation/pl";
 
 export default function ToggleBurger({setSelectedExtras, selectedExtras, showAllExtras, setShowAllExtras, renderItemsWithShowMore}) {
     const toggleBurgerOption = (option) => {

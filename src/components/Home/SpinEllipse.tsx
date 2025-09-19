@@ -4,7 +4,6 @@ const SpinningEllipse = () => {
     const [rotation, setRotation] = useState(0);
     const [currentIndex, setCurrentIndex] = useState(0);
     
-    // 4 colors: green, red, yellow, blue
     const colors = ['#E01094', '#940C62', '#43A9F7', '#0F7BCE'];
         
     useEffect(() => {
@@ -27,7 +26,6 @@ const SpinningEllipse = () => {
                     borderRadius: '50%',
                     transform: `translateY(-50%) translateX(50%) rotate(${rotation}deg)`,
                     transformOrigin: 'center center',
-                    // Add gradient to make rotation visible
                     background: `linear-gradient(45deg, ${colors[currentIndex]} 0%, ${colors[currentIndex]}80 50%, ${colors[currentIndex]} 100%)`
                 }}
             />

@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useCart } from "@/app/context/CartContext";
 import SummeryCart from "../SummeryCart"
 import { useState, useRef } from "react";
+import { useLanguage } from "@/app/context/LanguageContext";
 
 type CartProps = {
   isScrolled: boolean;
@@ -13,6 +14,7 @@ export default function CartSection({ isScrolled, isHovered }: CartProps) {
   const { totalQuantity, items } = useCart();
   const [showSummeryCart, setShowSummeryCart] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const {language, setLanguage} = useLanguage()
 
   const handleMouseEnterCart = () => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -34,6 +36,8 @@ export default function CartSection({ isScrolled, isHovered }: CartProps) {
           name="change"
           id="change"
           className="bg-[#FF30B3] w-[60px] h-[40px] rounded-[50px] pl-2 pr-2"
+          value={language}
+          onChange={(e) => setLanguage(e.target.value as "PL" | "EN" | "UK")}
         >
           <option value="PL">PL</option>
           <option value="EN">EN</option>

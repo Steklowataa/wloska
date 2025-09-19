@@ -34,7 +34,7 @@ const EffectAppear = ({
 
   return (
     <div
-      className="mt-6 text-lg text-white max-w-2xl transition-opacity min-h-[48px]" // Added min-h-[48px] to maintain consistent height
+      className="mt-6 text-lg text-white max-w-2xl transition-opacity min-h-[48px]" 
       style={{
         transition: `opacity ${duration}ms ease-in-out`,
         opacity: isVisible ? 1 : 0
