@@ -7,6 +7,7 @@ import ModalHeader from "./ModalHeader";
 import ModalQuantity from "./ModalQuantity";
 import ModalExtras from "./ModalExtras"
 import ModalSauces from "./ModalSauces";
+import { useMenuByLangName } from "@/utils/useMenuByLangName";
 
 export default function ModalWindow(props: ModalWindowProps) {
   const { name, description, type, img, price, onClose } = props;
@@ -19,6 +20,8 @@ export default function ModalWindow(props: ModalWindowProps) {
   const [showAllSauces, setShowAllSauces] = useState(false);
   const [showAllExtras, setShowAllExtras] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const window = useMenuByLangName()
+  const {amountProduct, addToCartTitle} = window.modalWindow.modalInfo[0]
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -119,7 +122,7 @@ export default function ModalWindow(props: ModalWindowProps) {
             onClick={handleAdd}
             className="w-full bg-green-600 hover:bg-green-700 text-white py-3 px-6 rounded-full transition-colors text-[16px] font-semibold mt-4"
           >
-            Dodaj do koszyka ({totalCombinedQuantity} szt. - {totalCombinedPrice}zł)
+            {addToCartTitle} ({totalCombinedQuantity} {amountProduct}. - {totalCombinedPrice}zł)
           </button>
         </div>
       </div>

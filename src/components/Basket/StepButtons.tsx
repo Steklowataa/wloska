@@ -1,5 +1,5 @@
 "use client";
-
+import { useMenuByLangName } from "@/utils/useMenuByLangName";
 import { usePathname, useRouter } from "next/navigation";
 import { Inter } from "next/font/google";
 
@@ -12,11 +12,13 @@ type Props = {
 export default function StepButtons({ goToSummary }: Props) {
   const pathname = usePathname();
   const router = useRouter();
+  const text = useMenuByLangName()
+    const {clientTitle, summaryStep, basketStep} = text.formVal.custInfo[0] 
 
   const steps = [
-    { label: "Koszyk", path: "/basket/products" },
-    { label: "Dane osobowe", path: "/basket/details" },
-    { label: "Podsumowanie", path: "/basket/summary" },
+    { label: summaryStep, path: "/basket/products" },
+    { label: clientTitle, path: "/basket/details" },
+    { label: basketStep, path: "/basket/summary" },
   ];
 
   const handleStepClick = (stepPath: string) => {

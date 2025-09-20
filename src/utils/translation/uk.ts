@@ -144,6 +144,7 @@ export const textUK : {
     secondHeader: {text: string}[],
     stableTextHeader: {text: string, buttonText: string}[],
     homePageHeader: {home: string, menu: string, contacts: string}[],
+    cartInfo: {cart: string, buttonSuccess: string, summary: string}[]
 } = {
     images : [
         { img: "/images/bianca.svg"},
@@ -168,5 +169,158 @@ export const textUK : {
     ],
     homePageHeader: [
         {home: "Головна", menu: "Меню", contacts: "Контакт"}
+    ],
+    cartInfo: [
+        {cart: "Ваш кошик порожній", buttonSuccess: "Підтвердити", summary: "All: "}
     ]
 }
+
+export const modalWindowUK: {
+    modalInfo: {
+      deliveryTime: string;
+      deliveryValue: string;
+      sum: string;
+      extrasTitle: string;
+      extrasInfo: string;
+      sausInfo: string;
+      showMore: string;
+      showLess: string;
+      addToCartTitle: string;
+      amountProduct: string;
+      setProd: string;
+      setProdInfo: string,
+    }[];
+  } = {
+    modalInfo: [
+      {
+        deliveryTime: "Час доставки",
+        deliveryValue: "30 хв",
+        sum: "Сума",
+        extrasTitle: "Додатки",
+        extrasInfo: "Будь ласка, оберіть не більше 2 додатків",
+        sausInfo: "Соуси",
+        showMore: "Показати більше",
+        showLess: "Показати менше",
+        addToCartTitle: "Додати до кошика",
+        amountProduct: "шт",
+        setProd: "Набір",
+        setProdInfo:  "з картоплею фрі та кетчупом",
+      },
+    ],
+};
+
+export const formValuesUK: {
+    yourOrder: {
+        order: string;
+        cartMessage: string;
+        allMessage: string;
+    }[],
+    buttonText: {
+        deleteBtn: string;
+        detailsBtn: string;
+        confirmBtn: string;
+        goBackBtn: string;
+        nextBtn: string;
+    }[],
+    formDetails: {
+        thankingMsg: string;
+        deliveryMsg: string;
+        deliveryNumb: string;
+        changeForm2: string;
+        anotherAmount: string;
+        withoutChange: string;
+        messageClient: string;
+        cashPayment: string;
+        cartPayment: string;
+        deliveryMessage: string;
+    }[],
+    custInfo: {
+        message: string;
+        payment: string;
+        changeFrom: string;
+        paymentForm: string;
+        clientTitle: string;
+        phoneNum: string;
+        emailData: string;
+        nameAndSurname: string;
+        summaryStep: string
+        basketStep: string
+        socialMediaTitle: string
+    }[],
+    adresForm: {
+        streetN: string;
+        streetNum: string;
+        flatNum: string;
+        floorNum: string;
+        stairCase: string;
+        adresTitle: string;
+    }[],
+    switchBtn: {
+        takeAwaySwitch: string,
+        deliverySwitch: string
+    }[],
+} = {
+   yourOrder: [
+        { order: "Ваше замовлення", cartMessage: "Ваш кошик порожній", allMessage: "Разом" }
+   ],
+   buttonText: [
+        { deleteBtn: "Видалити", detailsBtn: "До деталей →", confirmBtn: "Підтвердити замовлення", goBackBtn: "Повернутися до меню", nextBtn: "Далі →" }
+   ],
+   formDetails: [
+        { thankingMsg: "Дякуємо за ваше замовлення!", deliveryMsg: "Час очікування 40-60 хвилин", deliveryNumb: "Номер вашого замовлення:", changeForm2: "Видати решту з:", anotherAmount: "Інша сума", withoutChange: "Решта не потрібна", messageClient: "Коментар (необов’язково)", cashPayment: "Готівка", cartPayment: "Картка", deliveryMessage: "Оплата карткою можлива лише при отриманні у кур'єра (термінал)." }
+   ],
+   custInfo: [
+        { message: "Коментар", payment: "Оплата", changeFrom: "Решта з", paymentForm: "Вибір способу оплати", clientTitle: "Особисті дані", phoneNum: "Номер телефону", emailData: "Електронна пошта", nameAndSurname: "Ім’я та прізвище", summaryStep: "Резюме", basketStep: "Кошик", socialMediaTitle:"Підписуйтесь на нас та будьте в курсі наших останніх знижок:"}
+   ],
+   adresForm: [
+        { streetN: "Назва вулиці", streetNum: "Номер вулиці", flatNum: "Номер квартири", floorNum: "Поверх (необов’язково)", stairCase: "Під’їзд (необов’язково)", adresTitle: "Адреса" }
+   ],
+   switchBtn: [
+    {takeAwaySwitch: "Cамовивіз", deliverySwitch: "Доставка"}
+    ]
+}
+
+export const validationMessageUK: {
+    errors: {
+      nameMin: string;
+      phoneInvalid: string;
+      emailInvalid: string;
+      streetNameShort: string;
+      streetNameChars: string;
+      streetNameLetter: string;
+      streetNumberEmpty: string;
+      streetNumberChars: string;
+      flatNumberEmpty: string;
+      flatNumberDigits: string;
+      flatNumberRange: string;
+      floorNumberDigits: string;
+      floorNumberInteger: string;
+      promoCodeChars: string;
+      promoCodeLength: string;
+      messageLength: string;
+      paymentRequired: string;
+    }[];
+  } = {
+    errors: [
+      {
+        nameMin: "Ім’я повинно містити щонайменше 3 літери",
+        phoneInvalid: "Невірний номер телефону",
+        emailInvalid: "Невірна адреса електронної пошти",
+        streetNameShort: "Назва вулиці занадто коротка 🥺",
+        streetNameChars: "Назва вулиці може містити лише літери, цифри та пробіли 🥺",
+        streetNameLetter: "Назва вулиці повинна містити щонайменше одну літеру 🥺🥺🥺",
+        streetNumberEmpty: "Введіть номер будинку",
+        streetNumberChars: "Номер будинку може містити лише цифри та літери, напр. 65E",
+        flatNumberEmpty: "Введіть номер квартири",
+        flatNumberDigits: "Номер квартири не може містити літери — лише цифри",
+        flatNumberRange: "Номер квартири повинен бути в межах від 1 до 999",
+        floorNumberDigits: "Номер поверху повинен містити лише цифри",
+        floorNumberInteger: "Номер поверху повинен бути цілим числом",
+        promoCodeChars: "Промокод може містити лише літери та цифри",
+        promoCodeLength: "Промокод занадто довгий",
+        messageLength: "Коментар занадто довгий (макс. 200 символів)",
+        paymentRequired: "Ви повинні вибрати спосіб оплати 🥺",
+      },
+    ],
+  };
+  

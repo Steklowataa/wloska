@@ -4,16 +4,19 @@ import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/comp
 import Input from "./Input";
 import { Inter } from "next/font/google";
 import { OrderValues } from "@/utils/zodSchema";
+import { useMenuByLangName } from "@/utils/useMenuByLangName";
 
 const inter = Inter({ subsets: ["latin"], weight: "600" });
 
 export default function PersonalDataForm() {
   const form = useFormContext<OrderValues>();
+  const text = useMenuByLangName()
+  const { clientTitle, phoneNum, emailData, nameAndSurname,} = text.formVal.custInfo[0]
 
   const fields = [
-    { name: "name", label: "Imię i nazwisko", placeholder: "Imię i nazwisko" },
-    { name: "phone", label: "Numer telefonu", placeholder: "Numer telefonu" },
-    { name: "email", label: "Email", placeholder: "Email" },
+    { name: "name", label: nameAndSurname, placeholder: nameAndSurname},
+    { name: "phone", label: phoneNum, placeholder: phoneNum },
+    { name: "email", label: emailData, placeholder: emailData},
   ];
 
   return (
@@ -25,7 +28,7 @@ export default function PersonalDataForm() {
           color: "transparent",
         }}
       >
-        Dane Osobowe
+       {clientTitle}
       </h2>
 
       {fields.map((field) => (

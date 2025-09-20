@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
 import Image from "next/image";
 import DeleteItem from "./DeleteItem";
+import { useMenuByLangName } from "@/utils/useMenuByLangName";
 
 const inter = Inter({ subsets: ["latin"], weight: "400" });
 const interBold2 = Inter({ subsets: ["latin"], weight: "800" });
@@ -40,6 +41,8 @@ export default function CartItemProducts({ item, onRemove }: CartItemProps) {
   };
 
   const additionalsText = getAdditionalsText(item);
+  const menu = useMenuByLangName()
+  const { extrasTitle} = menu.modalWindow.modalInfo[0]
 
   return (
     <div className="pb-6 pr-6 last:border-b-0">
@@ -66,7 +69,7 @@ export default function CartItemProducts({ item, onRemove }: CartItemProps) {
             <div>
               {additionalsText && (
                 <p className={`${inter.className} text-sm text-white`}>
-                  <strong>Dodatki:</strong> {additionalsText}
+                  <strong>{extrasTitle}:</strong> {additionalsText}
                 </p>
               )}
             </div>

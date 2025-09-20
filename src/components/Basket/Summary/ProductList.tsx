@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import CustomerInfo from "./CustomerInfo";
 import { useOrder } from "@/app/context/OrderContext";
 import groupCartItems from "@/utils/GroupCartItem";
+import { useMenuByLangName } from "@/utils/useMenuByLangName";
 
 const inter = Inter({ subsets: ["latin"], weight: "600" });
 const inter2 = Inter({ subsets: ["latin"], weight: "400" });
@@ -11,6 +12,9 @@ const inter2 = Inter({ subsets: ["latin"], weight: "400" });
 export default function ProductList({ items, totalPrice }: any) {
     const {customer} = useOrder()
     const groupedItems = groupCartItems(items)
+    const text = useMenuByLangName()
+    const {allMessage} = text.formVal.yourOrder[0]
+    const {extrasTitle} = text.modalWindow.modalInfo[0]
     return (
         <div className="w-full max-w-[400px] bg-[#141111] rounded-[20px] p-4">
             {groupedItems.map((item: any, index: number) => (
@@ -27,7 +31,7 @@ export default function ProductList({ items, totalPrice }: any) {
                         </p>
                         {item.additionals.length > 0 && (
                             <p className="text-[12px] text-gray-300 mt-1">
-                                Dodatki: {item.additionals.join(", ")}
+                                {extrasTitle}: {item.additionals.join(", ")}
                             </p>
                         )}
                     </div>
@@ -38,7 +42,7 @@ export default function ProductList({ items, totalPrice }: any) {
             ))}
         <div className="w-full max-w-[500px] mt-4 pt-4 border-t border-gray-600">
             <p className={`${inter.className} text-white text-[16px] text-right`}>
-                Razem: {totalPrice}zł
+                {allMessage}: {totalPrice}zł
             </p>
             <CustomerInfo customer={customer}/>
         </div>

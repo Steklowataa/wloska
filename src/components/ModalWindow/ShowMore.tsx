@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { Inter } from "next/font/google";
+import { useMenuByLangName } from "@/utils/useMenuByLangName";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -33,6 +34,8 @@ export default function ShowMore({
 }: ShowMoreProps) {
   const visibleItemsToRender = showAll ? items : items.slice(0, 6);
   const hasMoreToShow = items.length > 6;
+  const window = useMenuByLangName()
+  const {showMore, showLess} = window.modalWindow.modalInfo[0]
 
   return (
     <>
@@ -99,7 +102,7 @@ export default function ShowMore({
           >
             {showAll ? (
               <>
-                <span>Pokaż mniej</span>
+                <span>{showLess}</span>
                 <svg
                   className="w-4 h-4 ml-1 transform rotate-180"
                   fill="currentColor"
@@ -114,7 +117,7 @@ export default function ShowMore({
               </>
             ) : (
               <>
-                <span>Pokaż więcej ({items.length - 6})</span>
+                <span>{showMore} ({items.length - 6})</span>
                 <svg
                   className="w-4 h-4 ml-1"
                   fill="currentColor"

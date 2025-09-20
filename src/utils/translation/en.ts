@@ -144,6 +144,7 @@ export const textEN : {
     secondHeader: {text: string}[],
     stableTextHeader: {text: string, buttonText: string}[],
     homePageHeader: {home: string, menu: string, contacts: string}[],
+    cartInfo: {cart: string, buttonSuccess: string, summary: string}[]
 } = {
     images : [
         { img: "/images/bianca.svg"},
@@ -168,5 +169,157 @@ export const textEN : {
     ],
     homePageHeader: [
         {home: "Home", menu: "Menu", contacts: "Contact"}
+    ],
+    cartInfo: [
+        {cart: "Your basket is empty", buttonSuccess: "Confirm", summary: "Together: "}
     ]
 }
+export const modalWindowEN: {
+    modalInfo: {
+      deliveryTime: string;
+      deliveryValue: string;
+      sum: string;
+      extrasTitle: string;
+      extrasInfo: string;
+      sausInfo: string;
+      showMore: string;
+      showLess: string;
+      addToCartTitle: string;
+      amountProduct: string;
+      setProd: string;
+      setProdInfo: string;
+    }[];
+  } = {
+    modalInfo: [
+      {
+        deliveryTime: "Delivery time",
+        deliveryValue: "30 min",
+        sum: "Total",
+        extrasTitle: "Extras",
+        extrasInfo: "Please select up to 2 extras",
+        sausInfo: "Sauces",
+        showMore: "Show more",
+        showLess: "Show less",
+        addToCartTitle: "Add to cart",
+        amountProduct: "pcs",
+        setProd: "Set",
+        setProdInfo: " with fries and ketchup",
+      },
+    ],
+};
+  
+export const formValuesEN: {
+    yourOrder: {
+        order: string;
+        cartMessage: string;
+        allMessage: string;
+    }[],
+    buttonText: {
+        deleteBtn: string;
+        detailsBtn: string;
+        confirmBtn: string;
+        goBackBtn: string;
+        nextBtn: string;
+    }[],
+    formDetails: {
+        thankingMsg: string;
+        deliveryMsg: string;
+        deliveryNumb: string;
+        changeForm2: string;
+        anotherAmount: string;
+        withoutChange: string;
+        messageClient: string;
+        cashPayment: string;
+        cartPayment: string;
+        deliveryMessage: string;
+    }[],
+    custInfo: {
+        message: string;
+        payment: string;
+        changeFrom: string;
+        paymentForm: string;
+        clientTitle: string;
+        phoneNum: string;
+        emailData: string;
+        nameAndSurname: string
+        summaryStep: string
+        basketStep: string
+        socialMediaTitle: string
+    }[],
+    adresForm: {
+        streetN: string;
+        streetNum: string;
+        flatNum: string;
+        floorNum: string;
+        stairCase: string;
+        adresTitle: string;
+    }[],
+    switchBtn: {
+        takeAwaySwitch: string,
+        deliverySwitch: string
+    }[],
+} = {
+   yourOrder: [
+        { order: "Your order", cartMessage: "Your cart is empty", allMessage: "Total" }
+   ],
+   buttonText: [
+        { deleteBtn: "Delete", detailsBtn: "View details →", confirmBtn: "Confirm order", goBackBtn: "Back to menu", nextBtn: "Next →" }
+   ],
+   formDetails: [
+        { thankingMsg: "Thank you for your order!", deliveryMsg: "Estimated delivery time 40-60 minutes", deliveryNumb: "Your order number:", changeForm2: "Give change from:", anotherAmount: "Other amount", withoutChange: "No change needed", messageClient: "Comment (optional)", cashPayment: "Cash", cartPayment: "Card", deliveryMessage: "Card payment is only possible upon delivery to the courier (terminal)." }
+   ],
+   custInfo: [
+        { message: "Comment", payment: "Payment", changeFrom: "Change from", paymentForm: "Select payment method", clientTitle: "Personal Information", phoneNum: "Phone number", emailData: "Email", nameAndSurname: "Name and surname", summaryStep: "Summary", basketStep: "Basket", socialMediaTitle: "Follow us and stay up to date with our latest discounts:" }
+   ],
+   adresForm: [
+        { streetN: "Street name", streetNum: "Street number", flatNum: "Apartment number", floorNum: "Floor (optional)", stairCase: "Staircase (optional)", adresTitle: "Address" }
+   ],
+   switchBtn: [
+    {takeAwaySwitch: "Take away", deliverySwitch: "Delivery"}
+    ]
+}
+
+export const validationMessageEN: {
+    errors: {
+      nameMin: string;
+      phoneInvalid: string;
+      emailInvalid: string;
+      streetNameShort: string;
+      streetNameChars: string;
+      streetNameLetter: string;
+      streetNumberEmpty: string;
+      streetNumberChars: string;
+      flatNumberEmpty: string;
+      flatNumberDigits: string;
+      flatNumberRange: string;
+      floorNumberDigits: string;
+      floorNumberInteger: string;
+      promoCodeChars: string;
+      promoCodeLength: string;
+      messageLength: string;
+      paymentRequired: string;
+    }[];
+  } = {
+    errors: [
+      {
+        nameMin: "The name must contain at least 3 letters",
+        phoneInvalid: "Invalid phone number",
+        emailInvalid: "Invalid email address",
+        streetNameShort: "Street name is too short 🥺",
+        streetNameChars: "Street name can only contain letters, numbers, and spaces 🥺",
+        streetNameLetter: "Street name must contain at least one letter 🥺🥺🥺",
+        streetNumberEmpty: "Please enter the street number",
+        streetNumberChars: "Street number can only contain digits and letters, e.g. 65E",
+        flatNumberEmpty: "Please enter the flat number",
+        flatNumberDigits: "Flat number cannot contain letters — only digits",
+        flatNumberRange: "Flat number must be in the range 1–999",
+        floorNumberDigits: "Floor number must contain only digits",
+        floorNumberInteger: "Floor number must be an integer",
+        promoCodeChars: "Promo code can only contain letters and digits",
+        promoCodeLength: "Promo code is too long",
+        messageLength: "Comment is too long (max 200 characters)",
+        paymentRequired: "You must choose a payment method 🥺",
+      },
+    ],
+  };
+  

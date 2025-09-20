@@ -4,18 +4,20 @@ import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/comp
 import Input from "./Input";
 import { Inter } from "next/font/google";
 import { OrderValues } from "@/utils/zodSchema";
+import { useMenuByLangName } from "@/utils/useMenuByLangName";
 
 const inter = Inter({ subsets: ["latin"], weight: "600" });
 
 export default function AdressDataForm() {
   const form = useFormContext<OrderValues>();
-
+  const text = useMenuByLangName()
+  const { adresTitle, streetN, streetNum, flatNum, floorNum, stairCase} = text.formVal.adresForm[0]
   const fields = [
-    { name: "streetName", label: "Nazwa ulicy", placeholder: "3go Maja" },
-    { name: "streetNumber", label: "Numer ulicy", placeholder: "11" },
-    { name: "flatNumber", label: "Numer mieszkania", placeholder: "11" },
-    { name: "floorNumber", label: "Piętro (opcjonalnie)", placeholder: "1" },
-    { name: "staircase", label: "Klatka (opcjonalnie)", placeholder: "2" },
+    { name: "streetName", label: streetN, placeholder: "3go Maja" },
+    { name: "streetNumber", label: streetNum, placeholder: "11" },
+    { name: "flatNumber", label: flatNum, placeholder: "11" },
+    { name: "floorNumber", label: floorNum, placeholder: "1" },
+    { name: "staircase", label: stairCase, placeholder: "2" },
   ];
 
   return (
@@ -24,7 +26,7 @@ export default function AdressDataForm() {
         className={`${inter.className} text-4xl font-extrabold text-center mb-8`}
         style={{ WebkitTextStroke: "2px white", color: "transparent" }}
       >
-        Adres
+        {adresTitle}
       </h2>
 
       <div className="grid grid-cols-3 gap-6">

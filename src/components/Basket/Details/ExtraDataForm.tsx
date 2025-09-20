@@ -5,15 +5,17 @@ import Input from "./Input";
 import { Inter } from "next/font/google";
 import Image from "next/image";
 import { OrderValues } from "@/utils/zodSchema";
+import { useMenuByLangName } from "@/utils/useMenuByLangName";
 
 const inter = Inter({ subsets: ["latin"], weight: "600" });
 
 export default function ExtraDataForm() {
   const form = useFormContext<OrderValues>();
-
+  const text = useMenuByLangName()
+  const {messageClient} = text.formVal.formDetails[0]
   const fields = [
     { name: "promoCode", label: "PROMOKOD", placeholder: "np. YXC34RX" },
-    { name: "message", label: "Komentarz (opcjonalnie)", placeholder: "Proszę nie używać dzwonka" },
+    { name: "message", label: messageClient, placeholder: "Proszę nie używać dzwonka" },
   ];
 
   return (
