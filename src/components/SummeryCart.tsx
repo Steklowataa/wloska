@@ -6,6 +6,7 @@ import { useCart } from "@/app/context/CartContext";
 import type { CartItem } from "@/app/context/CartContext";
 import { Inter } from "next/font/google";
 import { AiOutlineDelete } from "react-icons/ai";
+import { useMenuByLangName } from "@/utils/useMenuByLangName";
 
 const inter = Inter({ subsets: ["latin"], weight: "400" });
 const interBold = Inter({ subsets: ["latin"], weight: "600" });
@@ -23,9 +24,11 @@ export default function SummeryCart({ items }: { items: CartItem[] }) {
   const displayedItems = expanded ? groupedItems : groupedItems.slice(0, 2);
 
   const handleToggleExpand = () => setExpanded(!expanded);
+  const menu = useMenuByLangName()
+  const { cart: title, buttonSuccess, summary } = menu.text.cartInfo[0];
 
   const handleDeleteItem = (id: string) => {
-    removeFromCart(id); // ✅ teraz podajemy tylko id
+    removeFromCart(id);
   };
 
   return (
@@ -48,7 +51,7 @@ export default function SummeryCart({ items }: { items: CartItem[] }) {
                       {item.totalPrice}zł
                     </span>
                     <button
-                      onClick={() => handleDeleteItem(item.id)} // ✅ przekazujemy tylko id
+                      onClick={() => handleDeleteItem(item.id)}
                       className="text-red-500 hover:text-[#EE0498] text-lg transition-colors cursor-pointer p-1 hover:bg-red-50 rounded"
                       title="Usuń z koszyka"
                       type="button"
@@ -83,7 +86,7 @@ export default function SummeryCart({ items }: { items: CartItem[] }) {
 
             {/* footer */}
             <div className="flex justify-between items-center mt-1 pt-2">
-              <p className={`${interBold2.className} text-[17px]`}>Razem: {totalPrice}zł</p>
+              <p className={`${interBold2.className} text-[17px]`}>{summary} {totalPrice}zł</p>
               <button
                 className={`${interBold.className} text-[15px] bg-[#7A0950] text-white rounded-full 
                 px-4 py-2 font-semibold hover:opacity-90 
@@ -91,12 +94,12 @@ export default function SummeryCart({ items }: { items: CartItem[] }) {
                 onClick={handleGoToBasket}
                 type="button"
               >
-                Potwierdź
+                {buttonSuccess}
               </button>
             </div>
           </>
         ) : (
-          <p className="text-center text-black py-4">Twój koszyk jest pusty</p>
+          <p className="text-center text-black py-4">{title}</p>
         )}
       </div>
     </div>

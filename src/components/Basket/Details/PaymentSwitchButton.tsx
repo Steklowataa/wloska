@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import { UseFormReturn, Controller } from "react-hook-form";
 import { PaymentValues } from "@/utils/zodSchema";
 import Changes from "./Changes";
+import { useMenuByLangName } from "@/utils/useMenuByLangName";
 
 const inter = Inter({ subsets: ["latin"], weight: "600" });
 
@@ -13,7 +14,8 @@ type Props = {
 export default function PaymentSwitchButton({ form }: Props) {
   const { control, watch } = form;
   const choice = watch("payment");
-
+  const text = useMenuByLangName()
+  const {deliveryMsg, cashPayment, cartPayment} = text.formVal.formDetails[0]
   return (
     <>
       <div className="grid grid-cols-2 gap-2 mt-4 w-[400px] pl-6">
@@ -31,7 +33,7 @@ export default function PaymentSwitchButton({ form }: Props) {
                   className="appearance-none w-5 h-5 rounded-full border-2 border-gray-400 
                              checked:border-green-500 checked:bg-green-500 cursor-pointer"/>
                 <span className={`${field.value === "Gotówka" ? "font-semibold" : "text-gray-400"}`}>
-                  Gotówka
+                  {cashPayment}
                 </span>
               </label>
 
@@ -47,7 +49,7 @@ export default function PaymentSwitchButton({ form }: Props) {
                     field.value === "Karta"
                       ? `font-semibold ${inter.className}`
                       : "text-gray-400" }`}>
-                  Karta
+                  {cartPayment}
                 </span>
               </label>
             </>
@@ -59,7 +61,7 @@ export default function PaymentSwitchButton({ form }: Props) {
         {choice === "Gotówka" && <Changes form={form} />}
         {choice === "Karta" && (
           <h2 className={`${inter.className} pl-6 mt-6`}>
-            Płatność kartą odbywa się wyłącznie przy odbiorze u kuriera (terminal).
+            {deliveryMsg}
           </h2>
         )}
       </div>

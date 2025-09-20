@@ -4,6 +4,7 @@ import { useRouter, usePathname } from "next/navigation";
 import SendMessageToButton from "./SendMessageFromBtn";
 import { UseFormReturn } from "react-hook-form";
 import { OrderValues } from "@/utils/zodSchema";
+import { useMenuByLangName } from "@/utils/useMenuByLangName";
 
 const interBold = Inter({ subsets: ["latin"], weight: "600" });
 
@@ -15,6 +16,8 @@ export default function NextButton({ form }: Props) {
   const router = useRouter();
   const pathname = usePathname();
   const { handleCheckout, loading } = SendMessageToButton();
+  const formValue = useMenuByLangName()
+  const {detailsBtn, confirmBtn, nextBtn, goBackBtn } = formValue.formVal.buttonText[0]
 
   const handleNext = async () => {
     if(form) {
@@ -35,10 +38,10 @@ export default function NextButton({ form }: Props) {
   };
 
   const getButtonText = () => {
-    if (pathname === "/basket/products") return "Do szczegółów →";
-    if (pathname === "/basket/details") return loading ? "Wysyłanie zamówienia..." : "Potwierdź zamówienie";
-    if (pathname === "/basket/summary") return "Powrót do menu";
-    return "Dalej →";
+    if (pathname === "/basket/products") return detailsBtn
+    if (pathname === "/basket/details") return loading ? "Wysyłanie zamówienia..." : confirmBtn
+    if (pathname === "/basket/summary") return goBackBtn
+    return nextBtn
   };
 
   return (

@@ -1,7 +1,7 @@
 "use client"
-import {menuPL, textPL} from "./translation/pl"
-import {menuEN, textEN} from "./translation/en"
-import {menuUK, textUK} from "./translation/uk"
+import {menuPL, textPL, modalWindowPL, formValuesPL, validationMessagePL} from "./translation/pl"
+import {menuEN, textEN, modalWindowEN, formValuesEN, validationMessageEN} from "./translation/en"
+import {menuUK, textUK, modalWindowUK, formValuesUK, validationMessageUK} from "./translation/uk"
 
 import { useLanguage } from "@/app/context/LanguageContext"
 
@@ -10,12 +10,12 @@ export const useMenuByLangName = () => {
 
     switch (language) {
         case "PL":
-          return { menu: menuPL, text: textPL };
+          return { menu: menuPL, text: textPL, modalWindow: modalWindowPL, formVal: formValuesPL, validation: validationMessagePL};
         case "EN":
-          return { menu: menuEN, text: textEN };
+          return { menu: menuEN, text: textEN , modalWindow: modalWindowEN, formVal: formValuesEN, validation: validationMessageEN};
         case "UK":
-          return { menu: menuUK, text: textUK };
+          return { menu: menuUK, text: textUK, modalWindow: modalWindowUK, formVal: formValuesUK, validation: validationMessageUK };
         default:
-          return { menu: menuPL, text: textPL };
+          return { menu: menuPL, text: textPL, modalWindow: modalWindowPL, formVal: formValuesPL, validation: validationMessagePL };
       }
 }

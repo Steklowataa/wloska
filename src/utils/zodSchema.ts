@@ -4,8 +4,6 @@ import validator from "validator";
 const STREET_ALLOWED = /^[A-Za-zÀ-ž0-9\s]+$/;
 const HAS_LETTER = /[A-Za-zÀ-ž]/;
 
-
-//formularz imie, telefon, email
 export const personSchema = z.object({
     name: z.string()
         .min(3, "Imie musi zawierać przynajmniej 3 litery"),

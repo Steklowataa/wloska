@@ -1,7 +1,7 @@
 "use client";
 import { Inter } from "next/font/google";
 import ToggleIncrease from "./ToggleIncrease";
-import { colors } from "../../../lib/colors";
+import { useMenuByLangName } from "@/utils/useMenuByLangName";
 
 const inter = Inter({ subsets: ["latin"], weight: "400" });
 const inter2 = Inter({ subsets: ["latin"], weight: "600" });
@@ -15,6 +15,8 @@ type Props = {
 
 export default function SetWithQuantity({ name, price, quantity, setQuantity }: Props) {
   const zestawPrice = price + 7;
+  const window = useMenuByLangName()
+  const {deliveryTime, deliveryValue, sum, setProd, setProdInfo} = window.modalWindow.modalInfo[0]
 
   return (
     <div className="relative md:px-4 md:py-6 md:mb-[2px] mb-6 overflow-hidden">
@@ -22,19 +24,19 @@ export default function SetWithQuantity({ name, price, quantity, setQuantity }: 
       <div className="absolute rounded-full h-[50px] w-[50px] bg-[#68FF3A] top-20 left-[120px] blur-lg z-0 opacity-70 hidden md:block"></div>
       
       <div className="relative z-10 mb-4">
-        <h3 className={`${inter2.className} text-[20px] mb-2`}>Zestaw</h3>
+        <h3 className={`${inter2.className} text-[20px] mb-2`}>{setProd}</h3>
         <h2 className={`${inter.className} text-[14px] text-grayI`}>
-          Zestaw {name}, z frytkami i ketchupem
+          {setProd} {name}, {setProdInfo}
         </h2>
       </div>
       
       <div className="flex justify-between items-center relative z-10">
         <div>
-          <p className={`${inter.className} text-white md:text-[12px] text-[10px]`}>Czas dostawy</p>
-          <p className={`${inter2.className} text-white md:text-[16px] text-[12px] mt-1`}>30 min</p>
+          <p className={`${inter.className} text-white md:text-[12px] text-[10px]`}>{deliveryTime}</p>
+          <p className={`${inter2.className} text-white md:text-[16px] text-[12px] mt-1`}>{deliveryValue}</p>
         </div>
         <div>
-          <p className={`${inter.className} text-white md:text-[12px] text-[10px]`}>Suma</p>
+          <p className={`${inter.className} text-white md:text-[12px] text-[10px]`}>{sum}</p>
           <p className={`${inter2.className} text-white md:text-[16px] text-[12px] mt-1`}>{zestawPrice}zł</p>
         </div>
         <div>

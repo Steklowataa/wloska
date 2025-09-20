@@ -40,9 +40,11 @@ export default function ModalSauces({
     return null;
   }
 
+  const window = useMenuByLangName()
+  const {sausInfo} = window.modalWindow.modalInfo[0]
   return (
     <>
-      <h3 className={`${inter2.className} text-[20px] mt-6 mb-2`}>Sosy</h3>
+      <h3 className={`${inter2.className} text-[20px] mt-6 mb-2`}>{sausInfo}</h3>
       <div className="mb-4">
         <ShowMore
           items={menu.sos}

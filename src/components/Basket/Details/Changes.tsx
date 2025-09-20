@@ -2,6 +2,7 @@
 import { Inter } from "next/font/google";
 import { UseFormReturn, Controller } from "react-hook-form";
 import { PaymentValues } from "@/utils/zodSchema";
+import { useMenuByLangName } from "@/utils/useMenuByLangName";
 
 const inter = Inter({ subsets: ["latin"], weight: "600" });
 
@@ -10,9 +11,11 @@ type Props = {
 };
 
 export default function Changes({ form }: Props) {
+  const text = useMenuByLangName()
+  const {changeForm2, anotherAmount, withoutChange,} = text.formVal.formDetails
   return (
     <div className={`${inter.className} pl-6 mt-6`}>
-      <p className="mb-2">Wydaj resztę od: </p>
+      <p className="mb-2">{changeForm2} </p>
       <Controller
         control={form.control}
         name="change"
@@ -23,8 +26,8 @@ export default function Changes({ form }: Props) {
             <option value="50">50 zł</option>
             <option value="100">100 zł</option>
             <option value="200">200 zł</option>
-            <option value="other">Inna kwota</option>
-            <option value="none">Nie potrzebuję resztę</option>
+            <option value="other">{anotherAmount}</option>
+            <option value="none">{withoutChange}</option>
           </select>
         )}
       />

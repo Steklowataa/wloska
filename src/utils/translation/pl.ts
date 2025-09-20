@@ -8,7 +8,7 @@ export const menuPL: {
     sos: {name: string, img: string, price: number}[]
     pizzaExtras: {name: string, price: number}[]
     burgerOptions: {name: string, price: number}[]
-    smashOptions: {name: string, price: number}[]
+    smashOptions: {name: string, price: number}[],
 } = {
     title: [
         {id: "Pizza", pizza: "Pizza"},
@@ -146,6 +146,7 @@ export const textPL : {
     secondHeader: {text: string}[],
     stableTextHeader: {text: string, buttonText: string}[],
     homePageHeader: {home: string, menu: string, contacts: string}[],
+    cartInfo: {cart: string, buttonSuccess: string, summary: string}[]
 } = {
     images : [
         { img: "/images/bianca.svg"},
@@ -170,5 +171,158 @@ export const textPL : {
     ],
     homePageHeader: [
         {home: "Strona główna", menu: "Menu", contacts: "Kontakt"}
+    ],
+    cartInfo: [
+        {cart: "Twój koszyk jest pusty", buttonSuccess: "Potwierdź", summary: "Разом: "}
     ]
 }
+
+export const modalWindowPL: {
+    modalInfo: {
+      deliveryTime: string;
+      deliveryValue: string;
+      sum: string;
+      extrasTitle: string;
+      extrasInfo: string;
+      sausInfo: string;
+      showMore: string;
+      showLess: string;
+      addToCartTitle: string;
+      amountProduct: string;
+      setProd: string;
+      setProdInfo: string,
+    }[];
+  } = {
+    modalInfo: [
+      {
+        deliveryTime: "Czas dostawy",
+        deliveryValue: "30 min",
+        sum: "Suma",
+        extrasTitle: "Dodatki",
+        extrasInfo: "Prosimy wybrać maksymalnie 2 dodatki",
+        sausInfo: "Sosy",
+        showMore: "Pokaż więcej",
+        showLess: "Pokaż mniej",
+        addToCartTitle: "Dodaj do koszyka",
+        amountProduct: "szt",
+        setProd: "Zestaw",
+        setProdInfo: " z frytkami i ketchupem"
+      },
+    ],
+  };
+  
+export const formValuesPL: {
+    yourOrder: {
+        order: string;
+        cartMessage: string
+        allMessage: string
+    }[],
+    buttonText: {
+        deleteBtn: string,
+        detailsBtn: string,
+        confirmBtn: string,
+        goBackBtn: string,
+        nextBtn: string
+    }[],
+    formDetails: {
+        thankingMsg: string,
+        deliveryMsg: string,
+        deliveryNumb: string
+        changeForm2: string
+        anotherAmount: string
+        withoutChange: string
+        messageClient: string
+        cashPayment: string
+        cartPayment: string
+        deliveryMessage: string
+    }[],
+    custInfo: {
+        message: string
+        payment: string
+        changeFrom: string
+        paymentForm: string
+        clientTitle: string
+        phoneNum: string
+        emailData: string
+        nameAndSurname: string
+        summaryStep: string,
+        basketStep: string
+        socialMediaTitle: string
+    }[],
+    adresForm: {
+        streetN: string,
+        streetNum: string,
+        flatNum: string,
+        floorNum: string,
+        stairCase: string
+        adresTitle: string
+    }[],
+    switchBtn: {
+        takeAwaySwitch: string,
+        deliverySwitch: string
+    }[]
+} = {
+   yourOrder: [
+        {order: "Twoje zamówienie", cartMessage: "Twój koszyk jest pusty", allMessage: "Razem"}
+   ],
+   buttonText: [
+        {deleteBtn: "Usuń", detailsBtn: "Do szczegółów →", confirmBtn: "Potwierdź zamówienie", goBackBtn: "Powrót do menu", nextBtn: "Dalej →"}
+   ],
+   formDetails: [
+        {thankingMsg: "Dziękujemy za zamówienie!", deliveryMsg: "Czas oczekiwania 40-60 minut", deliveryNumb: "Numer twojego zamówienia:", changeForm2: "Wydaj resztę od:", anotherAmount: "Inna kwota", withoutChange: "Nie potrzebuję resztę", messageClient: "Komentarz (opcjonalnie)", cashPayment: "Gotówka", cartPayment: "Karta", deliveryMessage: " Płatność kartą odbywa się wyłącznie przy odbiorze u kuriera (terminal)."}
+   ],
+   custInfo: [
+    {message: "Komentarz", payment: "Płatność", changeFrom: "Reszta z", paymentForm: "Wybór metody płatności", clientTitle: "Dane Osobowe", phoneNum: "Numer telefonu", emailData: "Email", nameAndSurname: "Imię i nazwisko", summaryStep: "Posumowanie", basketStep: "Koszyk", socialMediaTitle: " Zaobserwuj nas i śledź zniżki na bieżąco:"}
+   ],
+   adresForm: [
+    {streetN: "Nazwa ulicy", streetNum: "Numer ulicy", flatNum: "Numer mieszkania", floorNum: "Piętro (opcjonalnie)", stairCase: "Klatka (opcjonalnie)", adresTitle: "Adres" }
+   ],
+   switchBtn: [
+        {takeAwaySwitch: "Odbiór", deliverySwitch: "Dostawa"}
+   ]
+}
+
+export const validationMessagePL: {
+    errors: {
+      nameMin: string;
+      phoneInvalid: string;
+      emailInvalid: string;
+      streetNameShort: string;
+      streetNameChars: string;
+      streetNameLetter: string;
+      streetNumberEmpty: string;
+      streetNumberChars: string;
+      flatNumberEmpty: string;
+      flatNumberDigits: string;
+      flatNumberRange: string;
+      floorNumberDigits: string;
+      floorNumberInteger: string;
+      promoCodeChars: string;
+      promoCodeLength: string;
+      messageLength: string;
+      paymentRequired: string;
+    }[];
+  } = {
+    errors: [
+      {
+        nameMin: "Imie musi zawierać przynajmniej 3 litery",
+        phoneInvalid: "Niepoprawny numer telefonu",
+        emailInvalid: "Niepoprawny adres email",
+        streetNameShort: "Za krótka nazwa ulicy 🥺",
+        streetNameChars: "Nazwa ulicy może zawierać tylko litery, cyfry i spacje 🥺",
+        streetNameLetter: "Nazwa ulicy musi zawierać przynajmniej jedną literę 🥺🥺🥺",
+        streetNumberEmpty: "Podaj numer ulicy",
+        streetNumberChars: "Numer ulicy może zawierać tylko cyfry i litery, np. 65E",
+        flatNumberEmpty: "Podaj numer mieszkania",
+        flatNumberDigits: "Numer mieszkania nie może składać się z liter — tylko cyfry",
+        flatNumberRange: "Podaj numer mieszkania w zakresie 1-999",
+        floorNumberDigits: "Numer piętra musi zawierać tylko cyfry",
+        floorNumberInteger: "Numer piętra musi być liczbą całkowitą",
+        promoCodeChars: "Kod promocyjny może zawierać tylko litery i cyfry",
+        promoCodeLength: "Kod promocyjny jest za długi",
+        messageLength: "Komentarz jest za długi (max 200 znaków)",
+        paymentRequired: "Musisz wybrać metodę płatności 🥺",
+      },
+    ],
+  };
+  

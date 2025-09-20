@@ -1,15 +1,14 @@
 "use client"
 import { Inter } from "next/font/google"
-import { useState } from "react"
+import { useMenuByLangName } from "@/utils/useMenuByLangName"
 
 const inter = Inter({
     subsets: ["latin"],
     weight: "600"
 })
-export default function SwitchButton({ isDelivery, setIsDelivery}: {
-    isDelivery: boolean,
-    setIsDelivery: (value: boolean) => void
-    }) {  
+export default function SwitchButton({ isDelivery, setIsDelivery}: { isDelivery: boolean,  setIsDelivery: (value: boolean) => void }) {  
+    const text = useMenuByLangName()
+    const {takeAwaySwitch, deliverySwitch} = text.formVal.switchBtn[0] 
     return (
         // <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-purple-900 via-pink-900 to-orange-500">
             <div className="flex items-center justify-center">
@@ -29,14 +28,14 @@ export default function SwitchButton({ isDelivery, setIsDelivery}: {
                             <span className={`${inter.className} text-[16px] font-semibold transition-colors duration-300 ${
                                 !isDelivery ? 'text-white' : 'text-gray-300'
                             }`}>
-                                Dostawa
+                                {deliverySwitch}
                             </span>
                         </div>
                         <div className="flex-1 text-center">
                             <span className={`${inter.className} text-[16px] font-semibold transition-colors duration-300 ${
                                 isDelivery ? 'text-white' : 'text-gray-300'
                             }`}>
-                                Odbiór
+                                {takeAwaySwitch}
                             </span>
                         </div>
                     </div>

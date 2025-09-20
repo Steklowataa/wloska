@@ -26,13 +26,16 @@ type ModalExtrasProps = {
 };
 
 export default function ModalExtras({ type, selectedExtras, setSelectedExtras, showAllExtras, setShowAllExtras, isSelected, toggleItem,}: ModalExtrasProps) {
-  const { menu } = useMenuByLangName()
+  const window = useMenuByLangName();
+  const { extrasTitle, extrasInfo, sausInfo } = window.modalWindow.modalInfo[0]
+
+  const { menu } = useMenuByLangName() 
   if (type === "pizza") {
     return (
       <>
-        <h3 className={`${inter2.className} text-[20px] mt-0 mb-2`}>Dodatki</h3>
+        <h3 className={`${inter2.className} text-[20px] mt-0 mb-2`}>{ extrasTitle }</h3>
         <h4 className={`${inter.className} text-[12px] text-gray-400 mb-4`}>
-          Prosimy wybrać maksymalnie 2 dodatki
+          { extrasInfo }
         </h4>
         <div className="mb-4">
           <ShowMore
@@ -52,7 +55,7 @@ export default function ModalExtras({ type, selectedExtras, setSelectedExtras, s
   if (type === "burger") {
     return (
       <>
-        <h2 className={`${inter2.className} text-[20px] mt-3 mb-4`}>Dodatki</h2>
+        <h2 className={`${inter2.className} text-[20px] mt-3 mb-4`}>{extrasTitle }</h2>
         <ShowMore
           items={menu.burgerOptions}
           showAll={showAllExtras}
@@ -69,7 +72,7 @@ export default function ModalExtras({ type, selectedExtras, setSelectedExtras, s
   if (type === "smashburger") {
     return (
       <>
-        <h2 className={`${inter2.className} text-[20px] mt-3 mb-4`}>Dodatki</h2>
+        <h2 className={`${inter2.className} text-[20px] mt-3 mb-4`}>{extrasTitle}</h2>
         <ShowMore
           items={menu.smashOptions}
           showAll={showAllExtras}
