@@ -1,15 +1,12 @@
 import { useState, useEffect } from "react";
 
-const TypingText = ({ text, speed, delay = 0, trigger }: {text: string, speed?: number, delay?: number, trigger: string}) => {
+const TypingText = ({ text, speed, delay = 0, trigger }: {text: string, speed?: number, delay?: number, trigger: number}) => {
     const [displayedText, setDisplayedText] = useState('');
-    const [isTyping, setIsTyping] = useState(false);
 
     useEffect(() => {
         setDisplayedText('');
-        setIsTyping(false);
         
         const delayTimeout = setTimeout(() => {
-            setIsTyping(true);
             let i = 0;
             const typingInterval = setInterval(() => {
                 if (i < text.length) {
@@ -17,7 +14,6 @@ const TypingText = ({ text, speed, delay = 0, trigger }: {text: string, speed?: 
                     i++;
                 } else {
                     clearInterval(typingInterval);
-                    setIsTyping(false);
                 }
             }, speed);
 

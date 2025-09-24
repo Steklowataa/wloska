@@ -44,17 +44,7 @@ export default function CartSection({ isScrolled, isHovered }: CartProps) {
 
         {showSummeryCart && (
           <div className="absolute right-0 top-0 z-40">
-            <SummeryCart
-              items={items.map((item) => ({
-                id: item.id,
-                name: item.name,
-                image: item.image,
-                price: item.basePrice,
-                quantity: item.quantity,
-                totalPrice: item.totalPrice,
-                sauces: item.sauces,
-                extras: item.extras,
-              }))}/>
+            <SummeryCart items={items} />
           </div>
         )}
       </div>

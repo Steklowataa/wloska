@@ -1,14 +1,14 @@
 "use client";
 import { Inter } from "next/font/google";
 import { UseFormReturn, Controller } from "react-hook-form";
-import { PaymentValues } from "@/utils/zodSchema";
+import { type OrderInputValues } from "@/utils/zodSchema";
 import Changes from "./Changes";
 import { useMenuByLangName } from "@/utils/useMenuByLangName";
 
 const inter = Inter({ subsets: ["latin"], weight: "600" });
 
 type Props = {
-  form: UseFormReturn<PaymentValues>;
+  form: UseFormReturn<OrderInputValues>;
 };
 
 export default function PaymentSwitchButton({ form }: Props) {

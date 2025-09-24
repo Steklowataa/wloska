@@ -35,13 +35,12 @@ export default function ModalSauces({
   toggleItem,
   freeSauceLimit,
 }: ModalSaucesProps) {
-  const {menu} = useMenuByLangName()
+  const text = useMenuByLangName()
+  const { menu } = text
+  const { sausInfo } = text.modalWindow.modalInfo[0]
   if (type === "drinks" || type === "sos" || type === "smashburger" || type === "burger") {
     return null;
   }
-
-  const window = useMenuByLangName()
-  const {sausInfo} = window.modalWindow.modalInfo[0]
   return (
     <>
       <h3 className={`${inter2.className} text-[20px] mt-6 mb-2`}>{sausInfo}</h3>

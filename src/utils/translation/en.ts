@@ -171,7 +171,7 @@ export const textEN : {
         {home: "Home", menu: "Menu", contacts: "Contact"}
     ],
     cartInfo: [
-        {cart: "Your basket is empty", buttonSuccess: "Confirm", summary: "Together: "}
+        {cart: "Your basket is empty", buttonSuccess: "Confirm", summary: "Together"}
     ]
 }
 export const modalWindowEN: {
@@ -269,7 +269,7 @@ export const formValuesEN: {
         { thankingMsg: "Thank you for your order!", deliveryMsg: "Estimated delivery time 40-60 minutes", deliveryNumb: "Your order number:", changeForm2: "Give change from:", anotherAmount: "Other amount", withoutChange: "No change needed", messageClient: "Comment (optional)", cashPayment: "Cash", cartPayment: "Card", deliveryMessage: "Card payment is only possible upon delivery to the courier (terminal)." }
    ],
    custInfo: [
-        { message: "Comment", payment: "Payment", changeFrom: "Change from", paymentForm: "Select payment method", clientTitle: "Personal Information", phoneNum: "Phone number", emailData: "Email", nameAndSurname: "Name and surname", summaryStep: "Summary", basketStep: "Basket", socialMediaTitle: "Follow us and stay up to date with our latest discounts:" }
+        { message: "Comment", payment: "Payment", changeFrom: "Change from", paymentForm: "Select payment method", clientTitle: "Personal Info", phoneNum: "Phone number", emailData: "Email", nameAndSurname: "Name and surname", summaryStep: "Summary", basketStep: "Basket", socialMediaTitle: "Follow us and stay up to date with our latest discounts:" }
    ],
    adresForm: [
         { streetN: "Street name", streetNum: "Street number", flatNum: "Apartment number", floorNum: "Floor (optional)", stairCase: "Staircase (optional)", adresTitle: "Address" }

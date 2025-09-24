@@ -19,7 +19,7 @@ export const menuPL: {
         {id: "Sosy", saus: "Sosy"}
     ],
     pizza: {
-        "Margarita": ["Sos pomidorowy, mozzarella, świeża bazylia", 29, "/images/marg.svg", "vege",],
+        "Margarita": ["Sos pomidorowy, mozzarella, świeża bazylia", 29, "/images/marg.svg", "vege"],
         "Capricciosa": ["Sos pomidorowy, mozzarella, szynka, pieczarki", 34, "/images/capr.svg", ""],
         "Primavera": ["Sos pomidorowy, mozzarella, salami, pieczarki", 34, "/images/margarita.svg", ""],
         "Salami": ["Sos pomidorowy, mozzarella, salami, czosnek", 34, "/images/margarita.svg", ""],
@@ -173,7 +173,7 @@ export const textPL : {
         {home: "Strona główna", menu: "Menu", contacts: "Kontakt"}
     ],
     cartInfo: [
-        {cart: "Twój koszyk jest pusty", buttonSuccess: "Potwierdź", summary: "Разом: "}
+        {cart: "Twój koszyk jest pusty", buttonSuccess: "Potwierdź", summary: "Razem "}
     ]
 }
 

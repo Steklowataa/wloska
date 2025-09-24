@@ -1,24 +1,26 @@
 "use client";
 import { createContext, useContext, useState } from "react";
 
+type Addition = string | { name: string };
+
 export type CartItem = {
   id: string,
   name: string;
-  image: string;
+  img: string;
   quantity: number;
   description: string;
   type?: string;
   basePrice: number;
-  sauces?: any[];
-  extras?: any[];
+  sauces?: Addition[];
+  extras?: Addition[];
   totalPrice: number;
 };
 
 type CartContextType = {
   items: CartItem[];
-  addToCart: (item: CartItem) => void;
+  addToCart: (item: Omit<CartItem, "id">) => void;
   totalQuantity: number;
-  removeFromCart: (name: string, sauces?: any[], extras?: any[]) => void;
+  removeFromCart: (id: string) => void;
 };
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -26,8 +28,9 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
 
-  const addToCart = (item: CartItem) => {
-    const newItem = {...item, id:crypto.randomUUID()}
+  const addToCart = (item: Omit<CartItem, "id">) => {
+    console.log("ADDING TO CART:", item);
+    const newItem = { ...item, id: crypto.randomUUID() }
     setItems((prev) => [...prev, newItem]);
   };
 

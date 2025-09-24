@@ -11,13 +11,13 @@ const interBold2 = Inter({ subsets: ["latin"], weight: "800" });
 
 export default function ListOfProducts() {  
   const { items, removeFromCart } = useCart();
+  const menu = useMenuByLangName()
 
   if (items.length === 0) {
     return <EmptyCart />;
   }
 
   const totalPrice = items.reduce((sum, item) => sum + item.totalPrice, 0);
-  const menu = useMenuByLangName()
   const {order} = menu.formVal.yourOrder[0]
   return (
     <>

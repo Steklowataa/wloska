@@ -4,13 +4,13 @@ import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/comp
 import Input from "./Input";
 import { Inter } from "next/font/google";
 import Image from "next/image";
-import { OrderValues } from "@/utils/zodSchema";
+import { type OrderInputValues } from "@/utils/zodSchema";
 import { useMenuByLangName } from "@/utils/useMenuByLangName";
 
 const inter = Inter({ subsets: ["latin"], weight: "600" });
 
 export default function ExtraDataForm() {
-  const form = useFormContext<OrderValues>();
+  const form = useFormContext<OrderInputValues>();
   const text = useMenuByLangName()
   const {messageClient} = text.formVal.formDetails[0]
   const fields = [
@@ -34,7 +34,7 @@ export default function ExtraDataForm() {
             <FormField
               key={field.name}
               control={form.control}
-              name={field.name as keyof OrderValues}
+              name={field.name as keyof OrderInputValues}
               render={({ field: controllerField }) => (
                 <FormItem className={`${inter.className}`}>
                   <FormLabel className={`${inter.className} text-white mt-6 text-[16px]`}>

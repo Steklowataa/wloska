@@ -1,15 +1,15 @@
 "use client";
-import { useFormContext, Controller } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
 import Input from "./Input";
 import { Inter } from "next/font/google";
-import { OrderValues } from "@/utils/zodSchema";
+import { type OrderInputValues } from "@/utils/zodSchema";
 import { useMenuByLangName } from "@/utils/useMenuByLangName";
 
 const inter = Inter({ subsets: ["latin"], weight: "600" });
 
 export default function PersonalDataForm() {
-  const form = useFormContext<OrderValues>();
+  const form = useFormContext<OrderInputValues>();
   const text = useMenuByLangName()
   const { clientTitle, phoneNum, emailData, nameAndSurname,} = text.formVal.custInfo[0]
 
@@ -35,7 +35,7 @@ export default function PersonalDataForm() {
         <FormField
           key={field.name}
           control={form.control}
-          name={field.name as keyof OrderValues}
+          name={field.name as keyof OrderInputValues}
           render={({ field: controllerField }) => (
             <FormItem className={`${inter.className}`}>
               <FormLabel className={`${inter.className} text-[16px]`}>

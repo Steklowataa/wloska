@@ -76,9 +76,7 @@ export type ExtraDataValues = z.infer<typeof extraDataSchema>;
 
 //formularz do wyboru typu platnosci
 export const paymentSchema = z.object({
-  payment: z.enum(["Gotówka", "Karta"], {
-    required_error: "Musisz wybrać metodę płatności 🥺",
-  }),
+  payment: z.enum(["Gotówka", "Karta"]),
 
   change: z
     .union([
@@ -95,3 +93,4 @@ export type PaymentValues = z.infer<typeof paymentSchema>;
 
 export const orderSchema = personSchema.merge(adresSchema).merge(paymentSchema).merge(extraDataSchema)
 export type OrderValues = z.infer<typeof orderSchema>;
+export type OrderInputValues = z.input<typeof orderSchema>;

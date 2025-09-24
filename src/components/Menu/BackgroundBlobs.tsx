@@ -1,8 +1,15 @@
 "use client";
 import { colors } from "../../../lib/colors";
-import { useState, useEffect } from "react";
+
 
 export default function BackgroundBlobs() {
+  type BlobStyle = {
+    top?: string;
+    bottom?: string;
+    left?: string;
+    right?: string;
+    opacity?: string;
+  };
   // Desktop/tablet blobs
   const desktopBlobs = [
     // Pizza section
@@ -145,7 +152,7 @@ export default function BackgroundBlobs() {
     { top: "2406vh", left: "40%", opacity: "70%" },
   ];
 
-  const renderBlobsMobile = (blobs) => {
+  const renderBlobsMobile = (blobs: BlobStyle[]) => {
     return blobs.map((style, i) => {
       const topValue = parseInt(style.top || style.bottom || "0");
       let colorFrom = colors.rozowy;
@@ -185,7 +192,7 @@ export default function BackgroundBlobs() {
     });
   };
 
-  const renderBlobsDesktop = (blobs) => {
+  const renderBlobsDesktop = (blobs: BlobStyle[]) => {
     return blobs.map((style, i) => {
       const topValue = parseInt(style.top || style.bottom || "0");
       let colorFrom = colors.rozowy;

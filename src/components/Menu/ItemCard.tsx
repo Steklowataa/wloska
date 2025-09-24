@@ -26,7 +26,7 @@ const typeLabels: Record<ProductType, string> = {
   sos: "50 ml"
 }
 
-export default function ItemCard({ cartId, name, data, type }: ItemCardProps) {
+export default function ItemCard({ name, data, type }: ItemCardProps) {
   const [showModal, setShowModal] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false)
 

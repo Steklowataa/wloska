@@ -7,10 +7,11 @@ export default function MenuButtons() {
 
   // Funkcja pomocnicza do pobierania tłumaczeń z menu.title
   const getLabel = (id: string) => {
-    const found = menu.title.find((t: any) => t.id === id);
+    type TitleItem = { id: string } & Record<string, string>;
+    const found = menu.title.find((t: TitleItem) => t.id === id);
     if (!found) return id;
-    const [_, value] = Object.entries(found).find(([key]) => key !== "id") || [];
-    return value || id;
+    const entry = Object.entries(found).find(([key]) => key !== "id");
+    return (entry && entry[1]) || id;
   };
 
   // Memoize items array to prevent unnecessary re-renders

@@ -3,13 +3,13 @@ import { Inter } from "next/font/google";
 import { useRouter, usePathname } from "next/navigation";
 import SendMessageToButton from "./SendMessageFromBtn";
 import { UseFormReturn } from "react-hook-form";
-import { OrderValues } from "@/utils/zodSchema";
+import { type OrderInputValues } from "@/utils/zodSchema";
 import { useMenuByLangName } from "@/utils/useMenuByLangName";
 
 const interBold = Inter({ subsets: ["latin"], weight: "600" });
 
 type Props = {
-  form?: UseFormReturn<OrderValues>;
+  form?: UseFormReturn<OrderInputValues>;
 };
 
 export default function NextButton({ form }: Props) {

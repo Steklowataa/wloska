@@ -3,6 +3,7 @@ import { Inter, Playfair_Display } from "next/font/google"
 import Link from "next/link"
 import { useMenuByLangName } from "@/utils/useMenuByLangName"
 
+
 const inter = Inter({
     subsets: ["latin"],
     weight: "600"
