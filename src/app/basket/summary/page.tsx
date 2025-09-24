@@ -7,7 +7,7 @@ export default function Page() {
     return (
         <div>
             <Header showCart={false}/>
-            <StepButtons />
+            <StepButtons goToSummary={async () => {}} />
             <SummaryInfo />
         </div>
     )

@@ -54,7 +54,7 @@ export default function ModalWindow(props: ModalWindowProps) {
       addToCart({
         name,
         description,
-        img,
+        img: img,
         type,
         quantity: setQuantity,
         basePrice: price,
@@ -67,7 +67,7 @@ export default function ModalWindow(props: ModalWindowProps) {
       addToCart({
         name: name + " Zestaw",
         description,
-        img,
+        img: img,
         type,
         basePrice: price,
         sauces: selectedSauces,

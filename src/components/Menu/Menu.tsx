@@ -14,12 +14,13 @@ export default function Menu() {
   }, {} as Record<string, [string, number, string]>)
 
   // funkcja pomocnicza do wyciągania tytułu po id
+  type TitleItem = { id: string } & Record<string, string>
   const getTitle = (id: string) => {
-    const found = menu.title.find((t: any) => t.id === id)
+    const found = menu.title.find((t: TitleItem) => t.id === id)
     if (!found) return id // fallback
     // zwracamy pierwszy klucz różny od id
-    const [_, value] = Object.entries(found).find(([key]) => key !== "id") || []
-    return value || id
+    const entry = Object.entries(found).find(([key]) => key !== "id")
+    return (entry && entry[1]) || id
   }
 
   return (

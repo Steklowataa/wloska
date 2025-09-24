@@ -6,32 +6,36 @@ import { useMenuByLangName } from "@/utils/useMenuByLangName";
 const inter = Inter({ subsets: ["latin"], weight: "400" });
 const interBold2 = Inter({ subsets: ["latin"], weight: "800" });
 
+type Addition = string | { name?: string };
+
+interface CartItemUI {
+  id: string;
+  name: string;
+  img: string;
+  totalPrice: number;
+  quantity: number;
+  sauces?: Addition[];
+  extras?: Addition[];
+}
+
 interface CartItemProps {
-  item: {
-    id: string;
-    name: string;
-    img: string;
-    totalPrice: number;
-    quantity: number;
-    sauces?: any[];
-    extras?: any[];
-  };
+  item: CartItemUI;
   onRemove: (id: string) => void;
 }
 
 export default function CartItemProducts({ item, onRemove }: CartItemProps) {
-  const getAdditionalsText = (item: any) => {
+  const getAdditionalsText = (item: CartItemUI) => {
     const additions = [];
 
     if (item.sauces && item.sauces.length > 0) {
-      const sauceNames = item.sauces.map((sauce: any) =>
+      const sauceNames = item.sauces.map((sauce: Addition) =>
         typeof sauce === "string" ? sauce : sauce?.name || "Unknown sauce"
       );
       additions.push(...sauceNames);
     }
 
     if (item.extras && item.extras.length > 0) {
-      const extraNames = item.extras.map((extra: any) =>
+      const extraNames = item.extras.map((extra: Addition) =>
         typeof extra === "string" ? extra : extra?.name || "Unknown extra"
       );
       additions.push(...extraNames);
@@ -43,10 +47,12 @@ export default function CartItemProducts({ item, onRemove }: CartItemProps) {
   const additionalsText = getAdditionalsText(item);
   const menu = useMenuByLangName()
   const { extrasTitle} = menu.modalWindow.modalInfo[0]
+  console.log("Image:", item.img)
 
   return (
     <div className="pb-6 pr-6 last:border-b-0">
       <div className="flex gap-4 items-start">
+      {item.img ? (
         <Image
           src={item.img}
           alt={item.name}
@@ -55,6 +61,7 @@ export default function CartItemProducts({ item, onRemove }: CartItemProps) {
           height={150}
           className="rounded-lg"
         />
+      ) : null}
         <div className="flex-1 flex flex-col justify-between mt-[30px]">
           <div className="flex justify-between items-start">
             <p className={`${interBold2.className} text-[20px]`}>

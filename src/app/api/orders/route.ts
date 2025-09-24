@@ -1,6 +1,27 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(req) {
+type Sauce = {
+  name: string;
+};
+
+type Extra = {
+  name: string;
+};
+
+type CartItem = {
+  id: string;
+  name: string;
+  image: string;
+  quantity: number;
+  description: string;
+  type?: string;
+  basePrice: number;
+  sauces?: Sauce[];
+  extras?: Extra[];
+  totalPrice: number;
+};
+
+export async function POST(req: NextRequest) {
   try {
     const data = await req.json();
     
@@ -19,7 +40,7 @@ export async function POST(req) {
     }
 
 
-    const formatOrderItems = (items) => {
+    const formatOrderItems = (items: CartItem[]) => {
       return items?.map((item) => {
         let itemText = `• ${item.name}`;
          
@@ -103,7 +124,7 @@ export async function POST(req) {
     console.error("💥 Error processing order:", error);
     return NextResponse.json({ 
       success: false, 
-      error: error.message || "Internal server error"
+      error: error instanceof Error ? error.message : "Internal server error"
     }, { status: 500 });
   }
 }

@@ -7,13 +7,13 @@ import PaymentForm from "./PaymentForm";
 import NextButton from "../NextButton";
 import { Form } from "@/components/ui/form";
 import { UseFormReturn } from "react-hook-form";
-import { OrderValues } from "@/utils/zodSchema";
+import { type OrderInputValues } from "@/utils/zodSchema";
 import { useState } from "react";
 import BackgroundBlobsCart from "../BackgroundBlobsCart";
-import { useMenuByLangName } from "@/utils/useMenuByLangName";
+
 
 type Props = {
-  form: UseFormReturn<OrderValues>;
+  form: UseFormReturn<OrderInputValues>;
 };
 
 export default function OrderDetails({ form }: Props) {
@@ -33,11 +33,11 @@ export default function OrderDetails({ form }: Props) {
           {!isDelivery ? (
             <>
               <div className="flex gap-8 justify-center">
-                <PersonalDataForm form={form} />
-                <AdressDataForm form={form} />
+                <PersonalDataForm />
+                <AdressDataForm />
               </div>
               <div className="flex gap-8 justify-center -mt-15">
-                <ExtraDataForm form={form} />
+                <ExtraDataForm />
                 <PaymentForm form={form} />
               </div>
               <div className="flex justify-end mt-[-270px] z-999">

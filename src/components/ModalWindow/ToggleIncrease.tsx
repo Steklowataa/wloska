@@ -1,10 +1,6 @@
 "use client"
 import { Inter } from "next/font/google"
 
-const inter = Inter({
-    subsets: ["latin"],
-    weight: "400"
-})
 
 const inter2 = Inter({
     subsets: ["latin"],

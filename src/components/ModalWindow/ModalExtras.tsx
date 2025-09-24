@@ -12,7 +12,7 @@ type Item = {
 };
 
 type ModalExtrasProps = {
-  type: "pizza" | "burger" | "smashburger";
+  type: "pizza" | "burger" | "smashburger" | "extras" | "drinks" | "sos";
   selectedExtras: Item[];
   setSelectedExtras: (items: Item[]) => void;
   showAllExtras: boolean;
@@ -27,7 +27,7 @@ type ModalExtrasProps = {
 
 export default function ModalExtras({ type, selectedExtras, setSelectedExtras, showAllExtras, setShowAllExtras, isSelected, toggleItem,}: ModalExtrasProps) {
   const window = useMenuByLangName();
-  const { extrasTitle, extrasInfo, sausInfo } = window.modalWindow.modalInfo[0]
+  const { extrasTitle, extrasInfo } = window.modalWindow.modalInfo[0]
 
   const { menu } = useMenuByLangName() 
   if (type === "pizza") {

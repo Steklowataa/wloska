@@ -10,7 +10,15 @@ export default function ModalQuantity({
   setProductQuantity,
   setQuantity,
   setSetQuantity,
-}: any) {
+}: {
+  type: "pizza" | "burger" | "smashburger" | "extras" | "drinks" | "sos";
+  name: string;
+  price: number;
+  productQuantity: number;
+  setProductQuantity: React.Dispatch<React.SetStateAction<number>>;
+  setQuantity: number;
+  setSetQuantity: (value: number) => void;
+}) {
   return (
     <div>
       {(type === "pizza" || type === "extras" || type === "drinks" || type === "sos") && (

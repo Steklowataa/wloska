@@ -5,12 +5,14 @@ import Header from "@/components/Header/Header";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { orderSchema, OrderValues } from "@/utils/zodSchema";
+import { orderSchema, type OrderInputValues } from "@/utils/zodSchema";
+import type { UseFormReturn } from "react-hook-form";
+import type { Resolver } from "react-hook-form";
 
 export default function Page() {
   const router = useRouter();
-  const form = useForm<OrderValues>({
-    resolver: zodResolver(orderSchema),
+  const form = useForm<OrderInputValues>({
+    resolver: zodResolver(orderSchema, undefined, { raw: true }) as unknown as Resolver<OrderInputValues>,
     defaultValues: {
       name: "",
       phone: "",
@@ -39,7 +41,7 @@ export default function Page() {
     <>
       <Header showCart={false}/>
       <StepButtons goToSummary={goToSummary} />
-      <OrderDetails form={form} />
+      <OrderDetails form={form as unknown as UseFormReturn<OrderInputValues>} />
     </>
   );
 }

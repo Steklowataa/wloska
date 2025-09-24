@@ -40,7 +40,7 @@ export default function ShowMore({
   return (
     <>
       <div className="grid grid-cols-2 gap-3">
-        {visibleItemsToRender.map((item, index) => {
+        {visibleItemsToRender.map((item) => {
           const selectedIndex = selectedItems.findIndex((selectedItem) => selectedItem.name === item.name);
           const isFree = selectedIndex !== -1 && selectedIndex < freeLimit;
           const displayPrice = isFree ? 0 : item.price;

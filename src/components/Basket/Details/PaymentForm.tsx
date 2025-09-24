@@ -2,19 +2,15 @@
 
 import Image from "next/image";
 import { UseFormReturn } from "react-hook-form";
-import { paymentSchema, type PaymentValues } from "@/utils/zodSchema";
+import { type OrderInputValues } from "@/utils/zodSchema";
 import { Form } from "@/components/ui/form";
 import PaymentSwitchButton from "./PaymentSwitchButton";
 
 type Props = {
-  form: UseFormReturn<PaymentValues>;
-  onSave?: (values: PaymentValues) => void; // opcjonalnie
+  form: UseFormReturn<OrderInputValues>;
 };
 
-export default function PaymentForm({ form, onSave }: Props) {
-  const handleLocalSave = form.handleSubmit((values) => {
-    onSave?.(values);
-  });
+export default function PaymentForm({ form }: Props) {
 
   return (
     <div className="relative w-[595px] h-[228px] items-center">
