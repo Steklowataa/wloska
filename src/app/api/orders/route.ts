@@ -1,25 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-
-type Sauce = {
-  name: string;
-};
-
-type Extra = {
-  name: string;
-};
-
-type CartItem = {
-  id: string;
-  name: string;
-  image: string;
-  quantity: number;
-  description: string;
-  type?: string;
-  basePrice: number;
-  sauces?: Sauce[];
-  extras?: Extra[];
-  totalPrice: number;
-};
+import { CartItem } from "@/utils/type";
 
 export async function POST(req: NextRequest) {
   try {

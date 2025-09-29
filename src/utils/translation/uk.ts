@@ -323,4 +323,15 @@ export const validationMessageUK: {
       },
     ],
   };
-  
+
+export const HomeTextUK : {
+    homeText: {
+        promotion: string,
+        bestGraded: string,
+        addToCart: string
+    }[]
+} = {
+    homeText: [
+        {promotion: "СУПЕРАКЦІЯ! БЕЗКОШТОВНА ДОСТАВКА ВІД 50 ЗЛОТИХ!", bestGraded: "Найкраще оцінені позиції", addToCart: "додати до кошика"}
+    ]
+}

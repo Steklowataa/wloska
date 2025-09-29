@@ -1,0 +1,18 @@
+.marquee {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.marqueeContent {
+  display: inline-block;
+  animation: marquee-left-to-right 20s linear infinite;
+}
+
+@keyframes marquee-left-to-right {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}

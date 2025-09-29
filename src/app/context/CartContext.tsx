@@ -1,20 +1,6 @@
 "use client";
 import { createContext, useContext, useState } from "react";
-
-type Addition = string | { name: string };
-
-export type CartItem = {
-  id: string,
-  name: string;
-  img: string;
-  quantity: number;
-  description: string;
-  type?: string;
-  basePrice: number;
-  sauces?: Addition[];
-  extras?: Addition[];
-  totalPrice: number;
-};
+import { CartItem } from "@/utils/type";
 
 type CartContextType = {
   items: CartItem[];

@@ -9,6 +9,7 @@ import ButtonToMenu from "@/components/Home/ButtonToMenu";
 import { Playfair_Display, Inter } from "next/font/google";
 import { useMenuByLangName } from "@/utils/useMenuByLangName";
 import MarqueBar from "@/components/Home/MarqueBar";
+import BestGradedPosition from "@/components/Home/BestGradedPosition";
 
 
 const playfair = Playfair_Display({
@@ -45,7 +46,7 @@ export default function Home() {
             <Header />
             <SpinningEllipse />
             <div>
-              <ImageAppear src={text.images[currentIndex].img} trigger={currentIndex} duration={1000}/>
+              <ImageAppear src={text.images[currentIndex].img} alt={text.header[currentIndex].name} trigger={currentIndex} duration={1000}/>
             </div>
             <div className="mt-[100px] ml-[100px] relative z-10">
                 <div className="text-[80px] font-bold leading-[80px] ">
@@ -74,6 +75,9 @@ export default function Home() {
             </div>
             <div className="mt-[100px]">
                 <MarqueBar />
+            </div>
+            <div>
+                <BestGradedPosition />
             </div>
         </>
     );

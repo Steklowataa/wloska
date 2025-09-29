@@ -4,10 +4,12 @@ import Image from "next/image"
 
 const ImageAppear = ({
     src,
+    alt,
     trigger,
     duration = 1000
 } : {
     src: string,
+    alt: string,
     trigger: string | number,
     duration?: number
 }) => {
@@ -49,7 +51,7 @@ const ImageAppear = ({
         <div>
             <Image
                 src={currentSrc}
-                alt={currentSrc}
+                alt={alt}
                 width={500}
                 height={500}
                 className="absolute right-30 top-1/5 object-cover"

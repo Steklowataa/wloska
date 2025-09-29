@@ -16,7 +16,7 @@ const SpinningEllipse = () => {
     }, []);
 
     return (
-        <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+        <div className="inset-0 pointer-events-none overflow-hidden z-0">
             <div 
                 className="absolute right-0 top-1/2 transition-all duration-1000 ease-in-out"
                 style={{

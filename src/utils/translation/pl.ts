@@ -326,3 +326,14 @@ export const validationMessagePL: {
     ],
   };
   
+export const HomeTextPL : {
+    homeText: {
+        promotion: string,
+        bestGraded: string,
+        addToCart: string
+    }[]
+} = {
+    homeText: [
+        {promotion: "SUPER PROMOCJA! DARMOWA DOSTAWA OD 50ZŁ!", bestGraded: "Najlepiej oceniane pozycje", addToCart: "dodaj do koszyka"}
+    ]
+}
