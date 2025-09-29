@@ -1,12 +1,38 @@
 "use client";
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { useMenuByLangName } from "@/utils/useMenuByLangName";
 import SliderImage from "./SliderImage";
 import SliderControls from "./SliderControls";
 import SliderInfo from "./SliderInfo";
 import SliderDots from "./SliderDots";
+import { Playfair_Display } from "next/font/google";
+import Image from "next/image";
+
+const playfair = Playfair_Display({ subsets: ["latin"], weight: "800" });
 
 type Direction = "left" | "right";
+
+const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.5,
+        },
+    },
+};
+
+const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+        y: 0,
+        opacity: 1,
+        transition: {
+            duration: 0.8,
+        },
+    },
+};
 
 export default function BestGradedPosition() {
     const { menu, homeText } = useMenuByLangName();
@@ -32,9 +58,23 @@ export default function BestGradedPosition() {
     const currentPizza = pizzaEntries[current];
 
     return (
-        <div className="bg-black text-white flex flex-col items-center py-10">
-            <h2 className="text-2xl font-serif mb-6">{bestGradedText}</h2>
-            <div className="relative flex flex-col items-center w-full max-w-4xl">
+        <>
+        <Image 
+            src="/images/bestGradePositionOrnament.svg"
+            alt=""
+            width={500}
+            height={500}
+            className="absolute w-full h-full"/>
+         <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.2 }}
+            className="bg-black text-white flex flex-col items-center py-10">
+            <motion.h2 variants={itemVariants} className={`${playfair.className} text-2xl font-serif mb-6`}>
+                {bestGradedText}
+            </motion.h2>
+            <motion.div variants={itemVariants} className="relative flex flex-col items-center w-full max-w-4xl">
                 <div className="relative flex items-center justify-center w-full">
                     <SliderImage
                         current={current}
@@ -42,9 +82,7 @@ export default function BestGradedPosition() {
                         imageSrc={currentPizza[1][2]}
                         altText={currentPizza[0]}
                     />
-                    <SliderControls
-                        paginate={paginate}
-                    />
+                    <SliderControls paginate={paginate} />
                     <SliderDots
                         handleDotClick={handleDotClick}
                         pizzaEntries={pizzaEntries}
@@ -57,7 +95,9 @@ export default function BestGradedPosition() {
                     price={currentPizza[1][1]}
                     addToCartText={addToCartText}
                 />
-            </div>
-        </div>
+            </motion.div>
+        </motion.div>
+        </>
+       
     );
 }
