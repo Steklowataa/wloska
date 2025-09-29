@@ -8,6 +8,7 @@ import Header from "@/components/Header/Header";
 import ButtonToMenu from "@/components/Home/ButtonToMenu";
 import { Playfair_Display, Inter } from "next/font/google";
 import { useMenuByLangName } from "@/utils/useMenuByLangName";
+import MarqueBar from "@/components/Home/MarqueBar";
 
 
 const playfair = Playfair_Display({
@@ -70,6 +71,9 @@ export default function Home() {
             </div>
             <div className="mt-[100px]">
                 <ButtonToMenu />
+            </div>
+            <div className="mt-[100px]">
+                <MarqueBar />
             </div>
         </>
     );
