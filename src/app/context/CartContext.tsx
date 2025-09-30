@@ -4,7 +4,7 @@ import { CartItem } from "@/utils/type";
 
 type CartContextType = {
   items: CartItem[];
-  addToCart: (item: Omit<CartItem, "id">) => void;
+  addToCart: (item: CartItem) => void;
   totalQuantity: number;
   removeFromCart: (id: string) => void;
 };
@@ -15,7 +15,6 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
 
   const addToCart = (item: Omit<CartItem, "id">) => {
-    console.log("ADDING TO CART:", item);
     const newItem = { ...item, id: crypto.randomUUID() }
     setItems((prev) => [...prev, newItem]);
   };

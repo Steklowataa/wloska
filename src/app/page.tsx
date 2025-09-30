@@ -10,6 +10,7 @@ import { Playfair_Display, Inter } from "next/font/google";
 import { useMenuByLangName } from "@/utils/useMenuByLangName";
 import MarqueBar from "@/components/Home/MarqueBar";
 import BestGradedPosition from "@/components/Home/BestGradedPosition";
+import ContactUs from "@/components/Home/ContactInormation/ContactHome";
 
 
 const playfair = Playfair_Display({
@@ -78,6 +79,9 @@ export default function Home() {
             </div>
             <div>
                 <BestGradedPosition />
+            </div>
+            <div>
+                <ContactUs />
             </div>
         </>
     );
