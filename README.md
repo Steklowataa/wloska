@@ -62,8 +62,7 @@ https://t.me/wloskaZamowienia_bot
   ## TODO
   - Rozszerzyć Home page (więcej informacji o samej restauracji)
   - Zrobić pod strone Kontakt
-  - Dodać zmiane języków
   - Dorobić podstrone zamówienia odbiór osobisty ( na razie jest zaimplementowane zamówienie poprzez dostawę)
   - Zrobić stronę responsywną
-  - Zamienić zdjęcia
+
 
