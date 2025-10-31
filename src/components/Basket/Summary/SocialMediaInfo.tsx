@@ -1,5 +1,4 @@
 "use client"
-import { withCoalescedInvoke } from "next/dist/lib/coalesced-function";
 import { Inter } from "next/font/google"
 import Image from "next/image";
 import { useMenuByLangName } from "@/utils/useMenuByLangName";

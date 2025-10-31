@@ -42,7 +42,7 @@ export default function Home() {
         }, totalTime);
         
         return () => clearTimeout(timer);
-    }, [currentIndex, totalTime]);
+    }, [currentIndex, totalTime, text.header.length]);
 
     useEffect(() => {
         setIsClient(true);

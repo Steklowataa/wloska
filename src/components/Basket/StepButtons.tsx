@@ -1,44 +1,38 @@
 "use client";
 import { useMenuByLangName } from "@/utils/useMenuByLangName";
-import { usePathname, useRouter } from "next/navigation";
 import { Inter } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"], weight: "600" });
 
 type Props = {
-  goToSummary: () => Promise<void>;
+  onStepChange: (step: number) => void;
+  currentStep: number;
 };
 
-export default function StepButtons({ goToSummary }: Props) {
-  const pathname = usePathname();
-  const router = useRouter();
+export default function StepButtons({ onStepChange, currentStep }: Props) {
   const text = useMenuByLangName()
     const {clientTitle, summaryStep, basketStep} = text.formVal.custInfo[0] 
 
   const steps = [
-    { label: summaryStep, path: "/basket/products" },
-    { label: clientTitle, path: "/basket/details" },
-    { label: basketStep, path: "/basket/summary" },
+    { label: summaryStep },
+    { label: clientTitle },
+    { label: basketStep },
   ];
 
-  const handleStepClick = (stepPath: string) => {
-    if (stepPath === "/basket/summary") {
-      goToSummary(); // walidacja + przejście
-    } else {
-      router.push(stepPath);
-    }
+  const handleStepClick = (stepNumber: number) => {
+    onStepChange(stepNumber);
   };
 
   return (
     <div className="flex items-center justify-center gap-x-6 mt-6">
       {steps.map((step, index) => {
         const stepNumber = index + 1;
-        const isActive = pathname === step.path;
+        const isActive = stepNumber === currentStep;
 
         return (
           <button
             key={step.label}
-            onClick={() => handleStepClick(step.path)}
+            onClick={() => handleStepClick(stepNumber)}
             className={`${inter.className} flex items-center gap-2 px-4 py-3 border rounded-3xl transition-all duration-200 ${
               isActive
                 ? "bg-white/40 text-white border-white"

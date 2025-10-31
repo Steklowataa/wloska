@@ -12,7 +12,7 @@ export default function SummaryInfo() {
   const searchParams = useSearchParams();
   const orderNumber = searchParams.get("orderNumber") || "N/A";
 
-  const totalPrice = items.reduce((sum, item) => sum + item.totalPrice, 0);
+  const totalPrice = items.reduce((sum, item) => sum + (item.totalPrice * item.quantity), 0);
 
   return (
     <>

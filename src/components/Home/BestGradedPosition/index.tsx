@@ -1,8 +1,8 @@
 "use client";
-import { use, useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { useMenuByLangName } from "@/utils/useMenuByLangName";
-import SliderImage from "./SliderImage";
+import SliderImage, { type Direction } from "./SliderImage";
 import SliderControls from "./SliderControls";
 import SliderInfo from "./SliderInfo";
 import SliderDots from "./SliderDots";
@@ -11,8 +11,6 @@ import Image from "next/image";
 import { useCart } from "@/app/context/CartContext";
 
 const playfair = Playfair_Display({ subsets: ["latin"], weight: "800" });
-
-type Direction = "left" | "right";
 
 const containerVariants = {
     hidden: { opacity: 0 },

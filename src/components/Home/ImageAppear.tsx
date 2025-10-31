@@ -43,12 +43,7 @@ const ImageAppear = ({
                 clearTimeout(timeoutRef.current);
             }
         };
-    }, [src, trigger]);
-
-    useEffect(() => {
-        setCurrentSrc(src);
-        setIsVisible(true);
-    }, []);
+    }, [src, trigger, currentSrc]);
 
     return (
         <div>

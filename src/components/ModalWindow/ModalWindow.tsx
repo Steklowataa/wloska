@@ -50,24 +50,33 @@ export default function ModalWindow(props: ModalWindowProps) {
   const totalCombinedPrice = totalPriceNormal + totalPriceZestaw;
 
   const handleAdd = () => {
-    for (let i = 0; i < productQuantity; i++) {
+    const createId = (baseName: string, sauces: Item[], extras: Item[]) => {
+      const sauceNames = sauces.map(s => s.name).sort().join(',');
+      const extraNames = extras.map(e => e.name).sort().join(',');
+      return `${baseName}-${sauceNames}-${extraNames}`;
+    };
+
+    if (productQuantity > 0) {
       addToCart({
+        id: createId(name, selectedSauces, selectedExtras),
         name,
         description,
-        img: img,
+        image: img,
         type,
-        quantity: setQuantity,
+        quantity: productQuantity,
         basePrice: price,
         sauces: selectedSauces,
         extras: selectedExtras,
         totalPrice: singlePrice,
       });
     }
-    for (let i = 0; i < setQuantity; i++) {
+    if (setQuantity > 0) {
+      const setName = name + " Zestaw";
       addToCart({
-        name: name + " Zestaw",
+        id: createId(setName, selectedSauces, selectedExtras),
+        name: setName,
         description,
-        img: img,
+        image: img,
         type,
         basePrice: price,
         sauces: selectedSauces,

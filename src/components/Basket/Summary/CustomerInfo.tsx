@@ -4,9 +4,19 @@ import { useMenuByLangName } from "@/utils/useMenuByLangName";
 
 const inter2 = Inter({ subsets: ["latin"], weight: "400" });
 
-export default function CustomerInfo({ customer }: any) {
-  if (!customer) return null;
+type Customer = {
+    message?: string;
+    payment?: string;
+    change?: string | number;
+}
+
+type Props = {
+    customer: Customer | null
+}
+
+export default function CustomerInfo({ customer }: Props) {
   const text = useMenuByLangName()
+  if (!customer) return null;
   const {message, payment, changeFrom} = text.formVal.custInfo[0]
   return (
     <div className="w-full max-w-[500px] mt-4 text-gray-300 space-y-1">

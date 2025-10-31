@@ -37,10 +37,18 @@ export default function Page() {
     router.push("/basket/summary");
   };
 
+  const onStepChange = (step: number) => {
+    if (step === 1) {
+      router.push("/basket/products");
+    } else if (step === 3) {
+      goToSummary();
+    }
+  };
+
   return (
     <>
       <Header showCart={false}/>
-      <StepButtons goToSummary={goToSummary} />
+      <StepButtons onStepChange={onStepChange} currentStep={2} />
       <OrderDetails form={form as unknown as UseFormReturn<OrderInputValues>} />
     </>
   );

@@ -17,7 +17,7 @@ export default function ListOfProducts() {
     return <EmptyCart />;
   }
 
-  const totalPrice = items.reduce((sum, item) => sum + item.totalPrice, 0);
+  const totalPrice = items.reduce((sum, item) => sum + (item.totalPrice * item.quantity), 0);
   const {order} = menu.formVal.yourOrder[0]
   return (
     <>

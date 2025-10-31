@@ -11,7 +11,7 @@ export type Extra = {
 export type CartItem = {
   id: string;
   name: string;
-  image: string;
+  image?: string;
   quantity: number;
   description: string;
   type?: string;
