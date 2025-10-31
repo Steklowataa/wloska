@@ -171,7 +171,7 @@ export const textUK : {
         {home: "Головна", menu: "Меню", contacts: "Контакт"}
     ],
     cartInfo: [
-        {cart: "Ваш кошик порожній", buttonSuccess: "Підтвердити", summary: "All: "}
+        {cart: "Ваш кошик порожній", buttonSuccess: "Підтвердити", summary: "Разом: "}
     ]
 }
 

@@ -1,18 +1,18 @@
 "use client";
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import { useMenuByLangName } from "@/utils/useMenuByLangName";
 
 export default function MenuButtons() {
   const { menu } = useMenuByLangName();
 
   // Funkcja pomocnicza do pobierania tłumaczeń z menu.title
-  const getLabel = (id: string) => {
+  const getLabel = useCallback((id: string) => {
     type TitleItem = { id: string } & Record<string, string>;
     const found = menu.title.find((t: TitleItem) => t.id === id);
     if (!found) return id;
     const entry = Object.entries(found).find(([key]) => key !== "id");
     return (entry && entry[1]) || id;
-  };
+  }, [menu.title]);
 
   // Memoize items array to prevent unnecessary re-renders
   const items = useMemo(() => [
@@ -22,7 +22,7 @@ export default function MenuButtons() {
     { key: "extras", id: "Przystawki", label: getLabel("Przystawki") },
     { key: "drinks", id: "Napoje", label: getLabel("Napoje") },
     { key: "sos", id: "Sosy", label: getLabel("Sosy") },
-  ], [menu.title]); // Only recreate when menu.title changes
+  ], [getLabel]); // Only recreate when menu.title changes
 
   const sectionref = useRef<(HTMLElement | null)[]>([]);
   const isScrolling = useRef(false);

@@ -170,7 +170,7 @@ export const textPL : {
         {text: "Potrzebujesz więcej opcji?", buttonText: "Menu"}
     ],
     homePageHeader: [
-        {home: "Strona główna", menu: "Menu", contacts: "Kontakt"}
+        {home: "Główna", menu: "Menu", contacts: "Kontakt"}
     ],
     cartInfo: [
         {cart: "Twój koszyk jest pusty", buttonSuccess: "Potwierdź", summary: "Razem "}

@@ -11,7 +11,7 @@ type Addition = string | { name?: string };
 interface CartItemUI {
   id: string;
   name: string;
-  img: string;
+  image?: string;
   totalPrice: number;
   quantity: number;
   sauces?: Addition[];
@@ -47,14 +47,14 @@ export default function CartItemProducts({ item, onRemove }: CartItemProps) {
   const additionalsText = getAdditionalsText(item);
   const menu = useMenuByLangName()
   const { extrasTitle} = menu.modalWindow.modalInfo[0]
-  console.log("Image:", item.img)
+  console.log("Image:", item.image)
 
   return (
     <div className="pb-6 pr-6 last:border-b-0">
       <div className="flex gap-4 items-start">
-      {item.img ? (
+      {item.image ? (
         <Image
-          src={item.img}
+          src={item.image}
           alt={item.name}
           style={{ objectFit: "cover" }}
           width={150}

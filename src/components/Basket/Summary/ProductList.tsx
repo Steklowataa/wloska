@@ -5,11 +5,11 @@ import CustomerInfo from "./CustomerInfo";
 import { useOrder } from "@/app/context/OrderContext";
 import groupCartItems from "@/utils/GroupCartItem";
 import { useMenuByLangName } from "@/utils/useMenuByLangName";
+import { CartItem } from "@/utils/type";
 
 const inter = Inter({ subsets: ["latin"], weight: "600" });
-const inter2 = Inter({ subsets: ["latin"], weight: "400" });
 
-export default function ProductList({ items, totalPrice }: any) {
+export default function ProductList({ items, totalPrice }: { items: CartItem[], totalPrice: number }) {
     const {customer} = useOrder()
     const groupedItems = groupCartItems(items)
     const text = useMenuByLangName()
@@ -17,14 +17,18 @@ export default function ProductList({ items, totalPrice }: any) {
     const {extrasTitle} = text.modalWindow.modalInfo[0]
     return (
         <div className="w-full max-w-[400px] bg-[#141111] rounded-[20px] p-4">
-            {groupedItems.map((item: any, index: number) => (
+            {groupedItems.map((item, index) => (
                 <div key={index} className="flex items-center gap-4 mb-10 last:mb-0">
-                    <Image
-                        alt={item.name}
-                        src={item.img}
-                        width={80}
-                        height={80}
-                        className="rounded-lg flex-shrink-0"/>
+                    {item.image ? (
+                        <Image
+                            alt={item.name}
+                            src={item.image}
+                            width={80}
+                            height={80}
+                            className="rounded-lg flex-shrink-0"/>
+                    ) : (
+                        <div className="w-[80px] h-[80px] rounded-lg flex-shrink-0 bg-gray-800" />
+                    )}
                     <div className="flex-1 min-w-0">
                         <p className={`${inter.className} text-white text-[16px]`}>
                             {item.name} {item.quantity > 1 ? `x${item.quantity}` : ""}

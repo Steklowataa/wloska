@@ -1,12 +1,37 @@
 "use client";
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { useMenuByLangName } from "@/utils/useMenuByLangName";
-import SliderImage from "./SliderImage";
+import SliderImage, { type Direction } from "./SliderImage";
 import SliderControls from "./SliderControls";
 import SliderInfo from "./SliderInfo";
 import SliderDots from "./SliderDots";
+import { Playfair_Display } from "next/font/google";
+import Image from "next/image";
+import { useCart } from "@/app/context/CartContext";
 
-type Direction = "left" | "right";
+const playfair = Playfair_Display({ subsets: ["latin"], weight: "800" });
+
+const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.5,
+        },
+    },
+};
+
+const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+        y: 0,
+        opacity: 1,
+        transition: {
+            duration: 0.8,
+        },
+    },
+};
 
 export default function BestGradedPosition() {
     const { menu, homeText } = useMenuByLangName();
@@ -15,6 +40,20 @@ export default function BestGradedPosition() {
 
     const bestGradedText = homeText.homeText[0]?.bestGraded;
     const addToCartText = homeText.homeText[0]?.addToCart;
+
+    const { addToCart } = useCart();
+    const handleAddToCart = () => {
+        const itemToAdd = {
+            id: currentPizza[0],
+            name: currentPizza[0],
+            description: currentPizza[1][0],
+            basePrice: currentPizza[1][1],
+            totalPrice: currentPizza[1][1],
+            image: currentPizza[1][2],
+            quantity: 1,
+        }
+        addToCart(itemToAdd)
+    } 
 
     const paginate = (newDirection: Direction) => {
         if (newDirection === "right") {
@@ -32,32 +71,49 @@ export default function BestGradedPosition() {
     const currentPizza = pizzaEntries[current];
 
     return (
-        <div className="bg-black text-white flex flex-col items-center py-10">
-            <h2 className="text-2xl font-serif mb-6">{bestGradedText}</h2>
-            <div className="relative flex flex-col items-center w-full max-w-4xl">
-                <div className="relative flex items-center justify-center w-full">
+        <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.2 }}
+            className="bg-black text-white flex flex-col items-center py-10 px-4 md:px-10 relative overflow-hidden"
+        >
+            <motion.h2 variants={itemVariants} className={`${playfair.className} text-3xl md:text-4xl font-serif mb-6 text-center`}>
+                {bestGradedText}
+            </motion.h2>
+            <motion.div variants={itemVariants} className="relative flex flex-row md:flex-col items-center w-full max-w-4xl z-10">
+                <div className="relative flex items-center justify-center w-1/2 md:w-full">
                     <SliderImage
                         current={current}
                         direction={direction}
                         imageSrc={currentPizza[1][2]}
                         altText={currentPizza[0]}
                     />
-                    <SliderControls
-                        paginate={paginate}
-                    />
+                    <SliderControls paginate={paginate} />
                     <SliderDots
                         handleDotClick={handleDotClick}
                         pizzaEntries={pizzaEntries}
                         current={current}
                     />
                 </div>
-                <SliderInfo
-                    name={currentPizza[0]}
-                    description={currentPizza[1][0]}
-                    price={currentPizza[1][1]}
-                    addToCartText={addToCartText}
+                <div className="w-1/2 md:w-full">
+                    <SliderInfo
+                        name={currentPizza[0]}
+                        description={currentPizza[1][0]}
+                        price={currentPizza[1][1]}
+                        addToCartText={addToCartText}
+                        onAddToCart={handleAddToCart}
+                    />
+                </div>
+            </motion.div>
+            <motion.div variants={itemVariants} className="absolute inset-0 w-full h-full flex items-center justify-center z-0">
+                 <Image 
+                    src="/images/bestGradePositionOrnament.svg"
+                    alt=""
+                    width={1000}
+                    height={1000}
                 />
-            </div>
-        </div>
+            </motion.div>
+        </motion.div>
     );
 }

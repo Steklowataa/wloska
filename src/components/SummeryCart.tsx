@@ -1,9 +1,8 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import groupCartItems from "@/utils/GroupCartItem";
 import { useCart } from "@/app/context/CartContext";
-import type { CartItem } from "@/app/context/CartContext";
+import type { CartItem } from "@/utils/type";
 import { Inter } from "next/font/google";
 import { AiOutlineDelete } from "react-icons/ai";
 import { useMenuByLangName } from "@/utils/useMenuByLangName";
@@ -17,11 +16,13 @@ export default function SummeryCart({ items }: { items: CartItem[] }) {
   const { removeFromCart } = useCart();
   const [expanded, setExpanded] = useState(false);
 
-  const totalPrice = (items || []).reduce((sum, item) => sum + item.totalPrice, 0);
+  const totalPrice = (items || []).reduce(
+    (sum, item) => sum + item.totalPrice * item.quantity,
+    0
+  );
   const handleGoToBasket = () => router.push("/basket/products");
 
-  const groupedItems = groupCartItems(items);
-  const displayedItems = expanded ? groupedItems : groupedItems.slice(0, 2);
+  const displayedItems = expanded ? items : items.slice(0, 2);
 
   const handleToggleExpand = () => setExpanded(!expanded);
   const menu = useMenuByLangName()
@@ -48,7 +49,7 @@ export default function SummeryCart({ items }: { items: CartItem[] }) {
                   </div>
                   <div className="flex items-center gap-2">
                     <span className={`${interBold2.className} text-[15px]`}>
-                      {item.totalPrice}zł
+                      {item.totalPrice * item.quantity}zł
                     </span>
                     <button
                       onClick={() => handleDeleteItem(item.id)}
@@ -74,13 +75,13 @@ export default function SummeryCart({ items }: { items: CartItem[] }) {
               </div>
             ))}
 
-            {groupedItems.length > 2 && (
+            {items.length > 2 && (
               <button
                 className={`${inter.className} text-sm text-[#FF01A2] mt-2 hover:underline cursor-pointer`}
                 onClick={handleToggleExpand}
                 type="button"
               >
-                {expanded ? "Pokaż mniej" : `Pokaż wszystkie (${groupedItems.length})`}
+                {expanded ? "Pokaż mniej" : `Pokaż wszystkie (${items.length})`}
               </button>
             )}
 

@@ -17,6 +17,9 @@ type HeaderProp = {
 export default function Header({showCart = true} : HeaderProp) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,19 +29,50 @@ export default function Header({showCart = true} : HeaderProp) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+   useEffect(() => {
+        setIsClient(true);
+        const handleSize = () => {
+            setIsMobile(window.innerWidth < 500);
+        }
+        handleSize()
+        window.addEventListener('resize', handleSize)
+        return () => window.removeEventListener('resize', handleSize)
+    }, [])
+
   return (
-    <div className="z-100 sticky top-0 flex justify-center">
-      <div
-        className={`${inter.className} flex items-center transition-all duration-500 ease-in-out
-          ${isScrolled && !isHovered ? "w-[200px] h-[50px]" : "w-[80%] h-[56px]"}
-          rounded-3xl px-6 bg-gradient-to-r from-[#FF30B3]/10 to-[#7A0950]/10 
-          bg-clip-padding backdrop-blur-md border border-white/50`}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}>
-        <Logo isScrolled={isScrolled} isHovered={isHovered} />
-        <Navigation isScrolled={isScrolled} isHovered={isHovered} />
-        {showCart &&  <CartSection isScrolled={isScrolled} isHovered={isHovered} />}
-      </div>
-    </div>
+    <>
+     {isClient && !isMobile && (
+      <>
+         <div className="z-[100] sticky top-0 flex justify-center">
+          <div
+            className={`${inter.className} flex items-center justify-between overflow-hidden transition-all duration-500 ease-in-out
+            ${isScrolled && !isHovered ? "w-[150px] h-[45px] md:w-[200px] md:h-[50px]" : "w-[95%] md:w-[80%] h-[56px]"} 
+            rounded-3xl px-4 bg-gradient-to-r from-[#FF30B3]/10 to-[#7A0950]/10 
+            bg-clip-padding backdrop-blur-md border border-white/50`}
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}>
+            <Logo isScrolled={isScrolled} isHovered={isHovered} />
+            <Navigation isScrolled={isScrolled} isHovered={isHovered} />
+            {showCart &&  <CartSection isScrolled={isScrolled} isHovered={isHovered} />}
+          </div>
+        </div>
+      </>
+     )}
+     {isClient && isMobile && (
+        <div className="z-[100] sticky top-0 flex justify-center">
+          <div
+            className={`${inter.className} flex items-center justify-between overflow-hidden transition-all duration-500 ease-in-out
+            ${isScrolled && !isHovered ? "w-[150px] h-[45px] md:w-[200px] md:h-[50px]" : "w-[95%] md:w-[80%] h-[56px]"} 
+            rounded-3xl px-4 bg-gradient-to-r from-[#FF30B3]/10 to-[#7A0950]/10 
+            bg-clip-padding backdrop-blur-md border border-white/50`}
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}>
+            <Navigation isScrolled={isScrolled} isHovered={isHovered} />
+            {showCart &&  <CartSection isScrolled={isScrolled} isHovered={isHovered} />}
+          </div>
+        </div>
+     )}
+    </>
   );
 }
+

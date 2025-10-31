@@ -13,7 +13,8 @@ const config: Config = {
   // Add more setup options before each test is run
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   moduleNameMapper: {
-    'next/font/google': require.resolve('./.jest/mocks/nextFontMock.js'),
+    '^@/(.*)$': '<rootDir>/src/$1',
+    'next/font/google': '<rootDir>/.jest/mocks/nextFontMock.js',
   },
 }
  
