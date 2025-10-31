@@ -48,13 +48,13 @@ export default function ContactUs() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: false, amount: 0.2 }}
-        className="bg-black text-white px-40 py-20 relative overflow-hidden"
+        className="bg-black text-white px-4 md:px-20 lg:px-40 py-10 md:py-20 relative overflow-hidden"
     >
       <Image src="/images/ContactUsOrnament.png" alt="" width={500} height={500} className="absolute w-full h-full top-0 left-0 z-0"/>
       <div className="grid md:grid-cols-2 gap-5 items-center z-10 relative">
         {/* Lewa kolumna */}
         <motion.div variants={itemVariants}>
-          <h2 className={`${playfair.className} text-[80px] md:text-4xl mb-10`}>
+          <h2 className={`${playfair.className} text-4xl md:text-6xl mb-10`}>
             Znajdujemy się <br /> pod adresem Włoska 2b!
           </h2>
 
@@ -62,7 +62,7 @@ export default function ContactUs() {
             <li className="flex items-start gap-4">
               <MapPin className="text-pink-500 w-6 h-6 mt-1" />
               <div>
-                <strong className={`${inter.className} block text-[18px] mb-2`}>Godziny otwarcia</strong>
+                <strong className={`${inter.className} block text-base md:text-[18px] mb-2`}>Godziny otwarcia</strong>
                 <p className={`${inter.className} text-sm text-gray-300`}>
                   Od poniedziałku do piątku 10:00-22:00 <br />
                   Soboty i niedziele 12:00-22:00
@@ -73,7 +73,7 @@ export default function ContactUs() {
             <li className="flex items-start gap-4">
               <Phone className="text-pink-500 w-6 h-6 mt-1" />
               <div>
-                <strong className={`${inter.className} block text-[18px] mb-2`}>Numer telefonu</strong>
+                <strong className={`${inter.className} block text-base md:text-[18px] mb-2`}>Numer telefonu</strong>
                 <p className={`${inter.className} text-sm text-gray-300`}>+48 696 454 454</p>
               </div>
             </li>
@@ -81,7 +81,7 @@ export default function ContactUs() {
             <li className="flex items-start gap-4">
               <Mail className="text-pink-500 w-6 h-6 mt-1" />
               <div>
-                <strong className={`${inter.className} block text-[18px] mb-2`}>Email</strong>
+                <strong className={`${inter.className} block text-base md:text-[18px] mb-2`}>Email</strong>
                 <p className={`${inter.className} text-sm text-gray-300`}>test@gmail.com</p>
               </div>
             </li>

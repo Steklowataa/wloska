@@ -6,46 +6,49 @@ const ImageAppear = ({
     src,
     alt,
     trigger,
-    duration = 1000
-} : {
-    src: string,
-    alt: string,
-    trigger: string | number,
-    duration?: number
+    duration = 1000,
+    style,
+    className,
+}: {
+    src: string;
+    alt: string;
+    trigger: string | number;
+    duration?: number;
+    style?: React.CSSProperties;
+    className?: string;
 }) => {
-    const [currentSrc, setCurrentSrc] = useState(src)
-    const [isVisible, setIsVisible] = useState(true)
-    const timeoutRef = useRef<NodeJS.Timeout | null>(null)
+    const [currentSrc, setCurrentSrc] = useState(src);
+    const [isVisible, setIsVisible] = useState(true);
+    const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
     useEffect(() => {
         if (timeoutRef.current) {
-            clearTimeout(timeoutRef.current)
+            clearTimeout(timeoutRef.current);
         }
 
         if (src === currentSrc) {
-            setIsVisible(true)
-            return
+            setIsVisible(true);
+            return;
         }
 
-        setCurrentSrc(src)
-        setIsVisible(false)
-        
+        setCurrentSrc(src);
+        setIsVisible(false);
+
         timeoutRef.current = setTimeout(() => {
-            setIsVisible(true)
-        }, 50)
+            setIsVisible(true);
+        }, 50);
 
         return () => {
             if (timeoutRef.current) {
-                clearTimeout(timeoutRef.current)
+                clearTimeout(timeoutRef.current);
             }
-        }
-    }, [src, trigger])
-
+        };
+    }, [src, trigger]);
 
     useEffect(() => {
-        setCurrentSrc(src)
-        setIsVisible(true)
-    }, [])
+        setCurrentSrc(src);
+        setIsVisible(true);
+    }, []);
 
     return (
         <div>
@@ -54,14 +57,15 @@ const ImageAppear = ({
                 alt={alt}
                 width={500}
                 height={500}
-                className="absolute right-30 top-1/5 object-cover"
+                className={className}
                 style={{
+                    ...style,
                     opacity: isVisible ? 1 : 0,
-                    transition: `opacity ${duration}ms cubic-bezier(0.25, 0.8, 0.25, 1)`
+                    transition: `opacity ${duration}ms ease-in-out`,
                 }}
             />
         </div>
-    )
-}
+    );
+};
 
 export default ImageAppear

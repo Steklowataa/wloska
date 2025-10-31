@@ -78,13 +78,13 @@ export default function BestGradedPosition() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: false, amount: 0.2 }}
-            className="bg-black text-white flex flex-col items-center py-10 relative overflow-hidden"
+            className="bg-black text-white flex flex-col items-center py-10 px-4 md:px-10 relative overflow-hidden"
         >
-            <motion.h2 variants={itemVariants} className={`${playfair.className} text-2xl font-serif mb-6`}>
+            <motion.h2 variants={itemVariants} className={`${playfair.className} text-3xl md:text-4xl font-serif mb-6 text-center`}>
                 {bestGradedText}
             </motion.h2>
-            <motion.div variants={itemVariants} className="relative flex flex-col items-center w-full max-w-4xl z-10">
-                <div className="relative flex items-center justify-center w-full">
+            <motion.div variants={itemVariants} className="relative flex flex-row md:flex-col items-center w-full max-w-4xl z-10">
+                <div className="relative flex items-center justify-center w-1/2 md:w-full">
                     <SliderImage
                         current={current}
                         direction={direction}
@@ -98,13 +98,15 @@ export default function BestGradedPosition() {
                         current={current}
                     />
                 </div>
-                <SliderInfo
-                    name={currentPizza[0]}
-                    description={currentPizza[1][0]}
-                    price={currentPizza[1][1]}
-                    addToCartText={addToCartText}
-                    onAddToCart={handleAddToCart}
-                />
+                <div className="w-1/2 md:w-full">
+                    <SliderInfo
+                        name={currentPizza[0]}
+                        description={currentPizza[1][0]}
+                        price={currentPizza[1][1]}
+                        addToCartText={addToCartText}
+                        onAddToCart={handleAddToCart}
+                    />
+                </div>
             </motion.div>
             <motion.div variants={itemVariants} className="absolute inset-0 w-full h-full flex items-center justify-center z-0">
                  <Image 

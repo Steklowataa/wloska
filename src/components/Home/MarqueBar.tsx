@@ -12,8 +12,8 @@ export default function MarqueBar() {
   return (
     <div className={styles.marquee}>
       <div className={styles.marqueeContent}>
-        <span className={`${inter.className} text-[60px] text-white mx-4`}>🚀 {promo}</span>
-        <span className={`${inter.className} text-[60px] text-white mx-4`}>🚀 {promo}</span>
+        <span className={`${inter.className} text-4xl md:text-[60px] text-white mx-4`}>🚀 {promo}</span>
+        <span className={`${inter.className} text-4xl md:text-[60px] text-white mx-4`}>🚀 {promo}</span>
       </div>
     </div>
   );

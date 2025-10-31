@@ -27,7 +27,6 @@ export default function CartSection({ isScrolled, isHovered }: CartProps) {
 
   return (
     <div className={`flex items-center gap-2 transition-all duration-300 ${isScrolled && !isHovered ? "justify-end w-auto ml-auto" : "justify-end w-1/3"}`}>
-        {/* Cart icon + summary */}
         <div className="relative" onMouseEnter={handleMouseEnterCart} onMouseLeave={handleMouseLeaveCart}>
         <div className="relative z-20">
           <Image
@@ -55,8 +54,8 @@ export default function CartSection({ isScrolled, isHovered }: CartProps) {
             name="change"
             id="change"
             className="bg-[#FF30B3] text-white text-sm font-bold 
-                       w-[80px] h-[40px] rounded-full 
-                       pl-3 pr-8 appearance-none cursor-pointer
+                       md:w-[80px] md:h-[40px] rounded-full 
+                       md:pl-3 md:pr-8 pl-3 w-[60px] h-[40px] appearance-none cursor-pointer
                        focus:outline-none focus:ring-2 focus:ring-pink-300"
             value={language}
             onChange={(e) =>
